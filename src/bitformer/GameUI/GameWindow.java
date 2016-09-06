@@ -1,4 +1,4 @@
-package bitformer;
+package bitformer.GameUI;
 
 import java.awt.Container;
 

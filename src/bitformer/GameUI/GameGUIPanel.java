@@ -1,4 +1,4 @@
-package bitformer;
+package bitformer.GameUI;
 
 import static org.junit.Assert.assertEquals;
 

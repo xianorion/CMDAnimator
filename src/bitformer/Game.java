@@ -3,6 +3,8 @@ import javax.swing.JTextField;
 import javax.swing.UIManager;
 import javax.swing.UIManager.*;
 
+import bitformer.GameUI.GameWindow;
+
 public class Game {
 
 	
