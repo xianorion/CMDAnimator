@@ -1,13 +1,13 @@
-package bitformer.GameUI;
+package cmdAnimator.GameCanvasActions;
 
 import static org.junit.Assert.*;
 
 import org.junit.Test;
 
-public class GameCanvasTests {
+public class GameCanvasWordWriterTests {
 
 	@Test
-	public void GameCanvasTextIsGreen() {
+	public void test() {
 		fail("Not yet implemented");
 	}
 

@@ -1,4 +1,4 @@
-package bitformer.GameUI;
+package cmdAnimator.GameUI;
 
 import java.awt.Container;
 

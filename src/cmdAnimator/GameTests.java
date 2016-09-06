@@ -1,4 +1,4 @@
-package bitformer;
+package cmdAnimator;
 
 import static org.junit.Assert.*;
 

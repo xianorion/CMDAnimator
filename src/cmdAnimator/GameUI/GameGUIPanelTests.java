@@ -1,4 +1,4 @@
-package bitformer.GameUI;
+package cmdAnimator.GameUI;
 
 import static org.junit.Assert.*;
 
@@ -42,7 +42,7 @@ public class GameGUIPanelTests {
 	
 	@Test
 	public void GUIHasPanelInVerticalOrderConsistingOfCanvasTextAreaJFieldButton(){
-		assertEquals(new GameCanvas().getClass(), GUI.getComponent(0).getClass());
+		assertEquals(new JPanel().getClass(), GUI.getComponent(0).getClass());
 		assertEquals(new JScrollPane().getClass(), GUI.getComponent(1).getClass());
 		assertEquals(new JPanel().getClass(), GUI.getComponent(2).getClass());
 	}
@@ -58,6 +58,12 @@ public class GameGUIPanelTests {
 	public void GUICanvasIsCorrectSize() {
 		assertEquals(MAX_COMPONENT_SCREEN_LENGTH, (int)GUI.getScreen().getPreferredSize().getWidth());
 		assertEquals(CANVAS_HEIGHT, (int)GUI.getScreen().getPreferredSize().getHeight());
+	}
+	
+	@Test 
+	public void GUICanvasIsInPanelAndHasCorrectBorderSize(){
+		assertEquals(GUI.getScreen(), GUI.getScreenBorder().getComponent(0));
+		assertEquals(new EmptyBorder(0,10,0,10).getBorderInsets(null), GUI.getScreenBorder().getBorder().getBorderInsets(null));
 	}
 	
 	@Test
@@ -89,7 +95,7 @@ public class GameGUIPanelTests {
 	
 	@Test
 	public void GUICanvasHasCorrectProperties(){
-		assertEquals(Color.BLACK, GUI.getScreen().getBackground());
+		assertEquals(Color.WHITE, GUI.getScreen().getBackground());
 
 	}
 	

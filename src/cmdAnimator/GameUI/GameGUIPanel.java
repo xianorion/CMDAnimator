@@ -1,4 +1,4 @@
-package bitformer.GameUI;
+package cmdAnimator.GameUI;
 
 import static org.junit.Assert.assertEquals;
 
@@ -29,6 +29,7 @@ public class GameGUIPanel extends JPanel {
 	private GameCanvas screen;
 	private JTextArea outputScreen;
 	private JScrollPane scroller;
+	private JPanel screenBorder;
 	
 	public GameGUIPanel(){
 		userInputPanel = new JPanel();
@@ -37,7 +38,7 @@ public class GameGUIPanel extends JPanel {
 		setupOutputScreen();
 		
 		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-		this.add(screen);
+		this.add(screenBorder);
 		this.add(scroller);
 		this.add(userInputPanel);
 		
@@ -58,7 +59,12 @@ public class GameGUIPanel extends JPanel {
 	private void setupScreen() {
 		screen = new GameCanvas();
 		screen.setPreferredSize(new Dimension(600,250));
-		screen.setBackground(Color.BLACK);
+		screen.setBackground(Color.WHITE);
+		
+		screenBorder = new JPanel();
+		screenBorder.add(screen);
+		screenBorder.setBorder(new EmptyBorder(0,10,0,10));
+		
 	}
 
 	private void setUpUserInputPanel() {
@@ -99,6 +105,10 @@ public class GameGUIPanel extends JPanel {
 	
 	public JTextArea getOutputScreen(){
 		return outputScreen;
+	}
+	
+	public JPanel getScreenBorder(){
+		return screenBorder;
 	}
 	
 	public JScrollPane getScroller(){
