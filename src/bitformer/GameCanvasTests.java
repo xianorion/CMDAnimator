@@ -7,7 +7,7 @@ import org.junit.Test;
 public class GameCanvasTests {
 
 	@Test
-	public void test() {
+	public void GameCanvasTextIsGreen() {
 		fail("Not yet implemented");
 	}
 
