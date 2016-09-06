@@ -10,9 +10,9 @@ public class GameCanvas extends Canvas {
 	//defaults for the canvas
 	@Override
 	public void paint(Graphics g){
-		g.setColor(Color.BLUE);
-		g.setFont(new Font("AR DESTINE", Font.ITALIC, 15));
-		g.drawString("my first canvas", 20, 20);
+//		g.setColor(Color.BLUE);
+//		g.setFont(new Font("AR DESTINE", Font.ITALIC, 15));
+//		g.drawString("my first canvas", 20, 20);
 	}
 
 }
