@@ -59,7 +59,7 @@ public class GameGUIPanel extends JPanel {
 	private void setupScreen() {
 		screen = new GameCanvas();
 		screen.setPreferredSize(new Dimension(600,250));
-		screen.setBackground(Color.WHITE);
+		screen.setBackground(Color.WHITE); //changing the color should not be done in this class
 		
 		screenBorder = new JPanel();
 		screenBorder.add(screen);

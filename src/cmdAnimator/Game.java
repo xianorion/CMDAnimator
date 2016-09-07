@@ -21,7 +21,7 @@ public class Game {
 		    // If Nimbus is not available, you can set the GUI to another look and feel.
 		}
 		//open game window
-		GameWindow bitformerWindow = new GameWindow("Bitformer");
+		GameWindow bitformerWindow = new GameWindow("Bitformer"); //change the CMD Animator
 		
 		
 		
