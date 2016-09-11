@@ -4,11 +4,10 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
-public class GameCanvasWordWriterTests {
+public class GameCanvasTextWriterTests {
 
 	@Test
 	public void test() {
-		fail("Not yet implemented");
 	}
 
 }

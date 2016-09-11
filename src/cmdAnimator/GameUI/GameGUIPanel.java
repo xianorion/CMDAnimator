@@ -12,6 +12,7 @@ import java.awt.FontFormatException;
 import java.awt.Graphics;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
 
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
@@ -26,12 +27,14 @@ public class GameGUIPanel extends JPanel {
 	private JTextField commandLine;
 	private JButton enterButton;
 	private JPanel userInputPanel;
-	private GameCanvas screen;
+	private ArrayList<GameCanvas> screens;
 	private JTextArea outputScreen;
 	private JScrollPane scroller;
 	private JPanel screenBorder;
+	private int currentFrame = 0;
 	
 	public GameGUIPanel(){
+		screens = new ArrayList<GameCanvas>();
 		userInputPanel = new JPanel();
 		setUpUserInputPanel();		
 		setupScreen();
@@ -57,12 +60,12 @@ public class GameGUIPanel extends JPanel {
 	
 
 	private void setupScreen() {
-		screen = new GameCanvas();
-		screen.setPreferredSize(new Dimension(600,250));
-		screen.setBackground(Color.WHITE); //changing the color should not be done in this class
+		screens.add(new GameCanvas());
+		screens.get(0).setPreferredSize(new Dimension(600,250));
+		screens.get(0).setBackground(Color.WHITE); //changing the color should not be done in this class
 		
 		screenBorder = new JPanel();
-		screenBorder.add(screen);
+		screenBorder.add(screens.get(0));
 		screenBorder.setBorder(new EmptyBorder(0,10,0,10));
 		
 	}
@@ -99,8 +102,11 @@ public class GameGUIPanel extends JPanel {
 		return userInputPanel;
 	}
 	
-	public Canvas getScreen(){
-		return screen;
+	public GameCanvas getScreen(int frame){
+		if(screens.get(frame)!= null)
+			return screens.get(frame);
+		else
+			return null;
 	}
 	
 	public JTextArea getOutputScreen(){

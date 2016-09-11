@@ -7,16 +7,20 @@ import javax.swing.JTextField;
 
 public class GameWindow extends JFrame{
 
-	JTextField textfield;
+	private GameGUIPanel GUI = new GameGUIPanel();
 	
 	public GameWindow(String name){
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setResizable(false);
 		this.setSize(640,480);
 		this.setTitle(name);
-		this.getContentPane().add(new GameGUIPanel());
+		this.getContentPane().add(GUI);
 		this.pack();
         this.setVisible(true);
+	}
+	
+	public GameGUIPanel getGameGUIPanel(){
+		return GUI;
 	}
 
 	

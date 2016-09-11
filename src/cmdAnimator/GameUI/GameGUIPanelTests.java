@@ -21,6 +21,7 @@ import org.junit.Test;
 
 public class GameGUIPanelTests {
 
+	private static final int FIRST_FRAME = 0;
 	private static final int COMMAND_LINE_HEIGHT = 50;
 	private static final int ENTER_BUTTON_LENGTH = 100;
 	private static final int ENTER_BUTTON_HEIGHT = 50;
@@ -56,13 +57,13 @@ public class GameGUIPanelTests {
 
 	@Test
 	public void GUICanvasIsCorrectSize() {
-		assertEquals(MAX_COMPONENT_SCREEN_LENGTH, (int)GUI.getScreen().getPreferredSize().getWidth());
-		assertEquals(CANVAS_HEIGHT, (int)GUI.getScreen().getPreferredSize().getHeight());
+		assertEquals(MAX_COMPONENT_SCREEN_LENGTH, (int)GUI.getScreen(FIRST_FRAME).getPreferredSize().getWidth());
+		assertEquals(CANVAS_HEIGHT, (int)GUI.getScreen(FIRST_FRAME).getPreferredSize().getHeight());
 	}
 	
 	@Test 
 	public void GUICanvasIsInPanelAndHasCorrectBorderSize(){
-		assertEquals(GUI.getScreen(), GUI.getScreenBorder().getComponent(0));
+		assertEquals(GUI.getScreen(FIRST_FRAME), GUI.getScreenBorder().getComponent(0));
 		assertEquals(new EmptyBorder(0,10,0,10).getBorderInsets(null), GUI.getScreenBorder().getBorder().getBorderInsets(null));
 	}
 	
@@ -95,7 +96,7 @@ public class GameGUIPanelTests {
 	
 	@Test
 	public void GUICanvasHasCorrectProperties(){
-		assertEquals(Color.WHITE, GUI.getScreen().getBackground());
+		assertEquals(Color.WHITE, GUI.getScreen(FIRST_FRAME).getBackground());
 
 	}
 	
