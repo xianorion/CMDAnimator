@@ -2,6 +2,7 @@ package cmdAnimator.GameUI;
 
 import static org.junit.Assert.assertEquals;
 
+import java.awt.BorderLayout;
 import java.awt.Button;
 import java.awt.Canvas;
 import java.awt.Color;
@@ -12,7 +13,6 @@ import java.awt.FontFormatException;
 import java.awt.Graphics;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.ArrayList;
 
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
@@ -27,24 +27,26 @@ public class GameGUIPanel extends JPanel {
 	private JTextField commandLine;
 	private JButton enterButton;
 	private JPanel userInputPanel;
-	private ArrayList<GameCanvas> screens;
+	private GameCanvas screen;
 	private JTextArea outputScreen;
 	private JScrollPane scroller;
 	private JPanel screenBorder;
-	private int currentFrame = 0;
+	
+	private JScrollPane sp;
 	
 	public GameGUIPanel(){
-		screens = new ArrayList<GameCanvas>();
+		screen = new GameCanvas();
 		userInputPanel = new JPanel();
 		setUpUserInputPanel();		
 		setupScreen();
 		setupOutputScreen();
 		
 		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-		this.add(screenBorder);
+		//this.add(screenBorder);
+		sp = new JScrollPane(screenBorder);
+		this.add(sp, BorderLayout.CENTER);
 		this.add(scroller);
 		this.add(userInputPanel);
-		
 	}
 
 	private void setupOutputScreen() {
@@ -60,14 +62,21 @@ public class GameGUIPanel extends JPanel {
 	
 
 	private void setupScreen() {
-		screens.add(new GameCanvas());
-		screens.get(0).setPreferredSize(new Dimension(600,250));
-		screens.get(0).setBackground(Color.WHITE); //changing the color should not be done in this class
+		screen.setPreferredSize(new Dimension(600,250));
+		screen.setBackground(Color.WHITE); //changing the color should not be done in this class
 		
 		screenBorder = new JPanel();
-		screenBorder.add(screens.get(0));
+		screenBorder.setBackground(Color.BLACK);
+		screenBorder.add(screen);
 		screenBorder.setBorder(new EmptyBorder(0,10,0,10));
+	}
+	
+	private void changeNewScreenProperties(){
+		screen.setPreferredSize(new Dimension(600,250));
+		screen.setBackground(Color.WHITE); //changing the color should not be done in this class
 		
+		screenBorder.add(screen);
+		sp.setViewportView(screenBorder);	
 	}
 
 	private void setUpUserInputPanel() {
@@ -102,11 +111,17 @@ public class GameGUIPanel extends JPanel {
 		return userInputPanel;
 	}
 	
-	public GameCanvas getScreen(int frame){
-		if(screens.get(frame)!= null)
-			return screens.get(frame);
-		else
-			return null;
+	public GameCanvas getScreen(){
+		return screen;
+	}
+	
+	public void setScreen(GameCanvas newScreen){
+		//remove the previous canvas from the border and remove the border from the layout
+		screenBorder.remove(screen);
+		sp.remove(screenBorder);
+		
+		screen = newScreen;
+		changeNewScreenProperties();
 	}
 	
 	public JTextArea getOutputScreen(){

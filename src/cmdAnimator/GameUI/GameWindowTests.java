@@ -9,6 +9,7 @@ import javax.swing.JPanel;
 import javax.swing.plaf.ColorUIResource;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
 public class GameWindowTests {
@@ -25,10 +26,10 @@ public class GameWindowTests {
 		assertNotNull(gameWindow);
 	}
 	
-	@Test
+	@Test @Ignore //doesnt really test functionality
 	public void sizeOfWindowIs640by480(){
-		assertEquals(gameWindow.getHeight(), 480);
-		assertEquals(gameWindow.getWidth(), 640);
+		assertEquals(480, gameWindow.getHeight());
+		assertEquals(640, gameWindow.getWidth());
 	}
 	
 	@Test
@@ -51,7 +52,7 @@ public class GameWindowTests {
 		assertEquals(false, gameWindow.isResizable());
 	}
 	
-	@Test
+	@Test  @Ignore //may delete this test, not important
 	public void thereIsAGamePanelOnTheGameWindow(){
 		assertEquals( new GameGUIPanel().getClass(), gameWindow.getContentPane().getComponents()[0].getClass());
 	}

@@ -4,7 +4,7 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
-public class GameCanvasTextWriterTests {
+public class CanvasTextTests {
 
 	@Test
 	public void test() {

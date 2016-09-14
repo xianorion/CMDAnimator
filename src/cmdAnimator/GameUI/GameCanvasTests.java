@@ -7,7 +7,7 @@ import java.awt.Point;
 import org.junit.Before;
 import org.junit.Test;
 
-import cmdAnimator.GameCanvasActions.GameCanvasTextWriter;
+import cmdAnimator.GameCanvasActions.CanvasText;
 
 public class GameCanvasTests {
 	
@@ -18,7 +18,7 @@ public class GameCanvasTests {
 	public void setup(){
 		canvas  = new GameCanvas();
 		point = new Point(1,1);
-		canvas.addText(new GameCanvasTextWriter("Test Text", point));
+		canvas.addText(new CanvasText("Test Text", point));
 	}
 
 	@Test
@@ -37,7 +37,7 @@ public class GameCanvasTests {
 	@Test
 	public void TwoTextsArePresentWhenAdded(){
 		Point point2 = new Point(5,5);
-		canvas.addText(new GameCanvasTextWriter("Hi", point2));
+		canvas.addText(new CanvasText("Hi", point2));
 		
 		assertTrue(canvas.getTextToWrite().containsKey("Test Text"));
 		assertEquals(canvas.getTextToWrite().get("Test Text").getPointToAddTextTo(), point );

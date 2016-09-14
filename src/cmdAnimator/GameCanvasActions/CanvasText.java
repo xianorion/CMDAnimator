@@ -9,14 +9,14 @@ import java.util.ArrayList;
 import cmdAnimator.GameUI.GameCanvas;
 
 /*writes a word on the canvas in an animation like way*/
-public class GameCanvasTextWriter {
+public class CanvasText {
 
 	private Point pointToAddTextTo;
 	private String textToAdd;
 	
 
 	
-	public GameCanvasTextWriter(String textToAdd, Point point){
+	public CanvasText(String textToAdd, Point point){
 		this.textToAdd = textToAdd;
 		this.pointToAddTextTo = point;
 	}

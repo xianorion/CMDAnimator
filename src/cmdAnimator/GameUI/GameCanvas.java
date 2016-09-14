@@ -11,20 +11,20 @@ import java.util.Map.Entry;
 
 import javax.swing.JPanel;
 
-import cmdAnimator.GameCanvasActions.GameCanvasTextWriter;
+import cmdAnimator.GameCanvasActions.CanvasText;
 
 public class GameCanvas extends JPanel {
 	
-	HashMap<String, GameCanvasTextWriter> textToWrite;
+	HashMap<String, CanvasText> textToWrite;
 	//GameCanvasImageWriter images;
 	
 	public GameCanvas(){
-		textToWrite = new HashMap<String, GameCanvasTextWriter>();
+		textToWrite = new HashMap<String, CanvasText>();
 		
 	}
 	
 	
-	public void addText(GameCanvasTextWriter newText){
+	public void addText(CanvasText newText){
 		textToWrite.put(newText.getTextToAdd(), newText);
 		this.repaint();
 	}
@@ -40,19 +40,24 @@ public class GameCanvas extends JPanel {
 		//g.setColor(Color.BLACK);
 		//g.setFont(new Font("ARIAL", Font.ITALIC, 15));
 		
-		//adding text
-		Iterator<Entry<String, GameCanvasTextWriter>> it = textToWrite.entrySet().iterator();
+		//adds all the text every added from the addText function onto the canvas
+		Iterator<Entry<String, CanvasText>> it = textToWrite.entrySet().iterator();
 		while(it.hasNext()) {
-			GameCanvasTextWriter text = (GameCanvasTextWriter)it.next().getValue();
+			CanvasText text = (CanvasText)it.next().getValue();
 			  g.drawString(text.getTextToAdd(), text.getPointToAddTextTo().x, text.getPointToAddTextTo().y);
 			}
 		
 		//adding images
 	}
 	
-	public HashMap<String, GameCanvasTextWriter> getTextToWrite(){
+	public HashMap<String, CanvasText> getTextToWrite(){
 		return textToWrite;
 	}
 	
+	//clears the canvas
+	//We need to remove elements from all of the hashmaps
+	public void clearCanvas(){
+		textToWrite.clear();
+	}
 
 }
