@@ -43,7 +43,7 @@ public class GameGUIPanel extends JPanel {
 		
 		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 		//this.add(screenBorder);
-		sp = new JScrollPane(screenBorder);
+
 		this.add(sp, BorderLayout.CENTER);
 		this.add(scroller);
 		this.add(userInputPanel);
@@ -69,14 +69,20 @@ public class GameGUIPanel extends JPanel {
 		screenBorder.setBackground(Color.BLACK);
 		screenBorder.add(screen);
 		screenBorder.setBorder(new EmptyBorder(0,10,0,10));
+		sp = new JScrollPane(screenBorder);
 	}
 	
 	private void changeNewScreenProperties(){
-		screen.setPreferredSize(new Dimension(600,250));
-		screen.setBackground(Color.WHITE); //changing the color should not be done in this class
-		
+		if(screen.getPreferredSize().getHeight() != 600){
+			screen.setPreferredSize(new Dimension(600,250));
+			screen.setBackground(Color.WHITE); //changing the color should not be done in this class
+		}
+		screen.repaint();
+		screenBorder.repaint();
+		sp.repaint();
 		screenBorder.add(screen);
 		sp.setViewportView(screenBorder);	
+		
 	}
 
 	private void setUpUserInputPanel() {
@@ -117,8 +123,9 @@ public class GameGUIPanel extends JPanel {
 	
 	public void setScreen(GameCanvas newScreen){
 		//remove the previous canvas from the border and remove the border from the layout
+		
 		screenBorder.remove(screen);
-		sp.remove(screenBorder);
+		sp.getViewport().remove(screenBorder);
 		
 		screen = newScreen;
 		changeNewScreenProperties();

@@ -43,7 +43,7 @@ public class GameCanvas extends JPanel {
 		//adds all the text every added from the addText function onto the canvas
 		Iterator<Entry<String, CanvasText>> it = textToWrite.entrySet().iterator();
 		while(it.hasNext()) {
-			CanvasText text = (CanvasText)it.next().getValue();
+			CanvasText text = it.next().getValue();
 			  g.drawString(text.getTextToAdd(), text.getPointToAddTextTo().x, text.getPointToAddTextTo().y);
 			}
 		
@@ -58,6 +58,7 @@ public class GameCanvas extends JPanel {
 	//We need to remove elements from all of the hashmaps
 	public void clearCanvas(){
 		textToWrite.clear();
+		repaint();
 	}
 
 }
