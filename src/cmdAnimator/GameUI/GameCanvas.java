@@ -4,6 +4,7 @@ import java.awt.Canvas;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
+import java.awt.Point;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -15,21 +16,21 @@ import cmdAnimator.GameCanvasActions.CanvasText;
 
 public class GameCanvas extends JPanel {
 	
-	HashMap<String, CanvasText> textToWrite;
+	HashMap<Point, CanvasText> textToWrite;
 	//GameCanvasImageWriter images;
 	
 	public GameCanvas(){
-		textToWrite = new HashMap<String, CanvasText>();
+		textToWrite = new HashMap<Point, CanvasText>();
 		
 	}
 	
 	
 	public void addText(CanvasText newText){
-		textToWrite.put(newText.getTextToAdd(), newText);
+		textToWrite.put(newText.getPointToAddTextTo(), newText);
 		this.repaint();
 	}
 	
-	public void deleteText(String key){
+	public void deleteText(Point key){
 		textToWrite.remove(key);
 	}
 	
@@ -41,7 +42,7 @@ public class GameCanvas extends JPanel {
 		//g.setFont(new Font("ARIAL", Font.ITALIC, 15));
 		
 		//adds all the text every added from the addText function onto the canvas
-		Iterator<Entry<String, CanvasText>> it = textToWrite.entrySet().iterator();
+		Iterator<Entry<Point, CanvasText>> it = textToWrite.entrySet().iterator();
 		while(it.hasNext()) {
 			CanvasText text = it.next().getValue();
 			  g.drawString(text.getTextToAdd(), text.getPointToAddTextTo().x, text.getPointToAddTextTo().y);
@@ -50,7 +51,7 @@ public class GameCanvas extends JPanel {
 		//adding images
 	}
 	
-	public HashMap<String, CanvasText> getTextToWrite(){
+	public HashMap<Point, CanvasText> getTextToWrite(){
 		return textToWrite;
 	}
 	
