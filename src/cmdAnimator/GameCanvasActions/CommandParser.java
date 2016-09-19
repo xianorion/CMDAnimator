@@ -53,6 +53,8 @@ public class CommandParser {
 			GameCanvas.addImage(new CanvasImage(image[z] ,  new Point(3,4)));
 			x=x+5; y=y+5;
 			z++;
+		}else if(text.equals("delImg")){
+			GameCanvas.deleteImage(new Point(3,4));
 		}
 		
 	}

@@ -86,4 +86,11 @@ public class GameCanvas extends JPanel {
 		return imagesToAdd;
 	}
 
+
+	public void deleteImage(Point point) {
+		// TODO Auto-generated method stub
+		imagesToAdd.remove(point);
+		this.repaint();
+	}
+
 }

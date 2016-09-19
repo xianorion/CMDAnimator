@@ -64,6 +64,13 @@ public class GameCanvasTests {
 		assertEquals(canvas.getImagesToAdd().get(point).getImageFilename(), filename);
 	}
 
-	
+	@Test
+	public void ImageThatIsAddedCanBeRemoved(){
+		String filename = "C:\\Users\\Orion\\workspace\\TextBasedGame\\src\\resource\\images\\kirbywalk1.png";
+		canvas.addImage(new CanvasImage( filename ,point));
+		canvas.deleteImage(point);
+		
+		assertFalse(canvas.getImagesToAdd().containsKey(point));
+	}
 
 }
