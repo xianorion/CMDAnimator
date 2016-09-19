@@ -35,6 +35,7 @@ public class GameCanvas extends JPanel {
 	
 	public void deleteText(Point key){
 		textToWrite.remove(key);
+		this.repaint();
 	}
 	
 	//defaults for the canvas

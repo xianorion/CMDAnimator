@@ -55,6 +55,8 @@ public class CommandParser {
 			z++;
 		}else if(text.equals("delImg")){
 			GameCanvas.deleteImage(new Point(3,4));
+		}else if(text.equals("delTxt")){
+			GameCanvas.deleteText(new Point(x-5,y-5));
 		}
 		
 	}
