@@ -12,15 +12,18 @@ import java.util.Map.Entry;
 
 import javax.swing.JPanel;
 
+import cmdAnimator.GameCanvasActions.CanvasImage;
 import cmdAnimator.GameCanvasActions.CanvasText;
 
 public class GameCanvas extends JPanel {
 	
 	HashMap<Point, CanvasText> textToWrite;
+	HashMap<Point, CanvasImage> imagesToAdd;
 	//GameCanvasImageWriter images;
 	
 	public GameCanvas(){
 		textToWrite = new HashMap<Point, CanvasText>();
+		imagesToAdd = new HashMap<Point, CanvasImage>();
 		
 	}
 	
@@ -49,6 +52,11 @@ public class GameCanvas extends JPanel {
 			}
 		
 		//adding images
+		Iterator<Entry<Point, CanvasImage>> iterator2 = imagesToAdd.entrySet().iterator();
+		while(iterator2.hasNext()) {
+			CanvasImage image = iterator2.next().getValue();
+			g.drawImage(image.getImage(), image.getPointToAddImage().x, image.getPointToAddImage().y, this);
+			}
 	}
 	
 	public HashMap<Point, CanvasText> getTextToWrite(){
@@ -60,6 +68,22 @@ public class GameCanvas extends JPanel {
 	public void clearCanvas(){
 		textToWrite.clear();
 		repaint();
+	}
+
+   
+	public void addImage(CanvasImage canvasImage) {
+		// TODO Auto-generated method stub
+		if(canvasImage.getImage() != null)
+			imagesToAdd.put(canvasImage.getPointToAddImage(), canvasImage);
+		else
+			System.out.println("is null");
+		this.repaint();
+	}
+
+
+	public HashMap<Point, CanvasImage> getImagesToAdd() {
+		// TODO Auto-generated method stub
+		return imagesToAdd;
 	}
 
 }

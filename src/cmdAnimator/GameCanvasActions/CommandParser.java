@@ -14,7 +14,20 @@ public class CommandParser {
 
 	static int x = 56;
 	static int y =  56;
+	static int z = 0;
 	static StringBuffer buffer = new StringBuffer();
+	static String[] image = {
+			"C:\\Users\\Orion\\workspace\\TextBasedGame\\src\\resource\\images\\kirbywalk1.png",
+			"C:\\Users\\Orion\\workspace\\TextBasedGame\\src\\resource\\images\\kirbywalk2.png",
+			"C:\\Users\\Orion\\workspace\\TextBasedGame\\src\\resource\\images\\kirbywalk3.png",
+			"C:\\Users\\Orion\\workspace\\TextBasedGame\\src\\resource\\images\\kirbywalk4.png",
+			"C:\\Users\\Orion\\workspace\\TextBasedGame\\src\\resource\\images\\kirbywalk5.png",
+			"C:\\Users\\Orion\\workspace\\TextBasedGame\\src\\resource\\images\\kirbywalk6.png",
+			"C:\\Users\\Orion\\workspace\\TextBasedGame\\src\\resource\\images\\kirbywalk7.png",
+			"C:\\Users\\Orion\\workspace\\TextBasedGame\\src\\resource\\images\\kirbywalk8.png",
+			"C:\\Users\\Orion\\workspace\\TextBasedGame\\src\\resource\\images\\kirbywalk9.png",
+			"C:\\Users\\Orion\\workspace\\TextBasedGame\\src\\resource\\images\\kirbywalk10.png"
+	};
 	
 	public static void parseText(GameGUIPanel GUI, String text, FrameAnimator animation) {
 		GameCanvas GameCanvas =  GUI.getScreen();
@@ -36,6 +49,10 @@ public class CommandParser {
 			x=x+5; y=y+5;
 			String text1 = "1";
 			buffer.append(text1);
+		}else if(text.equals("image")){
+			GameCanvas.addImage(new CanvasImage(image[z] ,  new Point(3,4)));
+			x=x+5; y=y+5;
+			z++;
 		}
 		
 	}
