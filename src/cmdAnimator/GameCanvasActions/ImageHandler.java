@@ -2,7 +2,7 @@ package cmdAnimator.GameCanvasActions;
 
 public interface ImageHandler {
 	
-	public boolean doesImageExist(String imageFile);
+	public boolean doesImageExist();
 	
 	public void resizeImage();
 

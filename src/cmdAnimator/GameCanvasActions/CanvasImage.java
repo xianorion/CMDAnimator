@@ -13,26 +13,15 @@ public class CanvasImage implements ImageHandler{
 	private BufferedImage image;
 	private String imageFilename;
 	private Point pointToAddImage;
-	private int width;
-	private int height;
 
 	public CanvasImage(String imageFilename, Point pointToAddImage ) {
 		this.pointToAddImage = pointToAddImage;
 		this.imageFilename = imageFilename;
-		this.width = 21;
-		this.height = 20;
 		setImage(imageFilename);
 	}
-	
-	public CanvasImage(Point pointToAddImage, String imageFilename, int width, int height) {
-		this.pointToAddImage = pointToAddImage;
-		this.imageFilename = imageFilename;
-		this.width = width;
-		this.height = height;
-	}
 
-	public boolean doesImageExist(String filename) {
-		return false;
+	public boolean doesImageExist() {
+		return this.image != null;
 	}
 	
 	public void setImage(String filename) {

@@ -13,7 +13,7 @@ public class CanvasImageTests {
 		Point pointToAddImage =  new Point(5,5);
 		CanvasImage image = new CanvasImage("image.jpeg", pointToAddImage);
 
-		assertNull(image.getImage());
+		assertFalse(image.doesImageExist());
 	}
 	
 	@Test
@@ -21,7 +21,7 @@ public class CanvasImageTests {
 		Point pointToAddImage =  new Point(5,5);
 		CanvasImage image = new CanvasImage("C:\\Users\\Orion\\workspace\\TextBasedGame\\src\\resource\\images\\kirbywalk1.png", pointToAddImage );
 
-		assertNotNull(image.getImage());
+		assertTrue(image.doesImageExist());
 	}
 
 }
