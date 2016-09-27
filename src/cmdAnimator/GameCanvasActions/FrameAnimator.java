@@ -27,8 +27,8 @@ public class FrameAnimator {
 	public void playAnimation(GameGUIPanel GUI) {
 		// System.out.println("Start playing");
 		currentFrameBeingDisplayed = 0;
-		GUI.getEnterButton().setEnabled(false);
-		GUI.getEnterButton().repaint();
+		GUI.setEnabledForEnterButton(false);
+		GUI.repaint();
 		// timer that runs until we have shown all the frames in the arraylist once
 		timer = new Timer(ONE_SECOND_IN_MILLI / fps, new ActionListener() {
 			@Override
@@ -36,15 +36,14 @@ public class FrameAnimator {
 				// TODO Auto-generated method stub
 				if (currentFrameBeingDisplayed < frames.size()) {
 					GUI.setScreen(frames.get(currentFrameBeingDisplayed));
-					GUI.repaint();
 					System.out.println("repainted ");
 					currentFrameBeingDisplayed++;
 
 				} else {
 					timer.stop();
-					GUI.getEnterButton().setEnabled(true);
-					GUI.getEnterButton().repaint();
+					GUI.setEnabledForEnterButton(true);	
 				}
+				GUI.repaint();
 			}
 		});
 		timer.setRepeats(true);

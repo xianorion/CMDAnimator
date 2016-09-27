@@ -142,4 +142,9 @@ public class GameGUIPanel extends JPanel {
 	public JScrollPane getScroller(){
 		return scroller;
 	}
+
+	public void setEnabledForEnterButton(boolean shouldEnable) {
+		enterButton.setEnabled(shouldEnable);
+		
+	}
 }
