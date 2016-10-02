@@ -7,8 +7,8 @@ import java.util.Iterator;
 
 import javax.swing.Timer;
 
+import cmdAnimator.GUI;
 import cmdAnimator.GameUI.GameCanvas;
-import cmdAnimator.GameUI.GameGUIPanel;
 
 public class FrameAnimator {
 
@@ -24,11 +24,11 @@ public class FrameAnimator {
 	}
 
 	// add tests for me!!
-	public void playAnimation(GameGUIPanel GUI) {
+	public void playAnimation(GUI GUI) {
 		// System.out.println("Start playing");
 		currentFrameBeingDisplayed = 0;
-		GUI.setEnabledForEnterButton(false);
-		GUI.repaint();
+		GUI.setDisabledForEnterButton(true);
+		//GUI.repaint();
 		// timer that runs until we have shown all the frames in the arraylist once
 		timer = new Timer(ONE_SECOND_IN_MILLI / fps, new ActionListener() {
 			@Override
@@ -41,9 +41,9 @@ public class FrameAnimator {
 
 				} else {
 					timer.stop();
-					GUI.setEnabledForEnterButton(true);	
+					GUI.setDisabledForEnterButton(false);	
 				}
-				GUI.repaint();
+			
 			}
 		});
 		timer.setRepeats(true);
@@ -51,12 +51,12 @@ public class FrameAnimator {
 		System.out.println("--------------------------");
 	}
 
-	public void addFrameToAnimation(GameGUIPanel GUI) {
-		frames.add(GUI.getScreen());
-		GUI.setScreen(new GameCanvas());
+	public void addFrameToAnimation(GUI GUI) {
+		frames.add(GameCanvas.copy(GUI.getScreen()));
+		GUI.setScreen(null);
 	}
 
-	public void moveToFrameNumber(GameGUIPanel GUI) {
+	public void moveToFrameNumber(GUI GUI) {
 		// find the number in arraylist
 
 		// set the GUI screen to this frame

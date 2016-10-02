@@ -1,43 +1,48 @@
 package cmdAnimator.GameCanvasActions;
 
-import java.awt.Image;
 import java.awt.Point;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+
 import javax.imageio.ImageIO;
-import javax.swing.ImageIcon;
+
+import javafx.scene.image.ImageView;
 
 public class CanvasImage implements ImageHandler{
 	
-	private BufferedImage image;
+	private ImageView image;
 	private String imageFilename;
 	private Point pointToAddImage;
+	BufferedImage imageBuffer;
 
 	public CanvasImage(String imageFilename, Point pointToAddImage ) {
 		this.pointToAddImage = pointToAddImage;
 		this.imageFilename = imageFilename;
+		image = new ImageView();
 		setImage(imageFilename);
 	}
 
 	public boolean doesImageExist() {
-		return this.image != null;
+		return this.imageBuffer != null;
 	}
 	
 	public void setImage(String filename) {
-
+		File imagePath = new File(filename);
+		System.out.println(imagePath.toURI().toString());
 		try {
-			File imageFile = new File(filename); // image file path
-			image = ImageIO.read(imageFile);
-
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			//e.printStackTrace();
+			imageBuffer = ImageIO.read(imagePath);
+		} catch (IOException e) { //if image DNE return after setting both image instances to null
 			image = null;
+			imageBuffer = null;
+			return;
 		}
+		System.out.println(imagePath.toURI().toString());
+		image = new ImageView(imagePath.toURI().toString());
+		
 	}
 	
-	public BufferedImage getImage(){
+	public ImageView getImage(){
 		return image;
 	}
 	

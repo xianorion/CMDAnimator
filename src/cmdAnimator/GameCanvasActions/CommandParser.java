@@ -3,13 +3,10 @@ package cmdAnimator.GameCanvasActions;
 import java.awt.Point;
 import java.lang.reflect.InvocationTargetException;
 
-import javax.swing.JTextArea;
-import javax.swing.SwingUtilities;
 
+import cmdAnimator.GUI;
 import cmdAnimator.GameUI.GameCanvas;
-import cmdAnimator.GameUI.GameGUIPanel;
-import cmdAnimator.GameUI.GameWindow;
-
+import javafx.scene.control.TextArea;
 public class CommandParser {
 
 	static int x = 56;
@@ -29,10 +26,10 @@ public class CommandParser {
 			"C:\\Users\\Orion\\workspace\\TextBasedGame\\src\\resource\\images\\kirbywalk10.png"
 	};
 	
-	public static void parseText(GameGUIPanel GUI, String text, FrameAnimator animation) {
+	public static void parseText(GUI GUI, String text, FrameAnimator animation) {
 		GameCanvas GameCanvas =  GUI.getScreen();
 		if(text.equals("clear")){
-			JTextArea GUIFeed = GUI.getOutputScreen();
+			TextArea GUIFeed = GUI.getOutputScreen();
 			String previousText = GUIFeed.getText();
 			GUIFeed.setText(previousText+"\n"+text);
 			
@@ -50,8 +47,8 @@ public class CommandParser {
 			String text1 = "1";
 			buffer.append(text1);
 		}else if(text.equals("image")){
-			GameCanvas.addImage(new CanvasImage(image[z] ,  new Point(3,4)));
-			x=x+5; y=y+5;
+			GameCanvas.addImage(new CanvasImage(image[z] ,  new Point(x,y)));
+			x=x+5; 
 			z++;
 		}else if(text.equals("delImg")){
 			GameCanvas.deleteImage(new Point(3,4));

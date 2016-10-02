@@ -1,0 +1,66 @@
+/* JavaFX CSS - Leave this comment until you have at least create one rule which uses -fx-Property */
+
+
+#canvasContainer{
+	-fx-border-color:rgb(0,0,0);
+	-fx-border-width: 5px;
+	-fx-background-color: white;
+}
+
+#mainPane{
+
+     -fx-background-color: black;
+    -fx-background-repeat: repeat ;
+	-fx-background-position: center ;
+}
+
+
+
+#libraryArea{
+	-fx-border-insets: 20 20 60 20;
+	-fx-effect: dropshadow(three-pass-box, rgba(0,15,0,1.4), 20, 0, 0, 0);
+}
+
+#stage{
+	-fx-background-color: black;
+}
+
+.button{
+	-fx-background-color:rgb(128,128,128);
+}
+
+#outputField{
+	
+	-fx-text-fill:rgb(128,255,128);
+	-fx-font: 12px Arial;
+	-fx-font-style: italic;
+	-fx-border-color:rgb(0,0,0);
+	-fx-background-color: black;
+
+}
+
+#outputField * .content{
+
+	-fx-background-color:rgb(0,0,0);
+}
+
+.label{
+	-fx-font: 20px Arial;
+	-fx-alignment:center ;
+	-fx-text-fill: rgb(255,255,255);
+	-fx-background-color:rgb(30,23,29);
+	-fx-font-weight: bolder;
+
+}
+
+#helpCommandArea * .content{
+}
+
+.text-field{
+	-fx-background-color: rgb(0,0,0);
+	-fx-text-fill: rgb(255,255,255);
+}
+
+#outputArea{
+		-fx-background-color: black;
+}

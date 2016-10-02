@@ -1,9 +1,5 @@
 package cmdAnimator.GameUI;
 
-import java.awt.Canvas;
-import java.awt.Color;
-import java.awt.Font;
-import java.awt.Graphics;
 import java.awt.Point;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -14,50 +10,59 @@ import javax.swing.JPanel;
 
 import cmdAnimator.GameCanvasActions.CanvasImage;
 import cmdAnimator.GameCanvasActions.CanvasText;
+import javafx.scene.canvas.Canvas;
+import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.image.Image;
+import javafx.scene.layout.Pane;
 
-public class GameCanvas extends JPanel {
-	
+public class GameCanvas extends Canvas {
+	final static int HEIGHT=300;
+	final static int WIDTH=300;
 	HashMap<Point, CanvasText> textToWrite;
 	HashMap<Point, CanvasImage> imagesToAdd;
 	//GameCanvasImageWriter images;
 	
 	public GameCanvas(){
+		super(WIDTH, HEIGHT);
 		textToWrite = new HashMap<Point, CanvasText>();
 		imagesToAdd = new HashMap<Point, CanvasImage>();
+		GraphicsContext g = this.getGraphicsContext2D();
+		g.fillText("no way", 40, 43);
 		
 	}
 	
 	
 	public void addText(CanvasText newText){
 		textToWrite.put(newText.getPointToAddTextTo(), newText);
-		this.repaint();
+		this.updatePane();
+		GraphicsContext g = this.getGraphicsContext2D();
+		g.fillText("WORK", 55, 59);
 	}
 	
 	public void deleteText(Point key){
 		textToWrite.remove(key);
-		this.repaint();
+		this.updatePane();
 	}
 	
 	//defaults for the canvas
-	@Override
-	public void paintComponent(Graphics g){
-		super.paintComponent(g);
-		//g.setColor(Color.BLACK);
-		//g.setFont(new Font("ARIAL", Font.ITALIC, 15));
+	public void updatePane(){
+		GraphicsContext g = this.getGraphicsContext2D();
+		g.clearRect(0, 0, this.getWidth(), this.getHeight());
 		
-		//adds all the text every added from the addText function onto the canvas
 		Iterator<Entry<Point, CanvasText>> it = textToWrite.entrySet().iterator();
-		while(it.hasNext()) {
+		while (it.hasNext()) {
 			CanvasText text = it.next().getValue();
-			  g.drawString(text.getTextToAdd(), text.getPointToAddTextTo().x, text.getPointToAddTextTo().y);
-			}
-		
-		//adding images
+			g.fillText(text.getTextToAdd(), text.getPointToAddTextTo().x, text.getPointToAddTextTo().y);
+
+		}
+
+		// adding images
 		Iterator<Entry<Point, CanvasImage>> iterator2 = imagesToAdd.entrySet().iterator();
-		while(iterator2.hasNext()) {
+		while (iterator2.hasNext()) {
 			CanvasImage image = iterator2.next().getValue();
-			g.drawImage(image.getImage(), image.getPointToAddImage().x, image.getPointToAddImage().y, this);
-			}
+			g.drawImage(image.getImage().getImage(), image.getPointToAddImage().x, image.getPointToAddImage().y);
+		}
+		
 	}
 	
 	public HashMap<Point, CanvasText> getTextToWrite(){
@@ -68,30 +73,57 @@ public class GameCanvas extends JPanel {
 	//We need to remove elements from all of the hashmaps
 	public void clearCanvas(){
 		textToWrite.clear();
-		repaint();
+		imagesToAdd.clear();
+		this.updatePane();
 	}
 
    
 	public void addImage(CanvasImage canvasImage) {
-		// TODO Auto-generated method stub
-		if(canvasImage.getImage() != null)
+		if(canvasImage.doesImageExist()){
 			imagesToAdd.put(canvasImage.getPointToAddImage(), canvasImage);
-		else
-			System.out.println("is null");
-		this.repaint();
+			this.updatePane();
+		}
 	}
 
 
 	public HashMap<Point, CanvasImage> getImagesToAdd() {
-		// TODO Auto-generated method stub
 		return imagesToAdd;
 	}
 
 
 	public void deleteImage(Point point) {
-		// TODO Auto-generated method stub
 		imagesToAdd.remove(point);
-		this.repaint();
+		this.updatePane();
 	}
+	
+	public void setTextToWrite(HashMap<Point, CanvasText> ttw){
+		textToWrite = ttw ;
+	}
+	
+	
+	public void setImagesToAdd(HashMap<Point, CanvasImage> ita){
+		imagesToAdd=ita;
+	}
+
+
+	public static GameCanvas copy(GameCanvas screen) {
+		GameCanvas newCanvas = new GameCanvas();
+		
+		Iterator<Entry<Point, CanvasText>> it = screen.textToWrite.entrySet().iterator();
+		while (it.hasNext()) {
+			CanvasText text = it.next().getValue();
+			newCanvas.addText(text);
+		}
+
+		// adding images
+		Iterator<Entry<Point, CanvasImage>> iterator2 = screen.imagesToAdd.entrySet().iterator();
+		while (iterator2.hasNext()) {
+			CanvasImage image = iterator2.next().getValue();
+			newCanvas.addImage(image);
+		}
+		return newCanvas;
+	}
+	
+	
 
 }

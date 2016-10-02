@@ -5,10 +5,13 @@ import static org.junit.Assert.*;
 import java.awt.Point;
 
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 import cmdAnimator.GameCanvasActions.CanvasImage;
 import cmdAnimator.GameCanvasActions.CanvasText;
+import javafx.application.Application;
+import javafx.stage.Stage;
 
 public class GameCanvasTests {
 	
@@ -57,7 +60,7 @@ public class GameCanvasTests {
 	
 	@Test
 	public void addImageToCanvasAtSomePointIsPlacedAtCorrectPoint(){
-		String filename = "C:\\Users\\Orion\\workspace\\TextBasedGame\\src\\resource\\images\\kirbywalk1.png";
+		String filename = "..\\TextBasedGame\\src\\resource\\images\\kirbywalk1.png";
 		canvas.addImage(new CanvasImage( filename ,point));
 		
 		assertTrue(canvas.getImagesToAdd().containsKey(point));
@@ -66,11 +69,34 @@ public class GameCanvasTests {
 
 	@Test
 	public void ImageThatIsAddedCanBeRemoved(){
-		String filename = "C:\\Users\\Orion\\workspace\\TextBasedGame\\src\\resource\\images\\kirbywalk1.png";
+		String filename = "..\\TextBasedGame\\src\\resource\\images\\kirbywalk1.png";
 		canvas.addImage(new CanvasImage( filename ,point));
 		canvas.deleteImage(point);
 		
 		assertFalse(canvas.getImagesToAdd().containsKey(point));
+	}
+	
+	@Test
+	public void copyCopiesDataIntoAnotherCanvasCorrectly(){
+		
+	}
+	
+	public static class AsNonApp extends Application {
+	    @Override
+	    public void start(Stage primaryStage) throws Exception {
+	        // noop
+	    }
+	}
+
+	@BeforeClass
+	public static void initJFX() {
+	    Thread t = new Thread("JavaFX Init Thread") {
+	        public void run() {
+	            Application.launch(AsNonApp.class, new String[0]);
+	        }
+	    };
+	    t.setDaemon(true);
+	    t.start();
 	}
 
 }
