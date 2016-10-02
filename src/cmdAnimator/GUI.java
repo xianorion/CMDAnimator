@@ -197,7 +197,7 @@ public class GUI extends Group{
 		stage.addText(newText);
 	}
 	
-	public void addImageToCanvas(CanvasImage canvasImage){
-		stage.addImage(canvasImage);
+	public boolean addImageToCanvas(CanvasImage canvasImage){
+		return stage.addImage(canvasImage);
 	}
 }

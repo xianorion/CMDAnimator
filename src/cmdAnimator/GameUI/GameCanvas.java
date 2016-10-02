@@ -7,6 +7,7 @@ import java.util.Map.Entry;
 
 import cmdAnimator.GameCanvasActions.CanvasImage;
 import cmdAnimator.GameCanvasActions.CanvasText;
+import cmdAnimator.GameCanvasActions.InvalidImageException;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 
@@ -73,11 +74,13 @@ public class GameCanvas extends Canvas {
 	}
 
    
-	public void addImage(CanvasImage canvasImage) {
-		if(canvasImage.doesImageExist()){
+	public boolean addImage(CanvasImage canvasImage) {
+		if (canvasImage.doesImageExist()) {
 			imagesToAdd.put(canvasImage.getPointToAddImage(), canvasImage);
 			this.updatePane();
-		}
+			return true;
+		} 
+		return false;
 	}
 
 

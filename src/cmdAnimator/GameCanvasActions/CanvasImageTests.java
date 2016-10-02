@@ -7,15 +7,14 @@ import java.awt.Point;
 import org.junit.BeforeClass;
 import org.junit.Ignore;
 import org.junit.Test;
-
-import cmdAnimator.GameUI.GameCanvasTests.AsNonApp;
+import cmdAnimator.GameUI.GameCanvasTests.dummyApp;
 import javafx.application.Application;
 import javafx.stage.Stage;
 
 public class CanvasImageTests {
 
 	@Test
-	public void isImageDoesntExistDoesImageExistReturnsFalse() {
+	public void isImageDoesntExistDoesImageExistReturnsFalse(){
 		Point pointToAddImage =  new Point(5,5);
 		CanvasImage image = new CanvasImage("image.jpeg", pointToAddImage);
 
@@ -23,23 +22,27 @@ public class CanvasImageTests {
 	}
 	
 	@Test
-	public void isImageDoesExistDoesImageExistReturnsTrue() {
+	public void isImageDoesExistDoesImageExistReturnsTrue(){
 		Point pointToAddImage =  new Point(5,5);
 		CanvasImage image = new CanvasImage("..\\TextBasedGame\\src\\resource\\images\\kirbywalk1.png", pointToAddImage );
 
 		assertTrue(image.doesImageExist());
 	}
 
+	public static class dummyApp extends Application {
+	    @Override
+	    public void start(Stage primaryStage) throws Exception {
+	    }
+	}
+
 	@BeforeClass
-	public static void setUpClass() throws InterruptedException {
-	    // Initialise Java FX
+	public static void initJFX() {
 	    Thread t = new Thread("JavaFX Init Thread") {
 	        public void run() {
-	            Application.launch(AsNonApp.class, new String[0]);
+	            Application.launch(dummyApp.class, new String[0]);
 	        }
 	    };
 	    t.setDaemon(true);
 	    t.start();
-	    Thread.sleep(500);
 	}
 }

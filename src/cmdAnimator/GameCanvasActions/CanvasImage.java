@@ -23,7 +23,7 @@ public class CanvasImage implements ImageHandler{
 		setImage(imageFilename);
 	}
 
-	public boolean doesImageExist() {
+	public boolean doesImageExist(){
 		return this.imageBuffer != null;
 	}
 	

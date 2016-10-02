@@ -62,38 +62,53 @@ public class CommandParser {
 	private static String[] splittingCmds;
 	private static GUI guiInUse;
 	
-	
-	public static void parseText(GUI gui, String text, FrameAnimator animator){
+	//return true if parse worked, else false
+	public static boolean parseText(GUI gui, String text, FrameAnimator animator) {
 		guiInUse = gui;
 		splittingCmds = text.split("\\s+");
-		
-		try {
-			executeCommandBasedOnType();
-		} catch (InvalidCommandException e) {
-			gui.appendTextToOutputScreen(typeOfCommand.getErrorType());
+
+		if (stringArrayIsNotEmpty(splittingCmds)) {
+			try {
+				executeCommandBasedOnType();
+			} catch (InvalidCommandException e) {
+				System.out.println("error");
+				gui.appendTextToOutputScreen(typeOfCommand.getErrorType());
+				return false;
+			}			
+		}else{
+			return false;
 		}
-		 
+		return true;
 	}
-	
-	private static void executeCommandBasedOnType() throws InvalidCommandException {
-		String[] splittingCmdsParameters = new String[splittingCmds.length-1];
-		
-		for(int i = 0; i < splittingCmdsParameters.length; i++){
-			splittingCmdsParameters[i] = splittingCmds[i+1];
+
+	private static boolean stringArrayIsNotEmpty(String[] splittingCmds2) {
+		if(splittingCmds2.length < 1 || splittingCmds2[0].equals("")){
+			guiInUse.appendTextToOutputScreen("Nothing was typed");
+			return false;
 		}
-		
-		switch(splittingCmds[0].toLowerCase()){
+		return true;
+	}
+
+	private static void executeCommandBasedOnType() throws InvalidCommandException {
+		String[] splittingCmdsParameters = new String[splittingCmds.length - 1];
+
+		for (int i = 0; i < splittingCmdsParameters.length; i++) {
+			splittingCmdsParameters[i] = splittingCmds[i + 1];
+		}
+
+		switch (splittingCmds[0].toLowerCase()) {
 		case "add":
 			typeOfCommand = new AddCommandExecutor();
-			typeOfCommand.execute(splittingCmdsParameters);
+			typeOfCommand.execute(splittingCmdsParameters, guiInUse);
 			break;
 		case "play":
-			
+
 			break;
 		case "clear":
-			
+
 			break;
 		}
+
 	}
 
 	private void updateGUIAfterCommandEntered(){

@@ -10,6 +10,7 @@ import org.junit.Test;
 
 import cmdAnimator.GameCanvasActions.CanvasImage;
 import cmdAnimator.GameCanvasActions.CanvasText;
+import cmdAnimator.GameCanvasActions.InvalidImageException;
 import javafx.application.Application;
 import javafx.stage.Stage;
 
@@ -52,14 +53,14 @@ public class GameCanvasTests {
 	}
 	
 	@Test
-	public void addNullImageToCanvasAndItIsntAdded(){
+	public void addNullImageToCanvasAndItIsntAdded() throws InvalidImageException{
 		canvas.addImage(new CanvasImage("null.png",point));
 		
 		assertFalse(canvas.getImagesToAdd().containsKey(point));
 	}
 	
 	@Test
-	public void addImageToCanvasAtSomePointIsPlacedAtCorrectPoint(){
+	public void addImageToCanvasAtSomePointIsPlacedAtCorrectPoint() throws InvalidImageException{
 		String filename = "..\\TextBasedGame\\src\\resource\\images\\kirbywalk1.png";
 		canvas.addImage(new CanvasImage( filename ,point));
 		
@@ -68,7 +69,7 @@ public class GameCanvasTests {
 	}
 
 	@Test
-	public void ImageThatIsAddedCanBeRemoved(){
+	public void ImageThatIsAddedCanBeRemoved() throws InvalidImageException{
 		String filename = "..\\TextBasedGame\\src\\resource\\images\\kirbywalk1.png";
 		canvas.addImage(new CanvasImage( filename ,point));
 		canvas.deleteImage(point);
@@ -81,10 +82,9 @@ public class GameCanvasTests {
 		
 	}
 	
-	public static class AsNonApp extends Application {
+	public static class dummyApp extends Application {
 	    @Override
 	    public void start(Stage primaryStage) throws Exception {
-	        // noop
 	    }
 	}
 
@@ -92,7 +92,7 @@ public class GameCanvasTests {
 	public static void initJFX() {
 	    Thread t = new Thread("JavaFX Init Thread") {
 	        public void run() {
-	            Application.launch(AsNonApp.class, new String[0]);
+	            Application.launch(dummyApp.class, new String[0]);
 	        }
 	    };
 	    t.setDaemon(true);

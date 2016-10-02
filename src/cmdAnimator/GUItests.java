@@ -6,7 +6,7 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import cmdAnimator.GameUI.GameCanvasTests.AsNonApp;
+import cmdAnimator.GameUI.GameCanvasTests.dummyApp;
 import javafx.application.Application;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
@@ -52,10 +52,9 @@ public class GUItests {
 	}
 
 	
-	public static class AsNonApp extends Application {
+	public static class dummyApp extends Application {
 	    @Override
 	    public void start(Stage primaryStage) throws Exception {
-	        // noop
 	    }
 	}
 
@@ -63,7 +62,7 @@ public class GUItests {
 	public static void initJFX() {
 	    Thread t = new Thread("JavaFX Init Thread") {
 	        public void run() {
-	            Application.launch(AsNonApp.class, new String[0]);
+	            Application.launch(dummyApp.class, new String[0]);
 	        }
 	    };
 	    t.setDaemon(true);
