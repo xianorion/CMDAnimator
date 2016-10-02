@@ -2,7 +2,6 @@ package cmdAnimator;
 	
 import cmdAnimator.GameCanvasActions.CommandParser;
 import cmdAnimator.GameCanvasActions.FrameAnimator;
-import javafx.animation.Animation;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -11,10 +10,8 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.FlowPane;
+
 
 
 public class Main extends Application {

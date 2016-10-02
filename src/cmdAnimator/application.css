@@ -2,9 +2,10 @@
 
 
 #canvasContainer{
-	-fx-border-color:rgb(0,0,0);
+	-fx-border-color:linear-gradient( from 0.0% 0.0% to 100.0% 100.0%, rgb(26,0,104) 0.0, rgb(102,77,179) 100.0);
 	-fx-border-width: 5px;
 	-fx-background-color: white;
+	-fx-effect: dropshadow(three-pass-box, rgba(0,15,0,1.4), 20, 0, 0, 0);
 }
 
 #mainPane{
@@ -12,13 +13,14 @@
      -fx-background-color: black;
     -fx-background-repeat: repeat ;
 	-fx-background-position: center ;
+	
 }
 
 
 
 #libraryArea{
 	-fx-border-insets: 20 20 60 20;
-	-fx-effect: dropshadow(three-pass-box, rgba(0,15,0,1.4), 20, 0, 0, 0);
+	
 }
 
 #stage{
@@ -35,20 +37,21 @@
 	-fx-font: 12px Arial;
 	-fx-font-style: italic;
 	-fx-border-color:rgb(0,0,0);
-	-fx-background-color: black;
+	
 
 }
 
 #outputField * .content{
 
-	-fx-background-color:rgb(0,0,0);
+	
 }
 
 .label{
 	-fx-font: 20px Arial;
 	-fx-alignment:center ;
 	-fx-text-fill: rgb(255,255,255);
-	-fx-background-color:rgb(30,23,29);
+	-fx-background-image:url(../resource/images/galaxy.jpg);
+	
 	-fx-font-weight: bolder;
 
 }
@@ -57,8 +60,7 @@
 }
 
 .text-field{
-	-fx-background-color: rgb(0,0,0);
-	-fx-text-fill: rgb(255,255,255);
+	-fx-text-fill:rgb(0,64,0);
 }
 
 #outputArea{

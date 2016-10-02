@@ -1,18 +1,13 @@
 package cmdAnimator;
 
-import javax.swing.JTextArea;
 
-import cmdAnimator.GameCanvasActions.CommandParser;
+import cmdAnimator.GameCanvasActions.CanvasImage;
+import cmdAnimator.GameCanvasActions.CanvasText;
 import cmdAnimator.GameUI.GameCanvas;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
-import javafx.geometry.Pos;
+
 import javafx.scene.Group;
-import javafx.scene.canvas.Canvas;
-import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.Labeled;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.ScrollPane.ScrollBarPolicy;
@@ -22,7 +17,6 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
 
 public class GUI extends Group{
 	private TextArea outputField;
@@ -35,9 +29,10 @@ public class GUI extends Group{
 	private Label helpTitle;
 	private TextArea helpCommands;
 	private ScrollPane helpScroller;
+	private final String outputFieldText ="---output---";
 	
 	public GUI(){
-		outputField = new TextArea("outputArea");
+		outputField = new TextArea(outputFieldText);
 		libraryTitle = new Label();
 		helpTitle = new Label();
 		stage  = new GameCanvas();
@@ -184,5 +179,25 @@ public class GUI extends Group{
 	public TextField getCommandLine() {
 		return userInputField;
 	}
+
+	public void addUserInputToOutPutFieldAndClearUserInput() {
+		appendTextToOutputScreen(userInputField.getText());
+		userInputField.setText("");
+	}
 	
+	public String getOutputFieldDefaultText(){
+		return outputFieldText;
+	}
+
+	public void appendTextToOutputScreen(String string) {
+		outputField.setText(outputField.getText()+"\n"+string);
+	}
+	
+	public void addTextToCanvas(CanvasText newText){
+		stage.addText(newText);
+	}
+	
+	public void addImageToCanvas(CanvasImage canvasImage){
+		stage.addImage(canvasImage);
+	}
 }

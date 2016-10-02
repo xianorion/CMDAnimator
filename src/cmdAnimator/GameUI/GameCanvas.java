@@ -1,19 +1,14 @@
 package cmdAnimator.GameUI;
 
 import java.awt.Point;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map.Entry;
-
-import javax.swing.JPanel;
 
 import cmdAnimator.GameCanvasActions.CanvasImage;
 import cmdAnimator.GameCanvasActions.CanvasText;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.image.Image;
-import javafx.scene.layout.Pane;
 
 public class GameCanvas extends Canvas {
 	final static int HEIGHT=300;

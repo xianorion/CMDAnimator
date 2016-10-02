@@ -1,12 +1,7 @@
 package cmdAnimator.GameCanvasActions;
 
-import java.awt.Color;
-import java.awt.Font;
-import java.awt.Graphics;
-import java.awt.Point;
-import java.util.ArrayList;
 
-import cmdAnimator.GameUI.GameCanvas;
+import java.awt.Point;
 
 /*writes a word on the canvas in an animation like way*/
 public class CanvasText {
