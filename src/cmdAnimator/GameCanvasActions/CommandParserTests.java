@@ -48,12 +48,6 @@ public class CommandParserTests {
 	}
 	
 	@Test
-	public void ifUserEntersAddImageValidWithOutQuotationImageToPointParseReturnsFalse(){
-		text = "add image ..\\TextBasedGame\\src\\resource\\images\\kirbywalk1.png (40,40)";
-		assertFalse(CommandParser.parseText(gui, text, animator));
-	}
-	
-	@Test
 	public void ifUserEntersAddImageInValidImageToPointParseReturnsFalse(){
 		text = "add image \"image.gif\" (40,40)";
 		assertFalse(CommandParser.parseText(gui, text, animator));
@@ -78,6 +72,27 @@ public class CommandParserTests {
 	}
 	
 	@Test
+	public void returnTrueWhenHelloQuotationWorldSurroundedByQuotationsIsPassed(){
+		text = "add text \"Hello World\" (45,40)";
+		
+		assertTrue(CommandParser.parseText(gui, text, animator));
+	}
+	
+	@Test
+	public void returnFalseWhenQuotationHelloSpaceWorldSurroundedByQuotationsIsPassed(){
+		text = "add text \"Hello World (45,40)";
+		
+		assertFalse(CommandParser.parseText(gui, text, animator));
+	}
+	
+	@Test
+	public void returnFalseWhenHelloQuotationWorldSurroundedByQuotationsIsPassed(){
+		text = "add text \"Hello\"World\" (45,40)";
+		
+		assertFalse(CommandParser.parseText(gui, text, animator));
+	}
+	
+	@Test
 	public void ifUserEntersAddTextWithoutQuotationsToPointParseReturnsFalse(){
 		text = "add text hello (40.6,40)";
 		assertFalse(CommandParser.parseText(gui, text, animator));
@@ -88,6 +103,13 @@ public class CommandParserTests {
 		text = "add text \"hello\" (4.0,40)";
 		assertFalse(CommandParser.parseText(gui, text, animator));
 	}
+	
+	@Test
+	public void ifUserEntersAddTextWithMultipleWordsToPointParseReturnsTrue(){
+		text = "add text \"hello world\" (40,40)";
+		assertTrue(CommandParser.parseText(gui, text, animator));
+	}
+	
 	@Test 
 	public void ifUserInputIsMultipleSpacesReturnsFalseForParseText(){
 		text = "     ";

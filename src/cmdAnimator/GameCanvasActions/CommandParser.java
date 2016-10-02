@@ -1,7 +1,10 @@
 package cmdAnimator.GameCanvasActions;
 
 import java.awt.Point;
-
+import java.util.ArrayList;
+import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import cmdAnimator.GUI;
 import cmdAnimator.GameUI.GameCanvas;
@@ -67,7 +70,8 @@ public class CommandParser {
 	public static boolean parseText(GUI gui, String text, FrameAnimator animator) {
 		guiInUse = gui;
 		animation = animator;
-		splittingCmds = text.split("\\s+");
+		splittingCmds = splitTextBasedOnDelimiters(text);
+				//text.split("\\s+");
 
 		if (stringArrayIsNotEmpty(splittingCmds)) {
 			try {
@@ -81,6 +85,25 @@ public class CommandParser {
 			return false;
 		}
 		return true;
+	}
+
+	private static String[] splitTextBasedOnDelimiters(String text) {
+		List<String> matchList = new ArrayList<String>();
+		Pattern regex = Pattern.compile("[^\\s\"']+|\"([^\"]*)\"|'([^']*)'");
+		Matcher regexMatcher = regex.matcher(text);
+		while (regexMatcher.find()) {
+		    if (regexMatcher.group(1) != null) {
+		        // Add double-quoted string without the quotes
+		        matchList.add(regexMatcher.group(1));
+		    } else if (regexMatcher.group(2) != null) {
+		        // Add single-quoted string without the quotes
+		        matchList.add(regexMatcher.group(2));
+		    } else {
+		        // Add unquoted word
+		        matchList.add(regexMatcher.group());
+		    }
+		} 
+		return matchList.toArray(new String[0]);
 	}
 
 	private static boolean stringArrayIsNotEmpty(String[] splittingCmds2) {
