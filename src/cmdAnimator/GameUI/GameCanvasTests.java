@@ -10,7 +10,6 @@ import org.junit.Test;
 
 import cmdAnimator.GameCanvasActions.CanvasImage;
 import cmdAnimator.GameCanvasActions.CanvasText;
-import cmdAnimator.GameCanvasActions.InvalidImageException;
 import javafx.application.Application;
 import javafx.stage.Stage;
 
@@ -53,14 +52,14 @@ public class GameCanvasTests {
 	}
 	
 	@Test
-	public void addNullImageToCanvasAndItIsntAdded() throws InvalidImageException{
+	public void addNullImageToCanvasAndItIsntAdded(){
 		canvas.addImage(new CanvasImage("null.png",point));
 		
 		assertFalse(canvas.getImagesToAdd().containsKey(point));
 	}
 	
 	@Test
-	public void addImageToCanvasAtSomePointIsPlacedAtCorrectPoint() throws InvalidImageException{
+	public void addImageToCanvasAtSomePointIsPlacedAtCorrectPoint() {
 		String filename = "..\\TextBasedGame\\src\\resource\\images\\kirbywalk1.png";
 		canvas.addImage(new CanvasImage( filename ,point));
 		
@@ -69,7 +68,7 @@ public class GameCanvasTests {
 	}
 
 	@Test
-	public void ImageThatIsAddedCanBeRemoved() throws InvalidImageException{
+	public void ImageThatIsAddedCanBeRemoved() {
 		String filename = "..\\TextBasedGame\\src\\resource\\images\\kirbywalk1.png";
 		canvas.addImage(new CanvasImage( filename ,point));
 		canvas.deleteImage(point);
@@ -89,7 +88,7 @@ public class GameCanvasTests {
 	}
 
 	@BeforeClass
-	public static void initJFX() {
+	public static void initJFX() throws InterruptedException {
 	    Thread t = new Thread("JavaFX Init Thread") {
 	        public void run() {
 	            Application.launch(dummyApp.class, new String[0]);
@@ -97,6 +96,7 @@ public class GameCanvasTests {
 	    };
 	    t.setDaemon(true);
 	    t.start();
+	    Thread.sleep(500);
 	}
 
 }

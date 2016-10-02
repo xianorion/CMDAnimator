@@ -61,10 +61,12 @@ public class CommandParser {
 	private static ICommandExecutor typeOfCommand;
 	private static String[] splittingCmds;
 	private static GUI guiInUse;
+	private static FrameAnimator animation;
 	
 	//return true if parse worked, else false
 	public static boolean parseText(GUI gui, String text, FrameAnimator animator) {
 		guiInUse = gui;
+		animation = animator;
 		splittingCmds = text.split("\\s+");
 
 		if (stringArrayIsNotEmpty(splittingCmds)) {
@@ -99,16 +101,16 @@ public class CommandParser {
 		switch (splittingCmds[0].toLowerCase()) {
 		case "add":
 			typeOfCommand = new AddCommandExecutor();
-			typeOfCommand.execute(splittingCmdsParameters, guiInUse);
+			typeOfCommand.execute(splittingCmdsParameters, guiInUse, animation);
 			break;
 		case "play":
-
+			animation.playAnimation(guiInUse);
 			break;
-		case "clear":
-
+		case "clear": //check if works
+			guiInUse.clearStage();
 			break;
 		}
-
+		guiInUse.addUserInputToOutPutFieldAndClearUserInput();
 	}
 
 	private void updateGUIAfterCommandEntered(){

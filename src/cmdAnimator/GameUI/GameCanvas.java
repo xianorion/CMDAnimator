@@ -7,7 +7,6 @@ import java.util.Map.Entry;
 
 import cmdAnimator.GameCanvasActions.CanvasImage;
 import cmdAnimator.GameCanvasActions.CanvasText;
-import cmdAnimator.GameCanvasActions.InvalidImageException;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 
@@ -32,7 +31,6 @@ public class GameCanvas extends Canvas {
 		textToWrite.put(newText.getPointToAddTextTo(), newText);
 		this.updatePane();
 		GraphicsContext g = this.getGraphicsContext2D();
-		g.fillText("WORK", 55, 59);
 	}
 	
 	public void deleteText(Point key){

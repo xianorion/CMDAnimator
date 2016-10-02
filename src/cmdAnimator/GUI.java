@@ -200,4 +200,8 @@ public class GUI extends Group{
 	public boolean addImageToCanvas(CanvasImage canvasImage){
 		return stage.addImage(canvasImage);
 	}
+
+	public void clearStage() {
+		stage.clearCanvas();		
+	}
 }

@@ -12,6 +12,7 @@ import cmdAnimator.GameUI.GameCanvas;
 public class FrameAnimator {
 
 	private static final int ONE_SECOND_IN_MILLI = 1000;
+	private int totalNumberOfFrames;
 	private int fps;
 	private ArrayList<GameCanvas> frames;
 	private Timer timer;
@@ -53,6 +54,7 @@ public class FrameAnimator {
 	public void addFrameToAnimation(GUI GUI) {
 		frames.add(GameCanvas.copy(GUI.getScreen()));
 		GUI.setScreen(null);
+		totalNumberOfFrames++;
 	}
 
 	public void moveToFrameNumber(GUI GUI) {
@@ -87,5 +89,9 @@ public class FrameAnimator {
 
 	public ArrayList<GameCanvas> getFrames() {
 		return frames;
+	}
+	
+	public int getTotalNumberOfFrames(){
+		return totalNumberOfFrames;
 	}
 }

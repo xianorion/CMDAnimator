@@ -48,5 +48,24 @@ public class AddCommandExecutorTests {
 		
 		assertEquals(null, point);
 	}
+	
+	@Test
+	public void returnHelloQuotationWorldWhenHelloQuotationWorldSurroundedByQuotationsIsPassed(){
+		text = "\"Hello\"World\"";
+		
+		assertEquals("Hello\"World", ACE.convertUserStringToExcludeSurroundingQuotationMarks(text) );
+	}
+	
+	@Test
+	public void returnNullWhenUserAddsTextWithNothingInIt(){
+		text = "";	
+		assertNull(ACE.convertUserStringToExcludeSurroundingQuotationMarks(text) );
+	}
+	
+	@Test
+	public void returnNullWhenUserAddsMultipleBlankSpaces(){
+		text = "      ";
+		assertNull(ACE.convertUserStringToExcludeSurroundingQuotationMarks(text) );
+	}
 
 }
