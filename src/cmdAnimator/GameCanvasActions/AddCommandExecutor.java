@@ -45,7 +45,7 @@ public class AddCommandExecutor implements ICommandExecutor {
 
 	protected void executeFrameAddition(String[] parameters) throws InvalidCommandException{
 		if(parameters.length ==1){
-		animation.addFrameToAnimation(guiInUse);
+		animation.addFrameToAnimation();
 		}else{
 			throwErrorWithOutputMessage("Invalid Command.\nTo add a new Frame use command: \"Add Frame\"");
 		}

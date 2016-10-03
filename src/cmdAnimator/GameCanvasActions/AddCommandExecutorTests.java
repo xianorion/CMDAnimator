@@ -5,7 +5,12 @@ import static org.junit.Assert.*;
 import java.awt.Point;
 
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
+
+import cmdAnimator.GameCanvasActions.FrameAnimatorTests.dummyApp;
+import javafx.application.Application;
+import javafx.stage.Stage;
 
 public class AddCommandExecutorTests {
 	String text;
@@ -52,6 +57,24 @@ public class AddCommandExecutorTests {
 	@Test
 	public void returnTrueWhenUserEntersStringHello(){
 		
+	}
+	
+	public static class dummyApp extends Application {
+	    @Override
+	    public void start(Stage primaryStage) throws Exception {
+	    }
+	}
+
+	@BeforeClass
+	public static void initJFX() throws InterruptedException {
+	    Thread t = new Thread("JavaFX Init Thread") {
+	        public void run() {
+	            Application.launch(dummyApp.class, new String[0]);
+	        }
+	    };
+	    t.setDaemon(true);
+	    t.start();
+	    Thread.sleep(500);
 	}
 
 }

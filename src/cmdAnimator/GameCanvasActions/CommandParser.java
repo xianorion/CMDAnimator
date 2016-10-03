@@ -139,7 +139,7 @@ public class CommandParser {
 			typeOfCommand.execute(splittingCmdsParameters);
 			break;
 		case "play":
-			animation.playAnimation(guiInUse);
+			animation.playAnimation();
 			break;
 		case "clear": // check if works
 			guiInUse.clearStage();

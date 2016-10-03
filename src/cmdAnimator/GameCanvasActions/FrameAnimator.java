@@ -6,6 +6,7 @@ import java.util.ArrayList;
 
 import javax.swing.Timer;
 
+import cmdAnimator.GUI;
 import cmdAnimator.GameGui;
 import cmdAnimator.GameUI.GameCanvas;
 
@@ -18,31 +19,30 @@ public class FrameAnimator {
 	private ArrayList<GameCanvas> frames;
 	private Timer timer;
 	private int currentFrameBeingDisplayed;
+	private GameGui gui;
 
 	public FrameAnimator() {
 		frames = new ArrayList<GameCanvas>();
 		this.fps = DEFAULT_FPS;
+		gui =  GUI.getInstance();
 	}
 
 	// add tests for me!!
-	public void playAnimation(GameGui GUI) {
-		// System.out.println("Start playing");
+	public void playAnimation() {
 		currentFrameBeingDisplayed = 0;
-		GUI.setDisabledForEnterButton(true);
-		//GUI.repaint();
+		gui.setDisabledForEnterButton(true);
 		// timer that runs until we have shown all the frames in the arraylist once
 		timer = new Timer(ONE_SECOND_IN_MILLI / fps, new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
 				if (currentFrameBeingDisplayed < frames.size()) {
-					GUI.setScreen(frames.get(currentFrameBeingDisplayed));
+					gui.setScreen(frames.get(currentFrameBeingDisplayed));
 					System.out.println("repainted ");
 					currentFrameBeingDisplayed++;
 
 				} else {
 					timer.stop();
-					GUI.setDisabledForEnterButton(false);	
+					gui.setDisabledForEnterButton(false);	
 				}
 			
 			}
@@ -52,13 +52,13 @@ public class FrameAnimator {
 		System.out.println("--------------------------");
 	}
 
-	public void addFrameToAnimation(GameGui GUI) {
-		frames.add(GameCanvas.copy(GUI.getScreen()));
-		GUI.setScreen(null);
+	public void addFrameToAnimation() {
+		frames.add(GameCanvas.copy(gui.getScreen()));
+		gui.setScreen(null);
 		totalNumberOfFrames++;
 	}
 
-	public void moveToFrameNumber(GameGui GUI) {
+	public void moveToFrameNumber() {
 		// find the number in arraylist
 
 		// set the GUI screen to this frame
@@ -82,6 +82,10 @@ public class FrameAnimator {
 
 	public int getFPS() {
 		return fps;
+	}
+	
+	public Timer getTimer(){
+		return timer;
 	}
 
 	public void setFPS(int newFPS) {
