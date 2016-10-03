@@ -93,6 +93,13 @@ public class CommandParserTests {
 	}
 	
 	@Test
+	public void returnFalseWhenUnknownCommandIsPassed() {
+		text = "app text \"Hello World\" (45,40)";
+
+		assertFalse(CommandParser.parseText(gui, text, animator));
+	}
+
+	@Test
 	public void ifUserEntersAddTextWithoutQuotationsToPointParseReturnsFalse(){
 		text = "add text hello (40.6,40)";
 		assertFalse(CommandParser.parseText(gui, text, animator));

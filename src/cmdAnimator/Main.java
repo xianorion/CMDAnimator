@@ -26,7 +26,7 @@ public class Main extends Application {
 			
 			Button enterButton =gui.getEnterButton();
 			
-			enterButton.setOnAction( e -> new EventHandler<ActionEvent>() {
+			enterButton.setOnAction(new EventHandler<ActionEvent>() {
 	            @Override
 	            public void handle(ActionEvent event) {
 	            	CommandParser.parseText(gui, gui.getCommandLine().getText(), Animation);

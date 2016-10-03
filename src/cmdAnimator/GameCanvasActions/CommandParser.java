@@ -61,7 +61,19 @@ public class CommandParser {
 //	}
 	
 	private StringBuffer command;
-	private static ICommandExecutor typeOfCommand;
+	private static ICommandExecutor typeOfCommand = new ICommandExecutor(){
+
+		@Override
+		public void execute(String[] parameters, GUI gui, FrameAnimator animator)
+				throws InvalidCommandException {
+		}
+
+		@Override
+		public String getErrorType() {
+			return "Not a valid command.";
+		}
+		
+	};
 	private static String[] splittingCmds;
 	private static GUI guiInUse;
 	private static FrameAnimator animation;
@@ -89,15 +101,12 @@ public class CommandParser {
 
 	private static String[] splitTextBasedOnDelimiters(String text) {
 		List<String> matchList = new ArrayList<String>();
-		Pattern regex = Pattern.compile("[^\\s\"']+|\"([^\"]*)\"|'([^']*)'");
+		Pattern regex = Pattern.compile("[^\\s\"']+|\"([^\"]*)\"");
 		Matcher regexMatcher = regex.matcher(text);
 		while (regexMatcher.find()) {
 		    if (regexMatcher.group(1) != null) {
 		        // Add double-quoted string without the quotes
 		        matchList.add(regexMatcher.group(1));
-		    } else if (regexMatcher.group(2) != null) {
-		        // Add single-quoted string without the quotes
-		        matchList.add(regexMatcher.group(2));
 		    } else {
 		        // Add unquoted word
 		        matchList.add(regexMatcher.group());
@@ -129,15 +138,19 @@ public class CommandParser {
 		case "play":
 			animation.playAnimation(guiInUse);
 			break;
-		case "clear": //check if works
+		case "clear": // check if works
 			guiInUse.clearStage();
 			break;
+		default:
+			guiInUse.addUserInputToOutPutFieldAndClearUserInput();
+			throw new InvalidCommandException();
+
 		}
 		guiInUse.addUserInputToOutPutFieldAndClearUserInput();
 	}
 
-	private void updateGUIAfterCommandEntered(){
-		//call the gui to do this updating of output
+	private void updateGUIAfterCommandEntered() {
+		// call the gui to do this updating of output
 		guiInUse.addUserInputToOutPutFieldAndClearUserInput();
 	}
 	
