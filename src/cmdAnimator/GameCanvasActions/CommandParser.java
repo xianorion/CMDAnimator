@@ -61,7 +61,8 @@ public class CommandParser {
 //	}
 	
 	private StringBuffer command;
-	private static ICommandExecutor typeOfCommand = new ICommandExecutor(){
+	private static ICommandExecutor typeOfCommand;
+	private static final ICommandExecutor defaultTypeOfCommand = new ICommandExecutor(){
 
 		@Override
 		public void execute(String[] parameters, GUI gui, FrameAnimator animator)
@@ -82,6 +83,7 @@ public class CommandParser {
 	public static boolean parseText(GUI gui, String text, FrameAnimator animator) {
 		guiInUse = gui;
 		animation = animator;
+		typeOfCommand = defaultTypeOfCommand;
 		splittingCmds = splitTextBasedOnDelimiters(text);
 				//text.split("\\s+");
 
@@ -91,9 +93,11 @@ public class CommandParser {
 			} catch (InvalidCommandException e) {
 				System.out.println("error");
 				gui.appendTextToOutputScreen(typeOfCommand.getErrorType());
+				typeOfCommand = defaultTypeOfCommand;
 				return false;
 			}			
 		}else{
+			typeOfCommand = defaultTypeOfCommand;
 			return false;
 		}
 		return true;
@@ -147,6 +151,7 @@ public class CommandParser {
 
 		}
 		guiInUse.addUserInputToOutPutFieldAndClearUserInput();
+		typeOfCommand = defaultTypeOfCommand;
 	}
 
 	private void updateGUIAfterCommandEntered() {
