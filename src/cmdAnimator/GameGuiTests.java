@@ -11,15 +11,15 @@ import javafx.application.Application;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
-public class GUItests {
+public class GameGuiTests {
 	
 	String outputText;
-	GUI gui;
+	GameGui gui;
 	TextField cmdLine;
 	
 	@Before
 	public void setUp(){
-		gui = new GUI();
+		gui = new GameGui();
 		cmdLine = gui.getCommandLine();
 		outputText= gui.getOutputFieldDefaultText()+"\n";
 	}

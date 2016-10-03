@@ -8,7 +8,7 @@ import java.util.Date;
 
 import org.junit.Test;
 
-import cmdAnimator.GUI;
+import cmdAnimator.GameGui;
 import cmdAnimator.GameUI.GameCanvas;
 
 public class FrameAnimatorTests {
@@ -19,16 +19,17 @@ public class FrameAnimatorTests {
 	private static final int DIVISION_TO_CONVERT_NANO_TO_SECONDS = 1000000000;
 	FrameAnimator Animation;
 	float beginningTime, endingTime, deltaTime;
-	GUI GUI;
+	GameGui GUI;
 	
 	@Before
 	public void setup(){
-		GUI= new GUI();
+		GUI= new GameGui();
 	}
 
 	@Test
 	public void totalAnimationTimeIs1SecondWith2FPSAnd2Frames() {
-		Animation = new FrameAnimator(2);
+		Animation = new FrameAnimator();
+		Animation.setFPS(2);
 		Animation.addFrameToAnimation(GUI);
 		Animation.addFrameToAnimation(GUI);
 		
@@ -42,7 +43,8 @@ public class FrameAnimatorTests {
 	
 	@Test
 	public void totalAnimationTimeIsHalfASecondWith2FPSAnd1Frame(){
-		Animation = new FrameAnimator(2);
+		Animation = new FrameAnimator();
+		Animation.setFPS(2);
 		Animation.addFrameToAnimation(GUI);
 		
 		beginningTime = System.nanoTime()/DIVIDE_TO_GET_FIRST_DECIMAL_IN_ONES_PLACE_FOR_NANO_TIME;
@@ -55,7 +57,8 @@ public class FrameAnimatorTests {
 	
 	@Test
 	public void totalAnimationTimeIsOneAndAHalfSecondsWith2FPSAnd3Frames(){
-		Animation = new FrameAnimator(2);
+		Animation = new FrameAnimator();
+		Animation.setFPS(2);
 		Animation.addFrameToAnimation(GUI);
 		Animation.addFrameToAnimation(GUI);
 		Animation.addFrameToAnimation(GUI);
@@ -70,7 +73,8 @@ public class FrameAnimatorTests {
 	
 	@Test@Ignore
 	public void whenNewFrameIsAddedItIsPlacedInArrayListAndGUIScreenIsNowBlank(){
-		Animation = new FrameAnimator(2);
+		Animation = new FrameAnimator();
+		Animation.setFPS(2);
 		GameCanvas frameAdded = GUI.getScreen();
 		Animation.addFrameToAnimation(GUI);
 		

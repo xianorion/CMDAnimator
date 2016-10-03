@@ -7,6 +7,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import cmdAnimator.GUI;
+import cmdAnimator.GameGui;
 import cmdAnimator.GameUI.GameCanvas;
 import javafx.scene.control.TextArea;
 public class CommandParser {
@@ -65,7 +66,7 @@ public class CommandParser {
 	private static final ICommandExecutor defaultTypeOfCommand = new ICommandExecutor(){
 
 		@Override
-		public void execute(String[] parameters, GUI gui, FrameAnimator animator)
+		public void execute(String[] parameters)
 				throws InvalidCommandException {
 		}
 
@@ -76,13 +77,11 @@ public class CommandParser {
 		
 	};
 	private static String[] splittingCmds;
-	private static GUI guiInUse;
-	private static FrameAnimator animation;
+	private static GameGui guiInUse = GUI.getInstance();
+	private static FrameAnimator animation = GameAnimator.getInstance();
 	
 	//return true if parse worked, else false
-	public static boolean parseText(GUI gui, String text, FrameAnimator animator) {
-		guiInUse = gui;
-		animation = animator;
+	public static boolean parseText(String text) {
 		typeOfCommand = defaultTypeOfCommand;
 		splittingCmds = splitTextBasedOnDelimiters(text);
 				//text.split("\\s+");
@@ -92,7 +91,7 @@ public class CommandParser {
 				executeCommandBasedOnType();
 			} catch (InvalidCommandException e) {
 				System.out.println("error");
-				gui.appendTextToOutputScreen(typeOfCommand.getErrorType());
+				guiInUse.appendTextToOutputScreen(typeOfCommand.getErrorType());
 				typeOfCommand = defaultTypeOfCommand;
 				return false;
 			}			
@@ -137,7 +136,7 @@ public class CommandParser {
 		switch (splittingCmds[0].toLowerCase()) {
 		case "add":
 			typeOfCommand = new AddCommandExecutor();
-			typeOfCommand.execute(splittingCmdsParameters, guiInUse, animation);
+			typeOfCommand.execute(splittingCmdsParameters);
 			break;
 		case "play":
 			animation.playAnimation(guiInUse);

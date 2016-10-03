@@ -3,6 +3,7 @@ package cmdAnimator.GameCanvasActions;
 import java.awt.Point;
 
 import cmdAnimator.GUI;
+import cmdAnimator.GameGui;
 
 //text with quotations doesn't work: "hello\"this\" does 
 
@@ -11,13 +12,11 @@ public class AddCommandExecutor implements ICommandExecutor {
 	private final String DEFAULT_ADD_ERROR = "Not a command\nType 'help add' and refer to "+
 			"the help sidebar for more information";
 	private String error = "";
-	private GUI guiInUse;
-	private FrameAnimator animation;
+	private GameGui guiInUse = GUI.getInstance();
+	private FrameAnimator animation = GameAnimator.getInstance();
 	
 	@Override
-	public void execute(String[] parameters, GUI gui, FrameAnimator animator) throws InvalidCommandException {
-		guiInUse = gui;
-		animation = animator;
+	public void execute(String[] parameters) throws InvalidCommandException {
 		
 		if (parameters.length == 1 || parameters.length == 3) {
 

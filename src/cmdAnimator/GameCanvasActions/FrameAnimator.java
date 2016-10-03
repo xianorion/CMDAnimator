@@ -6,11 +6,12 @@ import java.util.ArrayList;
 
 import javax.swing.Timer;
 
-import cmdAnimator.GUI;
+import cmdAnimator.GameGui;
 import cmdAnimator.GameUI.GameCanvas;
 
 public class FrameAnimator {
 
+	private final int DEFAULT_FPS = 12;
 	private static final int ONE_SECOND_IN_MILLI = 1000;
 	private int totalNumberOfFrames;
 	private int fps;
@@ -18,13 +19,13 @@ public class FrameAnimator {
 	private Timer timer;
 	private int currentFrameBeingDisplayed;
 
-	public FrameAnimator(int fps) {
+	public FrameAnimator() {
 		frames = new ArrayList<GameCanvas>();
-		this.fps = fps;
+		this.fps = DEFAULT_FPS;
 	}
 
 	// add tests for me!!
-	public void playAnimation(GUI GUI) {
+	public void playAnimation(GameGui GUI) {
 		// System.out.println("Start playing");
 		currentFrameBeingDisplayed = 0;
 		GUI.setDisabledForEnterButton(true);
@@ -51,13 +52,13 @@ public class FrameAnimator {
 		System.out.println("--------------------------");
 	}
 
-	public void addFrameToAnimation(GUI GUI) {
+	public void addFrameToAnimation(GameGui GUI) {
 		frames.add(GameCanvas.copy(GUI.getScreen()));
 		GUI.setScreen(null);
 		totalNumberOfFrames++;
 	}
 
-	public void moveToFrameNumber(GUI GUI) {
+	public void moveToFrameNumber(GameGui GUI) {
 		// find the number in arraylist
 
 		// set the GUI screen to this frame

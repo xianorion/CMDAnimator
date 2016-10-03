@@ -30,7 +30,6 @@ public class GameCanvas extends Canvas {
 	public void addText(CanvasText newText){
 		textToWrite.put(newText.getPointToAddTextTo(), newText);
 		this.updatePane();
-		GraphicsContext g = this.getGraphicsContext2D();
 	}
 	
 	public void deleteText(Point key){

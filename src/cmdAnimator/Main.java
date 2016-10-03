@@ -2,6 +2,7 @@ package cmdAnimator;
 	
 import cmdAnimator.GameCanvasActions.CommandParser;
 import cmdAnimator.GameCanvasActions.FrameAnimator;
+import cmdAnimator.GameCanvasActions.GameAnimator;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -19,8 +20,8 @@ public class Main extends Application {
 	public void start(Stage primaryStage) {
 		try {
 			primaryStage.setTitle("CMDAnimator");
-			FrameAnimator Animation = new FrameAnimator(8);
-			GUI gui = new GUI();			
+			FrameAnimator Animation = GameAnimator.getInstance();
+			GameGui gui = GUI.getInstance();			
 			
 			
 			
@@ -29,7 +30,7 @@ public class Main extends Application {
 			enterButton.setOnAction(new EventHandler<ActionEvent>() {
 	            @Override
 	            public void handle(ActionEvent event) {
-	            	CommandParser.parseText(gui, gui.getCommandLine().getText(), Animation);
+	            	CommandParser.parseText( gui.getCommandLineText());
 	            	System.out.println("called");
 	    			primaryStage.requestFocus();
 	            }
@@ -41,7 +42,7 @@ public class Main extends Application {
 				@Override
 				public void handle(KeyEvent event) {
 					if (event.getCode().equals(KeyCode.ENTER)) {
-						CommandParser.parseText(gui, gui.getCommandLine().getText(), Animation);
+						CommandParser.parseText(gui.getCommandLineText());
 					}
 
 				}
