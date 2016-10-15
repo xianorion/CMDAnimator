@@ -8,7 +8,9 @@ import cmdAnimator.GameUI.GameCanvas;
 import javafx.scene.Group;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
+import javafx.scene.control.MenuItem;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.ScrollPane.ScrollBarPolicy;
 import javafx.scene.control.TextArea;
@@ -22,6 +24,7 @@ public class GameGui extends Group{
 	private TextArea outputField;
 	private Label libraryTitle;
 	private MenuBar libraryMenu;
+	private Menu framesLibrary;
 	private FlowPane canvasPane;
 	private GameCanvas stage;
 	private TextField userInputField;
@@ -42,6 +45,7 @@ public class GameGui extends Group{
 		helpScroller = new ScrollPane();
 		canvasPane = new FlowPane();
 		libraryMenu = new MenuBar();
+		framesLibrary = new Menu("Current Frame: 0");
 		
 		setupIDs();
 		setupGUITextFields();
@@ -78,6 +82,7 @@ public class GameGui extends Group{
 		canvasPane.setId("canvasContainer");
 		outputField.setId("outputField");;
 		libraryTitle.setId("libraryTitle");
+		framesLibrary.setId("frameLibrary");
 		helpTitle.setId("helpTitle");
 		libraryMenu.setId("libraryMenu");
 		stage.setId("stage");
@@ -139,6 +144,7 @@ public class GameGui extends Group{
 		libraryMenu.setMaxWidth(180);
 		libraryMenu.setMaxHeight(425);
 		libraryMenu.setMinHeight(425);
+		libraryMenu.getMenus().add(framesLibrary);
 	}
 
 
@@ -150,6 +156,10 @@ public class GameGui extends Group{
 	public void setDisabledForEnterButton(boolean b) {
 		enterButton.setDisable(b);
 		
+	}
+	
+	public void setCurrentFrameLabel(String newLabel){
+		framesLibrary.setText(newLabel);
 	}
 
 	public void setScreen(GameCanvas gameCanvas) {

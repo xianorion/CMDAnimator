@@ -40,7 +40,7 @@ public class FrameAnimator {
 					gui.setScreen(frames.get(currentFrameBeingDisplayed));
 					System.out.println("repainted ");
 					currentFrameBeingDisplayed++;
-
+					
 				} else {
 					timer.stop();
 					gui.setDisabledForEnterButton(false);	
@@ -59,7 +59,7 @@ public class FrameAnimator {
 		totalNumberOfFrames++;
 		currentFrameNumber++;
 		System.out.println("current frame num "+ currentFrameNumber+" total frame"+ totalNumberOfFrames);
-		
+		updateCurrentFrameLabel(false);
 	}
 
 	public void moveToFrameNumber(int frameNumber) throws InvalidCommandException {
@@ -69,6 +69,7 @@ public class FrameAnimator {
 		}else{
 			throw new InvalidCommandException();
 		}
+		updateCurrentFrameLabel(true);
 	}
 
 	public void deleteFrame(int frameNumber) {
@@ -76,7 +77,10 @@ public class FrameAnimator {
 			System.out.println("removed");
 			frames.remove(frameNumber-1);
 			totalNumberOfFrames--;
+			currentFrameNumber = totalNumberOfFrames;
+			updateCurrentFrameLabel(true);
 		}
+		
 
 	}
 
@@ -122,5 +126,14 @@ public class FrameAnimator {
 
 	public void moveToClearFrame() {
 		gui.setScreen(new GameCanvas());
+		 updateCurrentFrameLabel(false);
+	}
+	
+	//input: false if we are on a clear screen, true if we are on some frame we had before
+	public void updateCurrentFrameLabel(boolean num) {
+		if (!num)
+			gui.setCurrentFrameLabel("Current Frame: n/a");
+		else
+			gui.setCurrentFrameLabel("Current Frame: " + getNumberOfCurrentFrame());
 	}
 }

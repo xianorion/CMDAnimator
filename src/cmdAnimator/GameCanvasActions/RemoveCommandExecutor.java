@@ -5,7 +5,7 @@ import cmdAnimator.GameGui;
 
 public class RemoveCommandExecutor implements ICommandExecutor {
 
-	private final String DEFAULT_ADD_ERROR = "Not a command\nType 'help add' and refer to "+
+	private final String DEFAULT_ADD_ERROR = "Not a command\nType 'help remove' and refer to "+
 			"the help sidebar for more information";
 	private String error = "";
 	private GameGui guiInUse = GUI.getInstance();

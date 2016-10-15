@@ -71,8 +71,8 @@ public class Main extends Application {
 							gui.getCommandLine().setText(commands.get(currentCommandView + 1));
 							currentCommandView++;
 							System.out.println("current command view " + currentCommandView);
-
-						}
+						}else
+							gui.getCommandLine().setText("");
 
 					}
 

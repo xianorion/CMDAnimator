@@ -54,6 +54,18 @@ public class AddCommandExecutorTests {
 		assertEquals(null, point);
 	}
 	
+	@Test (expected = InvalidCommandException.class)
+	public void shouldThrowExecptionIfTextIsJustEntered() throws InvalidCommandException{
+		String[] textToEnter = {"text"};
+		ACE.execute(textToEnter);
+	}
+	
+	@Test (expected = InvalidCommandException.class)
+	public void shouldThrowExecptionIfImageIsJustEntered() throws InvalidCommandException{
+		String[] textToEnter = {"image"};
+		ACE.execute(textToEnter);
+	}
+	
 	@Test
 	public void returnTrueWhenUserEntersStringHello(){
 		

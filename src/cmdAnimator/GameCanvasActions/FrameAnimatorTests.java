@@ -214,6 +214,19 @@ public class FrameAnimatorTests {
 		assertEquals(0,gui.getScreen().getTextToWrite().size());
 		assertEquals(0,gui.getScreen().getImagesToAdd().size());
 	}
+	
+	@Test 
+	public void ifDeletedFrameCurrentFrameNumberCurrentFrameNumberGoesToSizeOfFramesList(){
+		Animation.setCurrentFrameNumber(0);
+		Animation.addFrameToAnimation();
+		Animation.addFrameToAnimation();
+		
+		assertEquals(2, Animation.getNumberOfCurrentFrame());
+		
+		Animation.deleteFrame(2);
+		assertEquals(Animation.getTotalNumberOfFrames(), Animation.getNumberOfCurrentFrame());
+	}
+	
 
 	public static class dummyApp extends Application {
 	    @Override

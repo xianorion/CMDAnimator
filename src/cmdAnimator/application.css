@@ -46,14 +46,20 @@
 	
 }
 
-.label{
+#libraryTitle, #helpTitle{
 	-fx-font: 20px Arial;
 	-fx-alignment:center ;
 	-fx-text-fill: rgb(255,255,255);
 	-fx-background-image:url(../resource/images/galaxy.jpg);
 	
 	-fx-font-weight: bolder;
+}
 
+#frameLibrary .label{
+	-fx-font: 15px Arial;
+	-fx-alignment:center-left ;
+	-fx-text-fill: rgb(0,0,0);
+	
 }
 
 #helpCommandArea * .content{

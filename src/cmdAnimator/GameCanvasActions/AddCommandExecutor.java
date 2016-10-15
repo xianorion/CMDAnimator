@@ -59,6 +59,7 @@ public class AddCommandExecutor implements ICommandExecutor {
 	}
 
 	private void executeTextAddition(String[] para) throws InvalidCommandException{
+		if(para.length == 3){
 		Point point = convertStringToPoint(para[2]);
 		if(point == null){
 			throwErrorWithOutputMessage("Point representation is incorrect.\nPoints are in format (X-Coordinate, Y-Coordinate)"
@@ -66,10 +67,16 @@ public class AddCommandExecutor implements ICommandExecutor {
 		}else{
 			guiInUse.addTextToCanvas(new CanvasText(para[1], point));
 		}
+		}else{
+			error = "Not enough parameters to add text";
+			throw new InvalidCommandException();
+		}
+		
 
 	}
 
 	private void executeImageAddition(String[] para) throws InvalidCommandException{
+		if(para.length == 3){
 		Point point = convertStringToPoint(para[2]);
 		boolean isAdded =  false;
 		if(point == null){
@@ -81,6 +88,10 @@ public class AddCommandExecutor implements ICommandExecutor {
 			if(!isAdded){
 				throwErrorWithOutputMessage("Invalid Image");
 			}
+		}
+		}else{
+			error = "not enough prarmeters to add an image";
+			throw new InvalidCommandException();
 		}
 	}
 
