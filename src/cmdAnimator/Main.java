@@ -1,5 +1,7 @@
 package cmdAnimator;
 	
+import java.util.ArrayList;
+
 import cmdAnimator.GameCanvasActions.CommandParser;
 import cmdAnimator.GameCanvasActions.FrameAnimator;
 import cmdAnimator.GameCanvasActions.GameAnimator;
@@ -16,6 +18,10 @@ import javafx.scene.input.KeyEvent;
 
 
 public class Main extends Application {
+	
+	private ArrayList<String> commands =  new ArrayList<String>();
+	private static int currentCommandView = 0;
+	
 	@Override
 	public void start(Stage primaryStage) {
 		try {
@@ -28,32 +34,56 @@ public class Main extends Application {
 			Button enterButton =gui.getEnterButton();
 			
 			enterButton.setOnAction(new EventHandler<ActionEvent>() {
-	            @Override
-	            public void handle(ActionEvent event) {
-	            	CommandParser.parseText( gui.getCommandLineText());
-	            	System.out.println("called");
-	    			primaryStage.requestFocus();
-	            }
-	        });
-			
-			TextField cmdLine= gui.getCommandLine();
-			
+				@Override
+				public void handle(ActionEvent event) {
+					if (!commands.contains(gui.getCommandLineText()))
+						commands.add(gui.getCommandLineText());
+					currentCommandView++;
+					CommandParser.parseText(gui.getCommandLineText());
+
+					primaryStage.requestFocus();
+				}
+			});
+
+			TextField cmdLine = gui.getCommandLine();
+
 			cmdLine.setOnKeyPressed(new EventHandler<KeyEvent>() {
 				@Override
 				public void handle(KeyEvent event) {
 					if (event.getCode().equals(KeyCode.ENTER)) {
+						if (!commands.contains(gui.getCommandLineText()))
+							commands.add(gui.getCommandLineText());
+						currentCommandView = commands.size();
 						CommandParser.parseText(gui.getCommandLineText());
+					} else if (event.getCode().equals(KeyCode.RIGHT)) {
+						if (gui.getCommandLineText().equals(""))
+							CommandParser.parseText("goto frame " + (Animation.getNumberOfCurrentFrame() + 1));
+					} else if (event.getCode().equals(KeyCode.LEFT)) {
+						if (gui.getCommandLineText().equals(""))
+							CommandParser.parseText("goto frame " + (Animation.getNumberOfCurrentFrame() - 1));
+					} else if (event.getCode().equals(KeyCode.UP)) {
+						if (currentCommandView > 0) {
+							gui.getCommandLine().setText(commands.get(currentCommandView - 1));
+							currentCommandView--;
+						}
+					} else if (event.getCode().equals(KeyCode.DOWN)) {
+						if (currentCommandView < commands.size() - 1) {
+							gui.getCommandLine().setText(commands.get(currentCommandView + 1));
+							currentCommandView++;
+							System.out.println("current command view " + currentCommandView);
+
+						}
+
 					}
 
 				}
 			});
-			
-			Scene scene = new Scene(gui,1040,500);
-			
+
+			Scene scene = new Scene(gui, 1040, 500);
+
 			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 			primaryStage.setScene(scene);
 			primaryStage.show();
-			
 			
 		} catch(Exception e) {
 			e.printStackTrace();

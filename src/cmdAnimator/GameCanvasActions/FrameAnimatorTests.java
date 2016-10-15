@@ -73,6 +73,7 @@ public class FrameAnimatorTests {
 		assertEquals(1.5, runTime*runAmounts, 0.0);
 	}
 	
+	
 	@Test
 	public void whenNewFrameIsAddedAllComponentsOnFrameArePlacedInArrayListAndGUIScreenIsNowBlank(){
 		Point point = new Point(50,50);

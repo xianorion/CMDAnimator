@@ -80,8 +80,8 @@ public class FrameAnimator {
 
 	}
 
-	public int getNumberOfCurrentFrame(GameCanvas currentFrame) {
-		return 0;
+	public int getNumberOfCurrentFrame() {
+		return currentFrameNumber;
 	}
 
 	public GameCanvas getFrameBasedOnFrameNumber(int frameNumber) {
