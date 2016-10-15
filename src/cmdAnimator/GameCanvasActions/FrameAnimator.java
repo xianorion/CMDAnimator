@@ -12,7 +12,7 @@ import cmdAnimator.GameUI.GameCanvas;
 
 public class FrameAnimator {
 
-	private final int DEFAULT_FPS = 12;
+	private final int DEFAULT_FPS = 5;
 	private static final int ONE_SECOND_IN_MILLI = 1000;
 	private int totalNumberOfFrames;
 	private int fps;
@@ -118,5 +118,9 @@ public class FrameAnimator {
 	public GameCanvas getCurrentFrame() {
 		System.out.println("getting current frame "+ (currentFrameNumber-1));
 		return getFrameBasedOnFrameNumber(currentFrameNumber);
+	}
+
+	public void moveToClearFrame() {
+		gui.setScreen(new GameCanvas());
 	}
 }

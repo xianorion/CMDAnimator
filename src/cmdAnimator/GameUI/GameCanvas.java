@@ -22,8 +22,6 @@ public class GameCanvas extends Canvas {
 		textToWrite = new HashMap<Point, CanvasText>();
 		imagesToAdd = new HashMap<Point, CanvasImage>();
 		GraphicsContext g = this.getGraphicsContext2D();
-		g.fillText("no way", 40, 43);
-		
 	}
 	
 	

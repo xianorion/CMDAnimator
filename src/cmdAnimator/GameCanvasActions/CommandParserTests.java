@@ -2,6 +2,8 @@ package cmdAnimator.GameCanvasActions;
 
 import static org.junit.Assert.*;
 
+import java.awt.Point;
+
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Ignore;
@@ -169,11 +171,17 @@ public class CommandParserTests {
 	}
 	
 	@Test
-	public void ifUSerEntersTextGotoFrameOneParserReturnsTrue(){
+	public void ifUserEntersTextGotoFrameOneParserReturnsTrue(){
 		text ="goto frame 1";
 		assertTrue(CommandParser.parseText(text));
 	}
 	
+	@Test 
+	public void ifUserEntersDoneParserIsTrue(){
+		text = "Done";
+		
+		assertTrue(CommandParser.parseText(text));
+	}
 	
 
 	public static class dummyApp extends Application {

@@ -199,6 +199,20 @@ public class FrameAnimatorTests {
 		
 		Animation.moveToFrameNumber(0);
 	}
+	
+	@Test
+	public void WhenMoveToClearFrameIsCalledGuiIsNull(){
+		gui.addImageToCanvas(new CanvasImage( "..\\TextBasedGame\\src\\resource\\images\\kirbywalk1.png" ,new Point(3,4)));
+		gui.addTextToCanvas(new CanvasText("hi", new Point(1,1)));
+		
+		
+		assertEquals(1,gui.getScreen().getTextToWrite().size());
+		assertEquals(1,gui.getScreen().getImagesToAdd().size());
+		
+		Animation.moveToClearFrame();
+		assertEquals(0,gui.getScreen().getTextToWrite().size());
+		assertEquals(0,gui.getScreen().getImagesToAdd().size());
+	}
 
 	public static class dummyApp extends Application {
 	    @Override

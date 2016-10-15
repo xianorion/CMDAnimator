@@ -159,6 +159,9 @@ public class CommandParser {
 		case "clear": // check if works
 			guiInUse.clearStage();
 			break;
+		case "done":
+			animation.moveToClearFrame();
+			break;
 		default:
 			guiInUse.addUserInputToOutPutFieldAndClearUserInput();
 			throw new InvalidCommandException();
