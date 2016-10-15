@@ -66,6 +66,11 @@ public class FrameAnimator {
 	}
 
 	public void deleteFrame(int frameNumber) {
+		if(frameNumber -1 < totalNumberOfFrames){
+			System.out.println("removed");
+			frames.remove(frameNumber-1);
+			totalNumberOfFrames--;
+		}
 
 	}
 
@@ -74,8 +79,8 @@ public class FrameAnimator {
 	}
 
 	public GameCanvas getFrameBasedOnFrameNumber(int frameNumber) {
-		if (frames.get(frameNumber) != null) {
-			return frames.get(frameNumber);
+		if (frameNumber-1 < totalNumberOfFrames && frames.get(frameNumber-1) != null) {
+			return frames.get(frameNumber-1);
 		} else
 			return null;
 	}

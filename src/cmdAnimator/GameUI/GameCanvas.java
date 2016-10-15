@@ -103,22 +103,24 @@ public class GameCanvas extends Canvas {
 
 	public static GameCanvas copy(GameCanvas screen) {
 		GameCanvas newCanvas = new GameCanvas();
-		
-		Iterator<Entry<Point, CanvasText>> it = screen.textToWrite.entrySet().iterator();
-		while (it.hasNext()) {
-			CanvasText text = it.next().getValue();
-			newCanvas.addText(text);
-		}
 
-		// adding images
-		Iterator<Entry<Point, CanvasImage>> iterator2 = screen.imagesToAdd.entrySet().iterator();
-		while (iterator2.hasNext()) {
-			CanvasImage image = iterator2.next().getValue();
-			newCanvas.addImage(image);
+		if (screen != null) {
+			Iterator<Entry<Point, CanvasText>> it = screen.textToWrite.entrySet().iterator();
+			while (it.hasNext()) {
+				CanvasText text = it.next().getValue();
+				newCanvas.addText(text);
+			}
+
+			// adding images
+
+			Iterator<Entry<Point, CanvasImage>> iterator2 = screen.imagesToAdd.entrySet().iterator();
+			while (iterator2.hasNext()) {
+				CanvasImage image = iterator2.next().getValue();
+				newCanvas.addImage(image);
+			}
 		}
 		return newCanvas;
 	}
-	
 	
 
 }

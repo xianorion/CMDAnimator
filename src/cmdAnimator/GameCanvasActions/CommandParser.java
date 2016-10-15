@@ -129,6 +129,7 @@ public class CommandParser {
 	private static void executeCommandBasedOnType() throws InvalidCommandException {
 		String[] splittingCmdsParameters = new String[splittingCmds.length - 1];
 
+		//get all the parameters, i.e. text after first word
 		for (int i = 0; i < splittingCmdsParameters.length; i++) {
 			splittingCmdsParameters[i] = splittingCmds[i + 1];
 		}
@@ -136,6 +137,10 @@ public class CommandParser {
 		switch (splittingCmds[0].toLowerCase()) {
 		case "add":
 			typeOfCommand = new AddCommandExecutor();
+			typeOfCommand.execute(splittingCmdsParameters);
+			break;
+		case "remove":
+			typeOfCommand = new RemoveCommandExecutor();
 			typeOfCommand.execute(splittingCmdsParameters);
 			break;
 		case "play":

@@ -150,6 +150,18 @@ public class CommandParserTests {
 		
 	}
 	
+	@Test
+	public void ifUserEntersTextRemoveFrameOneParserReturnsTrue(){
+		text = "remove frame 1";
+		assertTrue(CommandParser.parseText( text));
+	}
+	
+	@Test
+	public void ifUserEntersTextRemoveParserReturnsFalse(){
+		text = "remove";
+		assertFalse(CommandParser.parseText( text));
+	}
+	
 	
 
 	public static class dummyApp extends Application {
