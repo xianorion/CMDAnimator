@@ -93,7 +93,118 @@ public class FrameAnimatorTests {
 	
 	@Test
 	public void frameIsDeletedFromArrayListWhenDeleteIsCalled(){
+		Animation.addFrameToAnimation();
+		Animation.getFrameBasedOnFrameNumber(1).addText(new CanvasText("hi", new Point(1,1)));
+		GameCanvas canvas = new GameCanvas();
+		canvas = GameCanvas.copy(Animation.getFrameBasedOnFrameNumber(1));
 		
+		assertEquals(canvas.getTextToWrite(), Animation.getFrameBasedOnFrameNumber(1).getTextToWrite());
+		Animation.deleteFrame(1);
+
+		assertNull(Animation.getFrameBasedOnFrameNumber(1));
+	}
+	
+	@Test 
+	public void whenUserGetsFrameNumberOfZeroReturnNull(){
+		assertNull(Animation.getFrameBasedOnFrameNumber(0));
+	}
+	
+	@Test 
+	public void whenUserGetsFrameNumberOfOneWithZeroFramesInanimatorReturnNull(){
+		assertNull(Animation.getFrameBasedOnFrameNumber(1));
+	}
+	
+	@Test
+	public void whenWeAddThreeFramesAndMoveToSecondFrameAddedAnimatorsCurrentCanvasIsSecondFrame(){
+		Animation.setCurrentFrameNumber(0);
+		Animation.addFrameToAnimation();
+		Animation.addFrameToAnimation();
+		Animation.addFrameToAnimation();
+		
+		//copy second frame into game canvas
+		Animation.getFrameBasedOnFrameNumber(2).addImage(new CanvasImage( "..\\TextBasedGame\\src\\resource\\images\\kirbywalk1.png" ,new Point(3,4)));
+		Animation.getFrameBasedOnFrameNumber(2).addText(new CanvasText("hi", new Point(1,1)));
+		GameCanvas canvas = new GameCanvas();
+		canvas = GameCanvas.copy(Animation.getFrameBasedOnFrameNumber(2));
+
+		//second frame doesnt equal current frame displayed 
+		assertNotEquals(canvas.getImagesToAdd(), gui.getScreen().getImagesToAdd());
+		assertNotEquals(canvas.getImagesToAdd(), gui.getScreen().getTextToWrite());
+		
+		Animation.moveToFrameNumber(2);
+		//after moving to second frame, second frame equal current frame displayed on gui
+		assertEquals(canvas.getImagesToAdd(), gui.getScreen().getImagesToAdd());
+		assertEquals(canvas.getTextToWrite(), gui.getScreen().getTextToWrite());
+	}
+	
+	@Test
+	public void whenWeAddTwoFramesAndMoveToFirstFrameAddedAnimatorsCurrentCanvasIsFirstFrame(){
+		System.out.println("in my test -------------");
+		Animation.setCurrentFrameNumber(0);
+		Animation.addFrameToAnimation();
+		Animation.addFrameToAnimation();
+		
+		//copy second frame into game canvas
+		Animation.getFrameBasedOnFrameNumber(1).addImage(new CanvasImage( "..\\TextBasedGame\\src\\resource\\images\\kirbywalk1.png" ,new Point(3,4)));
+		Animation.getFrameBasedOnFrameNumber(1).addText(new CanvasText("hi", new Point(1,1)));
+		GameCanvas canvas = new GameCanvas();
+		canvas = GameCanvas.copy(Animation.getFrameBasedOnFrameNumber(1));
+
+		//second frame doesnt equal current frame displayed 
+		assertNotEquals(canvas.getImagesToAdd(), gui.getScreen().getImagesToAdd());
+		assertNotEquals(canvas.getImagesToAdd(), gui.getScreen().getTextToWrite());
+		
+		Animation.moveToFrameNumber(1);
+		//after moving to second frame, second frame equal current frame displayed on gui
+		assertEquals(canvas.getImagesToAdd(), gui.getScreen().getImagesToAdd());
+		assertEquals(canvas.getTextToWrite(), gui.getScreen().getTextToWrite());
+		System.out.println("out my test -------------");
+	}
+	
+	@Test
+	public void whenWeAddTwoFramesAndMoveToThirdFrameAddedAnimatorsCurrentCanvasIsSecondFrame(){
+		Animation.setCurrentFrameNumber(0);
+		Animation.addFrameToAnimation();
+		Animation.addFrameToAnimation();
+		
+		//copy second frame into game canvas
+		Animation.getFrameBasedOnFrameNumber(2).addImage(new CanvasImage( "..\\TextBasedGame\\src\\resource\\images\\kirbywalk1.png" ,new Point(3,4)));
+		Animation.getFrameBasedOnFrameNumber(2).addText(new CanvasText("hi", new Point(1,1)));
+		GameCanvas canvas = new GameCanvas();
+		canvas = GameCanvas.copy(Animation.getFrameBasedOnFrameNumber(2));
+
+		//second frame doesnt equal current frame displayed 
+		assertNotEquals(canvas.getImagesToAdd(), gui.getScreen().getImagesToAdd());
+		assertNotEquals(canvas.getImagesToAdd(), gui.getScreen().getTextToWrite());
+		
+		Animation.moveToFrameNumber(3);
+		//after moving to second frame, second frame equal current frame displayed on gui
+		assertNotEquals(canvas.getImagesToAdd(), gui.getScreen().getImagesToAdd());
+		assertNotEquals(canvas.getTextToWrite(), gui.getScreen().getTextToWrite());
+	}
+	
+	@Test
+	public void whenWeAddTwoFramesAndMoveToZeroFrameAddedAnimatorsCurrentCanvasIsSecondFrame(){
+		System.out.println("in my test -------------");
+		Animation.setCurrentFrameNumber(0);
+		Animation.addFrameToAnimation();
+		Animation.addFrameToAnimation();
+		
+		//copy second frame into game canvas
+		Animation.getFrameBasedOnFrameNumber(2).addImage(new CanvasImage( "..\\TextBasedGame\\src\\resource\\images\\kirbywalk1.png" ,new Point(3,4)));
+		Animation.getFrameBasedOnFrameNumber(2).addText(new CanvasText("hi", new Point(1,1)));
+		GameCanvas canvas = new GameCanvas();
+		canvas = GameCanvas.copy(Animation.getFrameBasedOnFrameNumber(2));
+
+		//second frame doesnt equal current frame displayed 
+		assertNotEquals(canvas.getImagesToAdd(), gui.getScreen().getImagesToAdd());
+		assertNotEquals(canvas.getImagesToAdd(), gui.getScreen().getTextToWrite());
+		
+		Animation.moveToFrameNumber(0);
+		//after moving to second frame, second frame equal current frame displayed on gui
+		assertNotEquals(canvas.getImagesToAdd(), gui.getScreen().getImagesToAdd());
+		assertNotEquals(canvas.getTextToWrite(), gui.getScreen().getTextToWrite());
+		System.out.println("out my test -------------");
 	}
 
 	public static class dummyApp extends Application {

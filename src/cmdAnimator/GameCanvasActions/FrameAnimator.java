@@ -20,6 +20,7 @@ public class FrameAnimator {
 	private Timer timer;
 	private int currentFrameBeingDisplayed;
 	private GameGui gui;
+	private static int currentFrameNumber =0;
 
 	public FrameAnimator() {
 		frames = new ArrayList<GameCanvas>();
@@ -56,13 +57,16 @@ public class FrameAnimator {
 		frames.add(GameCanvas.copy(gui.getScreen()));
 		gui.setScreen(null);
 		totalNumberOfFrames++;
+		currentFrameNumber++;
+		System.out.println("current frame num "+ currentFrameNumber+" total frame"+ totalNumberOfFrames);
+		
 	}
 
-	public void moveToFrameNumber() {
-		// find the number in arraylist
-
-		// set the GUI screen to this frame
-
+	public void moveToFrameNumber(int frameNumber) {
+		if(frameNumber -  1 < totalNumberOfFrames && frameNumber -1 >= 0 ){
+			currentFrameNumber = frameNumber;
+			gui.setScreen(getFrameBasedOnFrameNumber(frameNumber));
+		}
 	}
 
 	public void deleteFrame(int frameNumber) {
@@ -79,7 +83,8 @@ public class FrameAnimator {
 	}
 
 	public GameCanvas getFrameBasedOnFrameNumber(int frameNumber) {
-		if (frameNumber-1 < totalNumberOfFrames && frames.get(frameNumber-1) != null) {
+		if (frameNumber-1 < totalNumberOfFrames && frameNumber-1 >=0 && frames.get(frameNumber-1) != null) {
+			System.out.println("got um!");
 			return frames.get(frameNumber-1);
 		} else
 			return null;
@@ -96,6 +101,9 @@ public class FrameAnimator {
 	public void setFPS(int newFPS) {
 		this.fps = newFPS;
 	}
+	public void setCurrentFrameNumber(int number){
+		currentFrameNumber = number;
+	}
 
 	public ArrayList<GameCanvas> getFrames() {
 		return frames;
@@ -103,5 +111,10 @@ public class FrameAnimator {
 	
 	public int getTotalNumberOfFrames(){
 		return totalNumberOfFrames;
+	}
+
+	public GameCanvas getCurrentFrame() {
+		System.out.println("getting current frame "+ (currentFrameNumber-1));
+		return getFrameBasedOnFrameNumber(currentFrameNumber);
 	}
 }
