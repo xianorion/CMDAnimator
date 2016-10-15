@@ -74,6 +74,12 @@ public class CommandParser {
 		public String getErrorType() {
 			return "Not a valid command.";
 		}
+
+		@Override
+		public void throwErrorWithOutputMessage(String errorMsg) throws InvalidCommandException {
+			// TODO Auto-generated method stub
+			
+		}
 		
 	};
 	private static String[] splittingCmds;
@@ -141,6 +147,10 @@ public class CommandParser {
 			break;
 		case "remove":
 			typeOfCommand = new RemoveCommandExecutor();
+			typeOfCommand.execute(splittingCmdsParameters);
+			break;
+		case "goto":
+			typeOfCommand = new GoToCommandExecutor();
 			typeOfCommand.execute(splittingCmdsParameters);
 			break;
 		case "play":

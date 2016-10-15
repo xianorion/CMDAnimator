@@ -102,7 +102,7 @@ public class AddCommandExecutor implements ICommandExecutor {
 		return point;
 	}
 
-	private void throwErrorWithOutputMessage(String errorMsg) throws InvalidCommandException{
+	public void throwErrorWithOutputMessage(String errorMsg) throws InvalidCommandException{
 		error = errorMsg;
 		throw new InvalidCommandException();
 	}

@@ -162,6 +162,18 @@ public class CommandParserTests {
 		assertFalse(CommandParser.parseText( text));
 	}
 	
+	@Test
+	public void ifUserEntersTextGotoParserReturnsFalse(){
+		text = "goto";
+		assertFalse(CommandParser.parseText( text));
+	}
+	
+	@Test
+	public void ifUSerEntersTextGotoFrameOneParserReturnsTrue(){
+		text ="goto frame 1";
+		assertTrue(CommandParser.parseText(text));
+	}
+	
 	
 
 	public static class dummyApp extends Application {

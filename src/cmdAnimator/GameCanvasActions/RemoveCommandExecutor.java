@@ -54,7 +54,7 @@ public class RemoveCommandExecutor implements ICommandExecutor {
 		return null;
 	}
 
-	private void throwErrorWithOutputMessage(String errorMsg) throws InvalidCommandException{
+	public void throwErrorWithOutputMessage(String errorMsg) throws InvalidCommandException{
 		error = errorMsg;
 		throw new InvalidCommandException();
 	}

@@ -62,10 +62,12 @@ public class FrameAnimator {
 		
 	}
 
-	public void moveToFrameNumber(int frameNumber) {
+	public void moveToFrameNumber(int frameNumber) throws InvalidCommandException {
 		if(frameNumber -  1 < totalNumberOfFrames && frameNumber -1 >= 0 ){
 			currentFrameNumber = frameNumber;
 			gui.setScreen(getFrameBasedOnFrameNumber(frameNumber));
+		}else{
+			throw new InvalidCommandException();
 		}
 	}
 

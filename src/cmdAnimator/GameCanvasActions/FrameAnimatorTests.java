@@ -115,7 +115,7 @@ public class FrameAnimatorTests {
 	}
 	
 	@Test
-	public void whenWeAddThreeFramesAndMoveToSecondFrameAddedAnimatorsCurrentCanvasIsSecondFrame(){
+	public void whenWeAddThreeFramesAndMoveToSecondFrameAddedAnimatorsCurrentCanvasIsSecondFrame() throws InvalidCommandException{
 		Animation.setCurrentFrameNumber(0);
 		Animation.addFrameToAnimation();
 		Animation.addFrameToAnimation();
@@ -138,8 +138,7 @@ public class FrameAnimatorTests {
 	}
 	
 	@Test
-	public void whenWeAddTwoFramesAndMoveToFirstFrameAddedAnimatorsCurrentCanvasIsFirstFrame(){
-		System.out.println("in my test -------------");
+	public void whenWeAddTwoFramesAndMoveToFirstFrameAddedAnimatorsCurrentCanvasIsFirstFrame() throws InvalidCommandException{
 		Animation.setCurrentFrameNumber(0);
 		Animation.addFrameToAnimation();
 		Animation.addFrameToAnimation();
@@ -158,11 +157,10 @@ public class FrameAnimatorTests {
 		//after moving to second frame, second frame equal current frame displayed on gui
 		assertEquals(canvas.getImagesToAdd(), gui.getScreen().getImagesToAdd());
 		assertEquals(canvas.getTextToWrite(), gui.getScreen().getTextToWrite());
-		System.out.println("out my test -------------");
 	}
 	
-	@Test
-	public void whenWeAddTwoFramesAndMoveToThirdFrameAddedAnimatorsCurrentCanvasIsSecondFrame(){
+	@Test(expected = InvalidCommandException.class)
+	public void whenWeAddTwoFramesAndMoveToThirdFrameAddedExceptionIsThrown() throws InvalidCommandException{
 		Animation.setCurrentFrameNumber(0);
 		Animation.addFrameToAnimation();
 		Animation.addFrameToAnimation();
@@ -183,9 +181,8 @@ public class FrameAnimatorTests {
 		assertNotEquals(canvas.getTextToWrite(), gui.getScreen().getTextToWrite());
 	}
 	
-	@Test
-	public void whenWeAddTwoFramesAndMoveToZeroFrameAddedAnimatorsCurrentCanvasIsSecondFrame(){
-		System.out.println("in my test -------------");
+	@Test(expected = InvalidCommandException.class)
+	public void whenWeAddTwoFramesAndMoveToZeroFrameAddedExceptionIsThrown() throws InvalidCommandException{
 		Animation.setCurrentFrameNumber(0);
 		Animation.addFrameToAnimation();
 		Animation.addFrameToAnimation();
@@ -201,10 +198,6 @@ public class FrameAnimatorTests {
 		assertNotEquals(canvas.getImagesToAdd(), gui.getScreen().getTextToWrite());
 		
 		Animation.moveToFrameNumber(0);
-		//after moving to second frame, second frame equal current frame displayed on gui
-		assertNotEquals(canvas.getImagesToAdd(), gui.getScreen().getImagesToAdd());
-		assertNotEquals(canvas.getTextToWrite(), gui.getScreen().getTextToWrite());
-		System.out.println("out my test -------------");
 	}
 
 	public static class dummyApp extends Application {
