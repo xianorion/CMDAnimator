@@ -9,10 +9,11 @@ import cmdAnimator.GameCanvasActions.CanvasImage;
 import cmdAnimator.GameCanvasActions.CanvasText;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.image.Image;
 
 public class GameCanvas extends Canvas {
 	final static int HEIGHT=300;
-	final static int WIDTH=300;
+	final static int WIDTH=600;
 	HashMap<Point, CanvasText> textToWrite;
 	HashMap<Point, CanvasImage> imagesToAdd;
 	//GameCanvasImageWriter images;
@@ -38,7 +39,12 @@ public class GameCanvas extends Canvas {
 	//defaults for the canvas
 	public void updatePane(){
 		GraphicsContext g = this.getGraphicsContext2D();
-		g.clearRect(0, 0, this.getWidth(), this.getHeight());
+		g.clearRect(0, 0, this.getWidth(), this.getHeight());		
+		//set background image if has-----
+		CanvasImage background = new CanvasImage("..\\TextBasedGame\\src\\resource\\images\\kirbyBackground.png", new Point(0,0));
+		g.drawImage(background.getImage().getImage(), 0, 0, WIDTH, HEIGHT);
+		//----------------------------------------------------
+		
 		
 		Iterator<Entry<Point, CanvasText>> it = textToWrite.entrySet().iterator();
 		while (it.hasNext()) {
@@ -46,12 +52,11 @@ public class GameCanvas extends Canvas {
 			g.fillText(text.getTextToAdd(), text.getPointToAddTextTo().x, text.getPointToAddTextTo().y);
 
 		}
-
 		// adding images
 		Iterator<Entry<Point, CanvasImage>> iterator2 = imagesToAdd.entrySet().iterator();
 		while (iterator2.hasNext()) {
 			CanvasImage image = iterator2.next().getValue();
-			g.drawImage(image.getImage().getImage(), image.getPointToAddImage().x, image.getPointToAddImage().y);
+			g.drawImage(image.getImage().getImage(), image.getPointToAddImage().x, image.getPointToAddImage().y, 50,50);
 		}
 		
 	}

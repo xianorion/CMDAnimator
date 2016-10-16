@@ -1,6 +1,8 @@
 package cmdAnimator;
 
 
+import java.awt.Point;
+
 import cmdAnimator.GameCanvasActions.CanvasImage;
 import cmdAnimator.GameCanvasActions.CanvasText;
 import cmdAnimator.GameUI.GameCanvas;
@@ -76,7 +78,6 @@ public class GameGui extends Group{
 		pane.setRight(LibraryArea); 
 		
 		this.getChildren().add(pane);
-		
 	}
 
 	private void setupIDs() {
@@ -98,7 +99,7 @@ public class GameGui extends Group{
 	private void setupStage() {
 		canvasPane.setPrefSize(300, 300);
 		enterButton.setPrefSize(55, 35);
-		
+				
 		userInputField.setPrefSize(555, 35);
 		userInputField.setMinHeight(35);
 		userInputField.setMinWidth(555);

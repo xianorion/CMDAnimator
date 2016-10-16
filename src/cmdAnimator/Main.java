@@ -56,10 +56,10 @@ public class Main extends Application {
 						currentCommandView = commands.size();
 						CommandParser.parseText(gui.getCommandLineText());
 					} else if (event.getCode().equals(KeyCode.RIGHT)) {
-						if (gui.getCommandLineText().equals(""))
+						if (gui.getCommandLineText().equals("") && (Animation.getNumberOfCurrentFrame() +1) <= Animation.getTotalNumberOfFrames())
 							CommandParser.parseText("goto frame " + (Animation.getNumberOfCurrentFrame() + 1));
 					} else if (event.getCode().equals(KeyCode.LEFT)) {
-						if (gui.getCommandLineText().equals(""))
+						if (gui.getCommandLineText().equals("") && (Animation.getNumberOfCurrentFrame() - 1) >0)
 							CommandParser.parseText("goto frame " + (Animation.getNumberOfCurrentFrame() - 1));
 					} else if (event.getCode().equals(KeyCode.UP)) {
 						if (currentCommandView > 0) {

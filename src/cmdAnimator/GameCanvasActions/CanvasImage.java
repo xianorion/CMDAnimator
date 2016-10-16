@@ -29,8 +29,8 @@ public class CanvasImage implements ImageHandler{
 	
 	public void setImage(String filename) {
 		File imagePath = new File(filename);
-		System.out.println(imagePath.toURI().toString());
-		System.out.println(filename);
+		//System.out.println(imagePath.toURI().toString());
+		//System.out.println(filename);
 		try {
 			imageBuffer = ImageIO.read(imagePath);
 		} catch (IOException e) { //if image DNE return after setting both image instances to null
