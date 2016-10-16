@@ -50,7 +50,7 @@ public class GameGuiTests {
 		
 		assertEquals("", cmdLine.getText());
 	}
-
+	
 	
 	public static class dummyApp extends Application {
 	    @Override

@@ -62,6 +62,13 @@
 	
 }
 
+.tooltip{
+	
+	-fx-font: 13px impact;
+	-fx-background-radius: 5px;
+ 
+}
+
 #helpCommandArea * .content{
 }
 

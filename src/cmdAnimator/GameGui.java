@@ -15,6 +15,7 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.control.ScrollPane.ScrollBarPolicy;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Tooltip;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
@@ -110,6 +111,10 @@ public class GameGui extends Group{
 		outputField.setMaxHeight(130);
 		outputField.setMaxWidth(610);	
 		outputField.setEditable(false);
+		
+		//add tooltip to output field
+		Tooltip tip = new Tooltip("Output of your previous commands");
+		outputField.setTooltip(tip);
 	}
 
 
@@ -200,7 +205,7 @@ public class GameGui extends Group{
 	}
 
 	public void appendTextToOutputScreen(String string) {
-		outputField.setText(outputField.getText()+"\n"+string);
+		outputField.appendText("\n"+string);
 	}
 	
 	public void addTextToCanvas(CanvasText newText){
