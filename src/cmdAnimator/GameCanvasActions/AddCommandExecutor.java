@@ -18,19 +18,22 @@ public class AddCommandExecutor implements ICommandExecutor {
 	@Override
 	public void execute(String[] parameters) throws InvalidCommandException {
 		
-		if (parameters.length == 1 || parameters.length == 3) {
+		if (parameters.length >= 1 && parameters.length <= 3) {
 
 			for (int i = 0; i < parameters.length; i++)
 				System.out.println("para " + parameters[i]);
 			switch (parameters[0].toLowerCase()) {
 			case "image":
-				executeImageAddition(parameters);
+				executeImageAddition(parameters, false);
 				break;
 			case "text":
 				executeTextAddition(parameters);
 				break;
 			case "frame":
 				executeFrameAddition(parameters);
+				break;
+			case "background":
+				executeBackgroundImageAddition(parameters);
 				break;
 			default:
 				throwErrorWithOutputMessage("Not a valid command");
@@ -41,7 +44,9 @@ public class AddCommandExecutor implements ICommandExecutor {
 
 	}
 
-
+	private void executeBackgroundImageAddition(String[] parameters) throws InvalidCommandException {
+		executeImageAddition(parameters, true);
+	}
 
 	protected void executeFrameAddition(String[] parameters) throws InvalidCommandException{
 		if(parameters.length ==1){
@@ -75,29 +80,37 @@ public class AddCommandExecutor implements ICommandExecutor {
 
 	}
 
-	private void executeImageAddition(String[] para) throws InvalidCommandException{
-		if(para.length == 3){
-		Point point = convertStringToPoint(para[2]);
-		boolean isAdded =  false;
-		if(point == null){
-			throwErrorWithOutputMessage("Point representation is incorrect.\nPoints are in format (X-Coordinate, Y-Coordinate)"
-					+ "\nExample: (4,5)");
-		}else{
-			isAdded = guiInUse.addImageToCanvas(new CanvasImage(para[1], point));
-			System.out.println("image "+ para[1]+" is "+isAdded);
-			if(!isAdded){
-				throwErrorWithOutputMessage("Invalid Image");
+	private void executeImageAddition(String[] para, boolean isBackgroundImage) throws InvalidCommandException {
+		Point point =  null;
+		boolean isAdded = false;
+		if (para.length == 3 || (para.length == 2 && isBackgroundImage)) {
+			if (!isBackgroundImage)
+				point = convertStringToPoint(para[2]);
+			else
+				point = new Point(0, 0);
+
+			if (point == null) {
+				throwErrorWithOutputMessage(
+						"Point representation is incorrect.\nPoints are in format (X-Coordinate, Y-Coordinate)"
+								+ "\nExample: (4,5)");
+			} else {
+				if (!isBackgroundImage)
+					isAdded = guiInUse.addImageToCanvas(new CanvasImage(para[1], point));
+				else
+					isAdded = guiInUse.addBackgroundToCanvas(new CanvasImage(para[1], point));
+				// System.out.println("image " + para[1] + " is " + isAdded);
+				if (!isAdded) {
+					throwErrorWithOutputMessage("Invalid Image");
+				}
 			}
-		}
-		}else{
-			error = "not enough prarmeters to add an image";
-			throw new InvalidCommandException();
+		} else {
+			throwErrorWithOutputMessage("not enough prarmeters to add an image");
 		}
 	}
 
 	protected Point convertStringToPoint(String string) {
-		Point point =null;
-		int x=0,y=0;
+		Point point = null;
+		int x = 0, y = 0;
 		String[] coordinates = string.split("\\(|\\,|\\)|\\s+");
 
 		if (coordinates.length == 3)
@@ -115,7 +128,7 @@ public class AddCommandExecutor implements ICommandExecutor {
 
 	public void throwErrorWithOutputMessage(String errorMsg) throws InvalidCommandException{
 		error = errorMsg;
-		throw new InvalidCommandException();
+		throw new InvalidCommandException(error);
 	}
 	
 }

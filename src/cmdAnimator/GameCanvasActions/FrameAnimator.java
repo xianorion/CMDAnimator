@@ -125,7 +125,7 @@ public class FrameAnimator {
 	}
 
 	public void moveToClearFrame() {
-		gui.setScreen(new GameCanvas());
+		gui.setScreen(new GameCanvas(null));
 		 updateCurrentFrameLabel(false);
 	}
 	

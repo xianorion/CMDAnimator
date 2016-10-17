@@ -69,7 +69,7 @@ public class GoToCommandExecutorTests {
 		//copy second frame into game canvas
 		Animation.getFrameBasedOnFrameNumber(1).addImage(new CanvasImage( "..\\TextBasedGame\\src\\resource\\images\\kirbywalk1.png" ,new Point(3,4)));
 		Animation.getFrameBasedOnFrameNumber(1).addText(new CanvasText("hi", new Point(1,1)));
-		GameCanvas canvas = new GameCanvas();
+		GameCanvas canvas = new GameCanvas(null);
 		canvas = GameCanvas.copy(Animation.getFrameBasedOnFrameNumber(1));
 
 		//second frame doesnt equal current frame displayed 

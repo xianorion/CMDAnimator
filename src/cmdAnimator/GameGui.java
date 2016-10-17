@@ -45,7 +45,7 @@ public class GameGui extends Group{
 		outputField = new TextArea(outputFieldText);
 		libraryTitle = new Label();
 		helpTitle = new Label();
-		stage  = new GameCanvas();
+		stage  = new GameCanvas(null);
 		userInputField = new TextField("");
 		enterButton = new Button("Enter");
 		helpCommands = new TextArea();
@@ -179,6 +179,7 @@ public class GameGui extends Group{
 		if (gameCanvas != null) {
 			stage.setImagesToAdd(gameCanvas.getImagesToAdd());
 			stage.setTextToWrite(gameCanvas.getTextToWrite());
+			stage.setBackgroundImage(gameCanvas.getBackgroundImage());
 
 		} else {
 			stage.clearCanvas();
@@ -224,6 +225,10 @@ public class GameGui extends Group{
 		return stage.addImage(canvasImage);
 	}
 
+	public boolean addBackgroundToCanvas(CanvasImage canvasImage){
+		return stage.setBackgroundImage(canvasImage);
+	}
+	
 	public void clearStage() {
 		stage.clearCanvas();		
 	}

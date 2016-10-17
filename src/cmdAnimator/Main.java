@@ -104,11 +104,18 @@ public class Main extends Application {
 		                File file = files.showOpenDialog(primaryStage);
 		                if (file != null) {
 		                	String point = Prompts.promptUserForPoint();
+		                	if(point.equalsIgnoreCase("background")){
+		                		gui.getCommandLine().setText("add background \""+file.getAbsolutePath()+"\"");
+		    		                	addCommandToPreviousCommandsFeed(gui);
+		    		                	CommandParser.parseText("add background \""+file.getAbsolutePath()+"\"");
+		                		
+		                	}else{
 		                	gui.getCommandLine().setText("add image \""+file.getAbsolutePath()+"\" "+
 		                	point);
 		                	addCommandToPreviousCommandsFeed(gui);
 		                	CommandParser.parseText("add image \""+file.getAbsolutePath()+"\" "+
 		                	point);
+		                	}
 		                	
 		                }
 		            }
@@ -116,6 +123,7 @@ public class Main extends Application {
 					private void addCommandToPreviousCommandsFeed(GameGui gui) {
 						if (!commands.contains(gui.getCommandLineText()))
 							commands.add(gui.getCommandLineText());
+						currentCommandView = commands.size();
 					}
 		        });
 	}

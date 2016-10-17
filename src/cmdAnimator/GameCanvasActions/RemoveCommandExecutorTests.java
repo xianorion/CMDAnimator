@@ -51,7 +51,7 @@ public class RemoveCommandExecutorTests {
 		String[] parameters = {"frame","1"};
 		Animation.addFrameToAnimation();
 		Animation.getFrameBasedOnFrameNumber(1).addText(new CanvasText("hi", new Point(1,1)));
-		GameCanvas canvas = new GameCanvas();
+		GameCanvas canvas = new GameCanvas(null);
 		canvas = GameCanvas.copy(Animation.getFrameBasedOnFrameNumber(1));
 		
 		assertEquals(canvas.getTextToWrite(), Animation.getFrameBasedOnFrameNumber(1).getTextToWrite());

@@ -37,14 +37,11 @@ public class RemoveCommandExecutor implements ICommandExecutor {
 				System.out.println((int)frameToRemove);
 				animation.deleteFrame((int)frameToRemove);
 			}else{
-				error = "Frame removal includes a non integer frame as a number";
-				throw new InvalidCommandException();
+				 throwErrorWithOutputMessage("Frame removal includes a non integer frame as a number");
 			}
 				
 		}else{
-			error = "Frame removal includes too many parameters";
-			throw new InvalidCommandException();
-	
+			 throwErrorWithOutputMessage("Frame removal includes too many parameters");
 		}
 	}
 
@@ -56,6 +53,6 @@ public class RemoveCommandExecutor implements ICommandExecutor {
 
 	public void throwErrorWithOutputMessage(String errorMsg) throws InvalidCommandException{
 		error = errorMsg;
-		throw new InvalidCommandException();
+		throw new InvalidCommandException(error);
 	}
 }

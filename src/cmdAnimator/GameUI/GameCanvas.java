@@ -16,16 +16,14 @@ public class GameCanvas extends Canvas {
 	final static int WIDTH=600;
 	HashMap<Point, CanvasText> textToWrite;
 	HashMap<Point, CanvasImage> imagesToAdd;
-	CanvasImage background;
-	//GameCanvasImageWriter images;
+	private CanvasImage background;
 	
-	public GameCanvas(){
+	public GameCanvas(CanvasImage backgroundImg){
 		super(WIDTH, HEIGHT);
 		textToWrite = new HashMap<Point, CanvasText>();
 		imagesToAdd = new HashMap<Point, CanvasImage>();
 		GraphicsContext g = this.getGraphicsContext2D();
-		background = new CanvasImage("..\\TextBasedGame\\src\\resource\\images\\kirbyBackground.png", new Point(0,0));
-
+		background = backgroundImg;
 	}
 	
 	
@@ -44,9 +42,9 @@ public class GameCanvas extends Canvas {
 		GraphicsContext g = this.getGraphicsContext2D();
 		g.clearRect(0, 0, this.getWidth(), this.getHeight());		
 		//set background image if has-----
-		g.drawImage(background.getImage().getImage(), 0, 0, WIDTH, HEIGHT);
+		if(background != null)
+			g.drawImage(background.getImage().getImage(), 0, 0, WIDTH, HEIGHT);
 		//----------------------------------------------------
-		
 		
 		Iterator<Entry<Point, CanvasText>> it = textToWrite.entrySet().iterator();
 		while (it.hasNext()) {
@@ -72,6 +70,7 @@ public class GameCanvas extends Canvas {
 	public void clearCanvas(){
 		textToWrite.clear();
 		imagesToAdd.clear();
+		background = null;
 		this.updatePane();
 	}
 
@@ -104,11 +103,32 @@ public class GameCanvas extends Canvas {
 	public void setImagesToAdd(HashMap<Point, CanvasImage> ita){
 		imagesToAdd=ita;
 	}
+	
+	public CanvasImage getBackgroundImage(){
+		return background;
+	}
 
+	public boolean setBackgroundImage(CanvasImage image){
+		if (image != null && image.doesImageExist()) {
+			
+			System.out.println("Background image set");
+			background = image;
+			this.updatePane();
+			return true;
+		} 
+		System.out.println("background image is set to null in setbackground");
+		background = null;
+		return false;	
+	}
 
 	public static GameCanvas copy(GameCanvas screen) {
-		GameCanvas newCanvas = new GameCanvas();
-
+		GameCanvas newCanvas;
+		if(screen.background != null){
+			newCanvas = new GameCanvas(new CanvasImage(screen.background.getImageFilename(), new Point(0,0)));
+			System.out.println("background is set to "+ newCanvas.getBackgroundImage());
+		}else{
+			newCanvas = new GameCanvas(null);
+		}
 		if (screen != null) {
 			Iterator<Entry<Point, CanvasText>> it = screen.textToWrite.entrySet().iterator();
 			while (it.hasNext()) {
@@ -117,7 +137,6 @@ public class GameCanvas extends Canvas {
 			}
 
 			// adding images
-
 			Iterator<Entry<Point, CanvasImage>> iterator2 = screen.imagesToAdd.entrySet().iterator();
 			while (iterator2.hasNext()) {
 				CanvasImage image = iterator2.next().getValue();

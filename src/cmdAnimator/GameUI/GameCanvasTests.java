@@ -20,7 +20,7 @@ public class GameCanvasTests {
 	
 	@Before
 	public void setup(){
-		canvas  = new GameCanvas();
+		canvas  = new GameCanvas(null);
 		point = new Point(1,1);
 		canvas.addText(new CanvasText("Test Text", point));
 	}
@@ -74,6 +74,38 @@ public class GameCanvasTests {
 		canvas.deleteImage(point);
 		
 		assertFalse(canvas.getImagesToAdd().containsKey(point));
+	}
+	
+	@Test
+	public void whenCanvasClearArrayListsAreEmptyAndBackgroundIsNull(){
+		String filename = "..\\TextBasedGame\\src\\resource\\images\\kirbywalk1.png";
+		canvas.addImage(new CanvasImage( filename ,point));
+		
+		canvas.addText(new CanvasText("Hi", new Point(56,56)));
+		
+		canvas.clearCanvas();
+		assertNull(canvas.getBackgroundImage());
+		assertEquals(0, canvas.getImagesToAdd().size());
+		assertEquals(0, canvas.getTextToWrite().size());
+	}
+	
+	@Test
+	public void afterCopyAndClearOfCanvasWithBackgroundNewCopiesBackgroundImageShouldStillBeSet(){
+		canvas.setBackgroundImage(new CanvasImage( "..\\TextBasedGame\\src\\resource\\images\\kirbywalk1.png", new Point(0,0)));
+		GameCanvas newCanvas = GameCanvas.copy(canvas);
+		
+		canvas.clearCanvas();
+		assertEquals("..\\TextBasedGame\\src\\resource\\images\\kirbywalk1.png", newCanvas.getBackgroundImage().getImageFilename());
+	}
+	
+	@Test
+	public void afterCopyAndClearOfCanvasWithoutBackgroundNewCopiesBackgroundImageShouldBeNull(){
+		canvas.setBackgroundImage(null);
+		GameCanvas newCanvas = GameCanvas.copy(canvas);
+		
+		canvas.clearCanvas();
+		assertNull(newCanvas.getBackgroundImage());
+	
 	}
 	
 	@Test
