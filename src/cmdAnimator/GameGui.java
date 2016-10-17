@@ -2,11 +2,13 @@ package cmdAnimator;
 
 
 import java.awt.Point;
+import java.io.File;
 
 import cmdAnimator.GameCanvasActions.CanvasImage;
 import cmdAnimator.GameCanvasActions.CanvasText;
 import cmdAnimator.GameUI.GameCanvas;
-
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.scene.Group;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -22,6 +24,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.stage.FileChooser;
 
 public class GameGui extends Group{
 	private TextArea outputField;
@@ -36,6 +39,7 @@ public class GameGui extends Group{
 	private TextArea helpCommands;
 	private ScrollPane helpScroller;
 	private final String outputFieldText ="---output---";
+	private Button addImageButton;
 	
 	public GameGui(){
 		outputField = new TextArea(outputFieldText);
@@ -49,6 +53,7 @@ public class GameGui extends Group{
 		canvasPane = new FlowPane();
 		libraryMenu = new MenuBar();
 		framesLibrary = new Menu("Current Frame: 0");
+		addImageButton = new Button("Add image");
 		
 		setupIDs();
 		setupGUITextFields();
@@ -69,7 +74,7 @@ public class GameGui extends Group{
 		outputAreas.getChildren().addAll(canvasPane, outputField, userinputArea);
 		outputAreas.setId("outputArea");
 
-		LibraryArea.getChildren().addAll(libraryTitle, libraryMenu);
+		LibraryArea.getChildren().addAll(libraryTitle, libraryMenu, addImageButton);
 		LibraryArea.setId("libraryArea");
 		helpArea.getChildren().addAll(helpTitle,helpScroller);
 		
@@ -92,6 +97,7 @@ public class GameGui extends Group{
 		enterButton.setId("enterButton");
 		helpCommands.setId("helpCommandArea");
 		helpScroller.setId("helpScoller");
+		addImageButton.setId("imageButton");
 		helpCommands.setEditable(false);
 		
 	}
@@ -142,15 +148,16 @@ public class GameGui extends Group{
 
 
 	private void setupLibrary() {
-		
-		libraryTitle.setText("Frames");
+		addImageButton.setPrefSize(180, 50);
+		libraryTitle.setText("Library");
 		libraryTitle.setPrefSize(180, 50);
-		libraryMenu.setPrefSize(180, 425);
+		libraryMenu.setPrefSize(180, 375);
 		libraryMenu.setMinWidth(180);
 		libraryMenu.setMaxWidth(180);
-		libraryMenu.setMaxHeight(425);
-		libraryMenu.setMinHeight(425);
+		libraryMenu.setMaxHeight(375);
+		libraryMenu.setMinHeight(375);
 		libraryMenu.getMenus().add(framesLibrary);
+		
 	}
 
 
@@ -223,5 +230,9 @@ public class GameGui extends Group{
 
 	public String getCommandLineText() {
 		return userInputField.getText();
+	}
+	
+	public Button getAddImageButton(){
+		return addImageButton;
 	}
 }

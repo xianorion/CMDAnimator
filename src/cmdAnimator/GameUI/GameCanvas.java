@@ -16,6 +16,7 @@ public class GameCanvas extends Canvas {
 	final static int WIDTH=600;
 	HashMap<Point, CanvasText> textToWrite;
 	HashMap<Point, CanvasImage> imagesToAdd;
+	CanvasImage background;
 	//GameCanvasImageWriter images;
 	
 	public GameCanvas(){
@@ -23,6 +24,8 @@ public class GameCanvas extends Canvas {
 		textToWrite = new HashMap<Point, CanvasText>();
 		imagesToAdd = new HashMap<Point, CanvasImage>();
 		GraphicsContext g = this.getGraphicsContext2D();
+		background = new CanvasImage("..\\TextBasedGame\\src\\resource\\images\\kirbyBackground.png", new Point(0,0));
+
 	}
 	
 	
@@ -41,7 +44,6 @@ public class GameCanvas extends Canvas {
 		GraphicsContext g = this.getGraphicsContext2D();
 		g.clearRect(0, 0, this.getWidth(), this.getHeight());		
 		//set background image if has-----
-		CanvasImage background = new CanvasImage("..\\TextBasedGame\\src\\resource\\images\\kirbyBackground.png", new Point(0,0));
 		g.drawImage(background.getImage().getImage(), 0, 0, WIDTH, HEIGHT);
 		//----------------------------------------------------
 		

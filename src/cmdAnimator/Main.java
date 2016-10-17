@@ -1,5 +1,6 @@
 package cmdAnimator;
 	
+import java.io.File;
 import java.util.ArrayList;
 
 import cmdAnimator.GameCanvasActions.CommandParser;
@@ -8,6 +9,7 @@ import cmdAnimator.GameCanvasActions.GameAnimator;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -27,23 +29,12 @@ public class Main extends Application {
 		try {
 			primaryStage.setTitle("CMDAnimator");
 			FrameAnimator Animation = GameAnimator.getInstance();
-			GameGui gui = GUI.getInstance();			
-			
-			
-			
+			GameGui gui = GUI.getInstance();						
 			Button enterButton =gui.getEnterButton();
 			
-			enterButton.setOnAction(new EventHandler<ActionEvent>() {
-				@Override
-				public void handle(ActionEvent event) {
-					if (!commands.contains(gui.getCommandLineText()))
-						commands.add(gui.getCommandLineText());
-					currentCommandView++;
-					CommandParser.parseText(gui.getCommandLineText());
-
-					primaryStage.requestFocus();
-				}
-			});
+			setEnterButtonFromGuiAsAListener(primaryStage, gui, enterButton);
+			//listener for file choosing 
+			enableFileChooserListener(primaryStage, gui);
 
 			TextField cmdLine = gui.getCommandLine();
 
@@ -88,6 +79,45 @@ public class Main extends Application {
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
+	}
+
+	private void setEnterButtonFromGuiAsAListener(Stage primaryStage, GameGui gui, Button enterButton) {
+		enterButton.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent event) {
+				if (!commands.contains(gui.getCommandLineText()))
+					commands.add(gui.getCommandLineText());
+				currentCommandView++;
+				CommandParser.parseText(gui.getCommandLineText());
+
+				primaryStage.requestFocus();
+			}
+		});
+	}
+
+	private void enableFileChooserListener(Stage primaryStage, GameGui gui) {
+		FileChooser files = new FileChooser();
+		gui.getAddImageButton().setOnAction(
+		        new EventHandler<ActionEvent>() {
+		            @Override
+		            public void handle(final ActionEvent e) {
+		                File file = files.showOpenDialog(primaryStage);
+		                if (file != null) {
+		                	String point = Prompts.promptUserForPoint();
+		                	gui.getCommandLine().setText("add image \""+file.getAbsolutePath()+"\" "+
+		                	point);
+		                	addCommandToPreviousCommandsFeed(gui);
+		                	CommandParser.parseText("add image \""+file.getAbsolutePath()+"\" "+
+		                	point);
+		                	
+		                }
+		            }
+
+					private void addCommandToPreviousCommandsFeed(GameGui gui) {
+						if (!commands.contains(gui.getCommandLineText()))
+							commands.add(gui.getCommandLineText());
+					}
+		        });
 	}
 	
 	public static void main(String[] args) {
