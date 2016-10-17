@@ -37,7 +37,6 @@ public class GameGui extends Group{
 	private Button enterButton;
 	private Label helpTitle;
 	private TextArea helpCommands;
-	private ScrollPane helpScroller;
 	private final String outputFieldText ="---output---";
 	private Button addImageButton;
 	
@@ -49,7 +48,6 @@ public class GameGui extends Group{
 		userInputField = new TextField("");
 		enterButton = new Button("Enter");
 		helpCommands = new TextArea();
-		helpScroller = new ScrollPane();
 		canvasPane = new FlowPane();
 		libraryMenu = new MenuBar();
 		framesLibrary = new Menu("Current Frame: 0");
@@ -76,7 +74,7 @@ public class GameGui extends Group{
 
 		LibraryArea.getChildren().addAll(libraryTitle, libraryMenu, addImageButton);
 		LibraryArea.setId("libraryArea");
-		helpArea.getChildren().addAll(helpTitle,helpScroller);
+		helpArea.getChildren().addAll(helpTitle,helpCommands);
 		
 		pane.setCenter(outputAreas);
 		pane.setLeft(helpArea);
@@ -96,7 +94,7 @@ public class GameGui extends Group{
 		userInputField.setId("commandLine");
 		enterButton.setId("enterButton");
 		helpCommands.setId("helpCommandArea");
-		helpScroller.setId("helpScoller");
+		//helpScroller.setId("helpScoller");
 		addImageButton.setId("imageButton");
 		helpCommands.setEditable(false);
 		
@@ -134,15 +132,9 @@ public class GameGui extends Group{
 		helpCommands.setMaxHeight(425);
 		helpCommands.setMinWidth(200);
 		helpCommands.setMaxWidth(200);
-		
-		helpScroller.setMinHeight(425);
-		helpScroller.setMaxHeight(425);
-		helpScroller.setMinWidth(200);
-		helpScroller.setMaxWidth(200);
+		helpCommands.setEditable(false);
 		
 		helpCommands.setText("This is where help file will be placed");
-		helpScroller.setContent(helpCommands);
-		helpScroller.setHbarPolicy(ScrollBarPolicy.NEVER);
 	}
 
 
@@ -235,6 +227,10 @@ public class GameGui extends Group{
 
 	public String getCommandLineText() {
 		return userInputField.getText();
+	}
+	
+	public TextArea getHelpCommands(){
+		return helpCommands;
 	}
 	
 	public Button getAddImageButton(){

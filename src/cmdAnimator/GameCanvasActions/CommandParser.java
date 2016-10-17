@@ -119,6 +119,10 @@ public class CommandParser {
 			typeOfCommand = new FpsCommandExecutor();
 			typeOfCommand.execute(splittingCmdsParameters);
 			break;
+		case "help":
+			typeOfCommand = new HelpCommandExecutor();
+			typeOfCommand.execute(splittingCmdsParameters);
+			break;
 		default:
 			guiInUse.addUserInputToOutPutFieldAndClearUserInput();
 			throw new InvalidCommandException();

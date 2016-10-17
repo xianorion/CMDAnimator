@@ -47,8 +47,7 @@ public class RemoveCommandExecutor implements ICommandExecutor {
 
 	@Override
 	public String getErrorType() {
-		// TODO Auto-generated method stub
-		return null;
+		return error;
 	}
 
 	public void throwErrorWithOutputMessage(String errorMsg) throws InvalidCommandException{

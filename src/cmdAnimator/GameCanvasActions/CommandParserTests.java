@@ -191,6 +191,31 @@ public class CommandParserTests {
 		assertTrue(CommandParser.parseText(text));
 	}
 	
+	@Test 
+	public void ifUserEntersHelpParserIsTrue(){
+		text = "help";		
+		assertTrue(CommandParser.parseText(text));
+	}
+	
+	@Test 
+	public void ifUserEntersHelpAddParserIsTrue(){
+		text = "help add";		
+		assertTrue(CommandParser.parseText(text));
+	}
+	
+	@Test 
+	public void ifUserEntersHelpRemoveParserIsTrue(){
+		text = "help remove";		
+		assertTrue(CommandParser.parseText(text));
+	}
+	
+	@Test 
+	public void ifUserEntersHelpMeParserIsFalse(){
+		text = "help me";		
+		assertFalse(CommandParser.parseText(text));
+	}
+	
+	
 
 	public static class dummyApp extends Application {
 	    @Override

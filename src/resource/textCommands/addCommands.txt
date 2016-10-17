@@ -1,0 +1,12 @@
+----- add Commands ---
+
+Add Frame --- Calls add frame function
+Add Image “image.gif” (Point.x, Point.y) ---Calls addImage function with parameters: “Image.gif” and (Point.x, Point.y)
+Add Text “Hello world” (Point.x, Point.y) --- Calls addText function with parameters: “Hello world” and (Point.x, Point.y)
+
+You can either add an image, text, or a frame to the animation. To add a frame you must say “Add frame”.
+To add an image you must say “add image” followed by the path to the image and the point where you want to place the image on the screen.
+To add text you must say “add text” followed by the text you want to add surrounded in quotation marks like: “text I want to add”
+And lastly, you must add the point on the screen you want to text to be placed.
+
+The point must be in the format (x,y) where x is the x-coordinate on the canvas, and y the y-coordinate. Example: (45,32) will add a text and/or image to x-coordinate 45 and y-coordinate 32 on the graph.
