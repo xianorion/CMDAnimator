@@ -107,6 +107,7 @@ public class FrameAnimator {
 	public void setFPS(int newFPS) {
 		this.fps = newFPS;
 	}
+	
 	public void setCurrentFrameNumber(int number){
 		currentFrameNumber = number;
 	}

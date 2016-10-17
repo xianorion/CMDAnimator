@@ -176,6 +176,14 @@ public class CommandParserTests {
 		assertTrue(CommandParser.parseText(text));
 	}
 	
+	@Test
+	public void isUserEntersFPS25ParserReturnsTrueAndFPSIs25(){
+		text = "fps 25";
+		
+		assertTrue(CommandParser.parseText(text));
+		assertEquals(25, animator.getFPS());
+	}
+	
 	@Test 
 	public void ifUserEntersDoneParserIsTrue(){
 		text = "Done";

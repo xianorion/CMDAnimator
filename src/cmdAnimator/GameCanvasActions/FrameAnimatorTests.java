@@ -230,6 +230,7 @@ public class FrameAnimatorTests {
 		assertEquals(Animation.getTotalNumberOfFrames(), Animation.getNumberOfCurrentFrame());
 	}
 	
+	
 
 	public static class dummyApp extends Application {
 	    @Override

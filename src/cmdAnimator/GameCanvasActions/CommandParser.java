@@ -8,6 +8,7 @@ import java.util.regex.Pattern;
 
 import cmdAnimator.GUI;
 import cmdAnimator.GameGui;
+import cmdAnimator.GuiCommands;
 import cmdAnimator.GameUI.GameCanvas;
 import javafx.scene.control.TextArea;
 public class CommandParser {	
@@ -113,6 +114,10 @@ public class CommandParser {
 			break;
 		case "done":
 			animation.moveToClearFrame();
+			break;
+		case "fps":
+			typeOfCommand = new FpsCommandExecutor();
+			typeOfCommand.execute(splittingCmdsParameters);
 			break;
 		default:
 			guiInUse.addUserInputToOutPutFieldAndClearUserInput();

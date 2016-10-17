@@ -104,7 +104,7 @@ public class AddCommandExecutor implements ICommandExecutor {
 				}
 			}
 		} else {
-			throwErrorWithOutputMessage("not enough prarmeters to add an image");
+			throwErrorWithOutputMessage("not enough parameters to add an image");
 		}
 	}
 

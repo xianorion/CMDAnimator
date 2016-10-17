@@ -4,6 +4,7 @@ import java.io.File;
 import java.util.ArrayList;
 
 import cmdAnimator.GameCanvasActions.CommandParser;
+import cmdAnimator.GameCanvasActions.FrameAnimator;
 
 public class GuiCommands {
 
