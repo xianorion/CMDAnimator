@@ -16,11 +16,15 @@ public class GuiCommands {
 	public static void executeAddBackgroundCommand(GameGui gui, File file) {
 		gui.getCommandLine().setText("add background \"" + file.getAbsolutePath() + "\"");
 		CommandParser.parseText("add background \"" + file.getAbsolutePath() + "\"");
+		gui.getCommandLine().setText("");
+
 	}
 
 	public static void executeAddImageCommand(GameGui gui, File file, String point) {
 		gui.getCommandLine().setText("add image \"" + file.getAbsolutePath() + "\" " + point);
 		CommandParser.parseText("add image \"" + file.getAbsolutePath() + "\" " + point);
+		gui.getCommandLine().setText("");
+
 	}
 
 	public static void addCommandToPreviousCommandsFeed(GameGui gui, ArrayList<String> commands,
@@ -34,12 +38,15 @@ public class GuiCommands {
 		gui.getCommandLine().setText("add background \"" + ImagePath + "\"");
 		GuiCommands.addCommandToPreviousCommandsFeed(gui, commands, currentCommandView);
 		CommandParser.parseText("add background \"" + ImagePath + "\"");
+		gui.getCommandLine().setText("");
+
 	}
 
 	public static void executeImageAdditionCommand(GameGui gui, String ImagePath, String point) {
 		gui.getCommandLine().setText("add image \"" + ImagePath + "\" " + point);
 		GuiCommands.addCommandToPreviousCommandsFeed(gui, commands, currentCommandView);
 		CommandParser.parseText("add image \"" + ImagePath + "\" " + point);
+		gui.getCommandLine().setText("");
 	}
 
 }
