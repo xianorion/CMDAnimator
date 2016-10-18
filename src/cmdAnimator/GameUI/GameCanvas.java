@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map.Entry;
 
+import cmdAnimator.GUI;
 import cmdAnimator.GameCanvasActions.CanvasImage;
 import cmdAnimator.GameCanvasActions.CanvasText;
 import javafx.scene.canvas.Canvas;
@@ -72,7 +73,7 @@ public class GameCanvas extends Canvas {
 		imagesToAdd.clear();
 		background = null;
 		this.updatePane();
-	}
+		}
 
    
 	public boolean addImage(CanvasImage canvasImage) {

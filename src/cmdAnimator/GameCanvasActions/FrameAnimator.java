@@ -55,7 +55,7 @@ public class FrameAnimator {
 
 	public void addFrameToAnimation() {
 		frames.add(GameCanvas.copy(gui.getScreen()));
-		gui.setScreen(null);
+		gui.setScreen(new GameCanvas(null));
 		totalNumberOfFrames++;
 		currentFrameNumber++;
 		System.out.println("current frame num "+ currentFrameNumber+" total frame"+ totalNumberOfFrames);

@@ -9,6 +9,11 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import cmdAnimator.GameCanvasActions.CanvasImage;
+import cmdAnimator.GameCanvasActions.CanvasText;
+import cmdAnimator.GameCanvasActions.FrameAnimator;
+import cmdAnimator.GameCanvasActions.GameAnimator;
+import cmdAnimator.GameCanvasActions.InvalidCommandException;
+import cmdAnimator.GameUI.GameCanvas;
 import cmdAnimator.GameUI.GameCanvasTests.dummyApp;
 import javafx.application.Application;
 import javafx.scene.control.TextField;
@@ -19,6 +24,8 @@ public class GameGuiTests {
 	String outputText;
 	GameGui gui;
 	TextField cmdLine;
+	FrameAnimator anime;
+
 	
 	@Before
 	public void setUp(){
@@ -99,6 +106,19 @@ public class GameGuiTests {
 	}
 	
 	@Test
+	public void whenIAddTwoOfTheSameImagesAreAddedImageLibraryContainsOne(){
+		String filename = "..\\TextBasedGame\\src\\resource\\images\\kirbywalk1.png";
+		String filename2 = "..\\TextBasedGame\\src\\resource\\images\\kirbywalk1.png";
+		Point point = new Point(40,45);
+		Point point2 = new Point(56,78);
+		
+		gui.addImageToCanvas(new CanvasImage(filename, point));
+		gui.addImageToCanvas(new CanvasImage(filename2, point2));
+		assertEquals(filename, ((AddImageButton)(gui.getImageLibrary().getChildren().get(0))).getImagePath());
+		assertEquals(1, gui.getImageLibrary().getChildren().size());
+	}
+	
+	@Test
 	public void whenIAddTwoDifferentImagesImageAndButtonExecutionHappendsInbetweenLibraryContainsBoth(){
 		String filename = "..\\TextBasedGame\\src\\resource\\images\\kirbywalk1.png";
 		String filename2 = "..\\TextBasedGame\\src\\resource\\images\\kirbywalk2.png";
@@ -114,6 +134,52 @@ public class GameGuiTests {
 		assertEquals(filename, ((AddImageButton)(gui.getImageLibrary().getChildren().get(0))).getImagePath());
 		assertEquals(filename2, ((AddImageButton)(gui.getImageLibrary().getChildren().get(1))).getImagePath());
 		assertEquals(2, gui.getImageLibrary().getChildren().size());
+	}
+	
+	@Test
+	public void afterClearTheFrameBackgroundShouldBeClearEvenAfterTraversingWIthAnimator() throws InvalidCommandException{
+		
+		GameGui gui = GUI.getInstance();
+		anime = GameAnimator.getInstance();
+		gui.addBackgroundToCanvas(new CanvasImage( "..\\TextBasedGame\\src\\resource\\images\\kirbywalk1.png", new Point(0,0)));
+		anime.addFrameToAnimation();
+		anime.addFrameToAnimation();
+		anime.moveToFrameNumber(1);
+		
+		assertEquals(anime.getFrameBasedOnFrameNumber(1).getBackgroundImage().getImageFilename(), "..\\TextBasedGame\\src\\resource\\images\\kirbywalk1.png");
+		assertEquals(gui.getScreen().getBackgroundImage().getImageFilename(), "..\\TextBasedGame\\src\\resource\\images\\kirbywalk1.png");
+		
+		gui.clearStage();
+		anime.moveToFrameNumber(2);
+		anime.moveToFrameNumber(1);
+		assertNull(anime.getFrameBasedOnFrameNumber(1).getBackgroundImage());
+		assertNull(gui.getScreen().getBackgroundImage());
+	}
+	
+	
+	@Test
+	public void afterClearTheFrameBackgroundShouldBeClearEvenAfterTraversingWIthAnimatorThenAddFrameShouldHaveBackground() throws InvalidCommandException{
+		
+		GameGui gui = GUI.getInstance();
+		anime = GameAnimator.getInstance();
+		gui.addBackgroundToCanvas(new CanvasImage( "..\\TextBasedGame\\src\\resource\\images\\kirbywalk1.png", new Point(0,0)));
+		anime.addFrameToAnimation();
+		anime.addFrameToAnimation();
+		anime.moveToFrameNumber(1);
+		
+		assertEquals(anime.getFrameBasedOnFrameNumber(1).getBackgroundImage().getImageFilename(), "..\\TextBasedGame\\src\\resource\\images\\kirbywalk1.png");
+		assertEquals(gui.getScreen().getBackgroundImage().getImageFilename(), "..\\TextBasedGame\\src\\resource\\images\\kirbywalk1.png");
+		
+		gui.clearStage();
+		anime.moveToFrameNumber(2);
+		anime.moveToFrameNumber(1);
+		assertNull(anime.getFrameBasedOnFrameNumber(1).getBackgroundImage());
+		assertNull(gui.getScreen().getBackgroundImage());
+		
+		gui.addBackgroundToCanvas(new CanvasImage( "..\\TextBasedGame\\src\\resource\\images\\kirbywalk1.png", new Point(0,0)));
+		assertEquals(anime.getFrameBasedOnFrameNumber(1).getBackgroundImage().getImageFilename(), "..\\TextBasedGame\\src\\resource\\images\\kirbywalk1.png");
+		assertEquals(gui.getScreen().getBackgroundImage().getImageFilename(), "..\\TextBasedGame\\src\\resource\\images\\kirbywalk1.png");
+		
 	}
 	
 	@Test

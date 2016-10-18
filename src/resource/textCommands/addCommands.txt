@@ -3,6 +3,7 @@
 Add Frame --- Calls add frame function
 Add Image “image.gif” (Point.x, Point.y) ---Calls addImage function with parameters: “Image.gif” and (Point.x, Point.y)
 Add Text “Hello world” (Point.x, Point.y) --- Calls addText function with parameters: “Hello world” and (Point.x, Point.y)
+Add Background "image.gif" --- Adds an image to the background of the screen, may include stretching or shrinking the image to fit.
 
 You can either add an image, text, or a frame to the animation. To add a frame you must say “Add frame”.
 To add an image you must say “add image” followed by the path to the image and the point where you want to place the image on the screen.

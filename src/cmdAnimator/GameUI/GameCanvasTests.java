@@ -8,14 +8,20 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import cmdAnimator.GUI;
+import cmdAnimator.GameGui;
 import cmdAnimator.GameCanvasActions.CanvasImage;
 import cmdAnimator.GameCanvasActions.CanvasText;
+import cmdAnimator.GameCanvasActions.FrameAnimator;
+import cmdAnimator.GameCanvasActions.GameAnimator;
+import cmdAnimator.GameCanvasActions.InvalidCommandException;
 import javafx.application.Application;
 import javafx.stage.Stage;
 
 public class GameCanvasTests {
 	
 	GameCanvas canvas;
+	FrameAnimator anime;
 	Point point;
 	
 	@Before
@@ -108,6 +114,16 @@ public class GameCanvasTests {
 	
 	}
 	
+	@Test
+	public void afterClearTheFrameBackgroundShouldBeClear(){
+		canvas.setBackgroundImage(new CanvasImage( "..\\TextBasedGame\\src\\resource\\images\\kirbywalk1.png", new Point(0,0)));
+		canvas.clearCanvas();
+		
+		assertNull(canvas.getBackgroundImage());
+	}
+	
+
+		
 	@Test
 	public void copyCopiesDataIntoAnotherCanvasCorrectly(){
 		

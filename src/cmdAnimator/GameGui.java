@@ -8,6 +8,7 @@ import java.net.URL;
 import cmdAnimator.GameCanvasActions.CanvasImage;
 import cmdAnimator.GameCanvasActions.CanvasText;
 import cmdAnimator.GameCanvasActions.CommandParser;
+import cmdAnimator.GameCanvasActions.GameAnimator;
 import cmdAnimator.GameUI.GameCanvas;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
@@ -239,8 +240,10 @@ public class GameGui extends Group{
 	}
 
 	private void addNewImageToImageLibrary(CanvasImage canvasImage) {
+		
 		Image image = new Image(new File(canvasImage.getImageFilename()).toURI().toString(), ICON_SIZE, ICON_SIZE, false, false);
 		AddImageButton newImage =  new AddImageButton(canvasImage.getImageFilename());
+		if(!isImageAlreadyAddedToImageLibrary(canvasImage.getImageFilename())){
 		ImageView icon = new ImageView(image);
 		newImage.setGraphic(icon);
 		newImage.setPrefSize(LIBRARY_WIDTH, ICON_SIZE + 10);
@@ -258,16 +261,30 @@ public class GameGui extends Group{
 			
 		});
 		imageLibrary.getChildren().add(newImage);
+		}
 		//imageLibrary.getItems().add(new MenuItem("", newImage));
 	}
 	
+	private boolean isImageAlreadyAddedToImageLibrary(String image) {
+		int i = 0;
+		while(imageLibrary.getChildren() != null && i<imageLibrary.getChildren().size()){
+			if(((AddImageButton)imageLibrary.getChildren().get(i)).getImagePath().equals(image)){
+				return true;
+			}
+			i++;
+		}
+		
+		return false;
+	}
+
 	public VBox getImageLibrary(){
 		return imageLibrary;
 	}
 
 	public boolean addBackgroundToCanvas(CanvasImage canvasImage) {
 		boolean imageSafelyAdded = stage.setBackgroundImage(canvasImage);
-
+		if(GameAnimator.getInstance().getCurrentFrame() != null)
+			GameAnimator.getInstance().getCurrentFrame().setBackgroundImage(canvasImage);
 		if (imageSafelyAdded && !buttonExecuteCalled) {
 			addNewImageToImageLibrary(canvasImage);
 		}
@@ -277,7 +294,8 @@ public class GameGui extends Group{
 	}
 	
 	public void clearStage() {
-		stage.clearCanvas();		
+		GameAnimator.getInstance().getCurrentFrame().clearCanvas();
+		stage.clearCanvas();
 	}
 
 	public String getCommandLineText() {
