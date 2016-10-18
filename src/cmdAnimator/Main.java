@@ -1,5 +1,6 @@
 package cmdAnimator;
 	
+import java.awt.Point;
 import java.io.File;
 import java.util.ArrayList;
 
@@ -13,6 +14,8 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Menu;
+import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
@@ -21,7 +24,7 @@ import javafx.scene.input.KeyEvent;
 
 public class Main extends Application {
 	
-	private ArrayList<String> commands =  new ArrayList<String>();
+	public static ArrayList<String> commands =  new ArrayList<String>();
 	private static int currentCommandView = 0;
 	
 	@Override
@@ -31,7 +34,8 @@ public class Main extends Application {
 			FrameAnimator Animation = GameAnimator.getInstance();
 			GameGui gui = GUI.getInstance();						
 			Button enterButton =gui.getEnterButton();
-			
+			Menu libraryMenu = gui.getImageLibrary();
+		    setListenerForImageLibraryInGui(gui, libraryMenu);
 			setEnterButtonFromGuiAsAListener(primaryStage, gui, enterButton);
 			//listener for file choosing 
 			enableFileChooserListener(primaryStage, gui);
@@ -71,7 +75,6 @@ public class Main extends Application {
 			});
 
 			Scene scene = new Scene(gui, 1040, 500);
-
 			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 			primaryStage.setScene(scene);
 			primaryStage.show();
@@ -79,6 +82,38 @@ public class Main extends Application {
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
+		
+	
+		
+	}
+
+	private void setListenerForImageLibraryInGui(GameGui gui, Menu libraryMenu) {
+		libraryMenu.setOnAction(new EventHandler<ActionEvent>() {
+
+			public void handle(ActionEvent event) {
+				MenuItem item = ((MenuItem) event.getSource());
+				Menu m = gui.getImageLibrary();
+				int i = 0;
+				// find the item clicked in the library menu
+				while (m.getItems().get(i) != null && m.getItems().get(i).equals(item)) {
+					i++;
+				}
+				// alert gui that this image has been added to library so we
+				// dont add again and execute
+				// its addition to canvas
+				gui.buttonExecuteCalled = true;
+				String point = Prompts.promptUserForPoint();
+				if (point.equalsIgnoreCase("background")) {
+					GuiCommands.executeBackgroundImageAdditionCommand(gui,
+							((AddImageButton) m.getItems().get(i).getGraphic()).getImagePath(), commands,
+							currentCommandView);
+				} else {
+					GuiCommands.executeImageAdditionCommand(gui,
+							((AddImageButton) m.getItems().get(i).getGraphic()).getImagePath(), point, commands,
+							currentCommandView);
+				}
+			}
+		});
 	}
 
 	private void setEnterButtonFromGuiAsAListener(Stage primaryStage, GameGui gui, Button enterButton) {
@@ -97,40 +132,27 @@ public class Main extends Application {
 
 	private void enableFileChooserListener(Stage primaryStage, GameGui gui) {
 		FileChooser files = new FileChooser();
-		gui.getAddImageButton().setOnAction(
-		        new EventHandler<ActionEvent>() {
-		            @Override
-		            public void handle(final ActionEvent e) {
-		                File file = files.showOpenDialog(primaryStage);
-		                if (file != null) {
-		                	String point = Prompts.promptUserForPoint();
-		                	if(point.equalsIgnoreCase("background")){
-		                		gui.getCommandLine().setText("add background \""+file.getAbsolutePath()+"\"");
-		    		                	addCommandToPreviousCommandsFeed(gui);
-		    		                	CommandParser.parseText("add background \""+file.getAbsolutePath()+"\"");
-		                		
-		                	}else{
-		                	gui.getCommandLine().setText("add image \""+file.getAbsolutePath()+"\" "+
-		                	point);
-		                	addCommandToPreviousCommandsFeed(gui);
-		                	CommandParser.parseText("add image \""+file.getAbsolutePath()+"\" "+
-		                	point);
-		                	}
-		                	
-		                }
-		            }
-
-					private void addCommandToPreviousCommandsFeed(GameGui gui) {
-						if (!commands.contains(gui.getCommandLineText()))
-							commands.add(gui.getCommandLineText());
-						currentCommandView = commands.size();
+		gui.getAddImageButton().setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(final ActionEvent e) {
+				File file = files.showOpenDialog(primaryStage);
+				if (file != null) {
+					String point = Prompts.promptUserForPoint();
+					if (point.equalsIgnoreCase("background")) {
+						GuiCommands.executeBackgroundImageAdditionCommand(gui, file.getAbsolutePath(), commands,
+								currentCommandView);
+					} else {
+						GuiCommands.executeImageAdditionCommand(gui, file.getAbsolutePath(), point, commands,
+								currentCommandView);
 					}
-		        });
+
+				}
+			}
+		});
 	}
-	
+
 	public static void main(String[] args) {
 		launch(args);
-		
-		
+
 	}
 }

@@ -3,9 +3,11 @@ package cmdAnimator;
 
 import java.awt.Point;
 import java.io.File;
+import java.net.URL;
 
 import cmdAnimator.GameCanvasActions.CanvasImage;
 import cmdAnimator.GameCanvasActions.CanvasText;
+import cmdAnimator.GameCanvasActions.CommandParser;
 import cmdAnimator.GameUI.GameCanvas;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -20,6 +22,8 @@ import javafx.scene.control.ScrollPane.ScrollBarPolicy;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Tooltip;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
@@ -30,7 +34,8 @@ public class GameGui extends Group{
 	private TextArea outputField;
 	private Label libraryTitle;
 	private MenuBar libraryMenu;
-	private Menu framesLibrary;
+	private Label framesLibrary;
+	private Menu imageLibrary;
 	private FlowPane canvasPane;
 	private GameCanvas stage;
 	private TextField userInputField;
@@ -39,6 +44,8 @@ public class GameGui extends Group{
 	private TextArea helpCommands;
 	private final String outputFieldText ="---output---";
 	private Button addImageButton;
+	public static boolean buttonExecuteCalled = false;
+	private final int ICON_SIZE = 20;
 	
 	public GameGui(){
 		outputField = new TextArea(outputFieldText);
@@ -50,9 +57,10 @@ public class GameGui extends Group{
 		helpCommands = new TextArea();
 		canvasPane = new FlowPane();
 		libraryMenu = new MenuBar();
-		framesLibrary = new Menu("Current Frame: 0");
+		framesLibrary = new Label("Current Frame: 0");
+		imageLibrary =  new Menu ("Recently Added images");
 		addImageButton = new Button("Add image");
-		
+	
 		setupIDs();
 		setupGUITextFields();
 		setupStage();
@@ -72,7 +80,7 @@ public class GameGui extends Group{
 		outputAreas.getChildren().addAll(canvasPane, outputField, userinputArea);
 		outputAreas.setId("outputArea");
 
-		LibraryArea.getChildren().addAll(libraryTitle, libraryMenu, addImageButton);
+		LibraryArea.getChildren().addAll(libraryTitle, framesLibrary, libraryMenu, addImageButton);
 		LibraryArea.setId("libraryArea");
 		helpArea.getChildren().addAll(helpTitle,helpCommands);
 		
@@ -140,7 +148,7 @@ public class GameGui extends Group{
 
 
 	private void setupLibrary() {
-		addImageButton.setPrefSize(180, 50);
+		addImageButton.setPrefSize(180, 30);
 		libraryTitle.setText("Library");
 		libraryTitle.setPrefSize(180, 50);
 		libraryMenu.setPrefSize(180, 375);
@@ -148,7 +156,8 @@ public class GameGui extends Group{
 		libraryMenu.setMaxWidth(180);
 		libraryMenu.setMaxHeight(375);
 		libraryMenu.setMinHeight(375);
-		libraryMenu.getMenus().add(framesLibrary);
+		libraryMenu.getMenus().add(imageLibrary);
+		
 		
 	}
 
@@ -214,7 +223,28 @@ public class GameGui extends Group{
 	}
 	
 	public boolean addImageToCanvas(CanvasImage canvasImage){
+		boolean imageSafelyAdded = stage.addImage(canvasImage);
+		
+		if(imageSafelyAdded && !buttonExecuteCalled){
+			addNewImageToImageLibrary(canvasImage);
+		}buttonExecuteCalled = false;
 		return stage.addImage(canvasImage);
+	}
+
+	private void addNewImageToImageLibrary(CanvasImage canvasImage) {
+		Image image = new Image(new File(canvasImage.getImageFilename()).toURI().toString(), ICON_SIZE, ICON_SIZE, false, false);
+		AddImageButton newImage =  new AddImageButton(canvasImage.getImageFilename());
+		ImageView icon = new ImageView(image);
+		
+		newImage.setGraphic(icon);
+		
+		imageLibrary.getItems().add(new MenuItem("", newImage));
+		icon.fitHeightProperty();
+		icon.fitWidthProperty();
+	}
+	
+	public Menu getImageLibrary(){
+		return imageLibrary;
 	}
 
 	public boolean addBackgroundToCanvas(CanvasImage canvasImage){
