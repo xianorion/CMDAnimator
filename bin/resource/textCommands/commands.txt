@@ -1,0 +1,14 @@
+Command --- functionality
+Help	--- Calls help function
+Add Frame --- Calls add frame function
+Add Image “image.gif” (Point.x, Point.y) ---Calls addImage function with parameters: “Image.gif” and (Point.x, Point.y)
+Add Text “Hello world” (Point.x, Point.y) --- Calls addText function with parameters: “Hello world” and (Point.x, Point.y)
+fps framerate --- Changes the fps in the animation class to frameRate
+Remove Frame frame# --- Removes the frame frame#
+View frame frame# --- Changes the canvas view to view all frame number
+Done ---Goes to a clear canvas
+< (key command) --- Moves to previous frame
+> (key command) --- Moves to next frame if no next frame stays on current
+Up and down arrow keys (key command) --- Traverse throw previously executed statements
+Clear --- Clears what is on the frame
+

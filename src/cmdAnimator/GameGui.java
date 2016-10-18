@@ -10,6 +10,7 @@ import cmdAnimator.GameCanvasActions.CanvasText;
 import cmdAnimator.GameCanvasActions.CommandParser;
 import cmdAnimator.GameUI.GameCanvas;
 import javafx.event.ActionEvent;
+import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.scene.Group;
 import javafx.scene.control.Button;
@@ -31,11 +32,12 @@ import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
 
 public class GameGui extends Group{
+	private static final int LIBRARY_WIDTH = 180;
 	private TextArea outputField;
 	private Label libraryTitle;
 	private MenuBar libraryMenu;
 	private Label framesLibrary;
-	private Menu imageLibrary;
+	private VBox imageLibrary;
 	private FlowPane canvasPane;
 	private GameCanvas stage;
 	private TextField userInputField;
@@ -45,7 +47,8 @@ public class GameGui extends Group{
 	private final String outputFieldText ="---output---";
 	private Button addImageButton;
 	public static boolean buttonExecuteCalled = false;
-	private final int ICON_SIZE = 20;
+	private final int ICON_SIZE = 25;
+	private ScrollPane sp;
 	
 	public GameGui(){
 		outputField = new TextArea(outputFieldText);
@@ -58,9 +61,10 @@ public class GameGui extends Group{
 		canvasPane = new FlowPane();
 		libraryMenu = new MenuBar();
 		framesLibrary = new Label("Current Frame: 0");
-		imageLibrary =  new Menu ("Recently Added images");
+		imageLibrary =  new VBox ();
 		addImageButton = new Button("Add image");
-	
+		sp = new ScrollPane();
+		
 		setupIDs();
 		setupGUITextFields();
 		setupStage();
@@ -75,12 +79,13 @@ public class GameGui extends Group{
 		VBox LibraryArea = new VBox();
 		VBox helpArea = new VBox();
 		
+		sp.setContent(imageLibrary);
 		canvasPane.getChildren().add(stage);
 		userinputArea.getChildren().addAll(userInputField, enterButton);
 		outputAreas.getChildren().addAll(canvasPane, outputField, userinputArea);
 		outputAreas.setId("outputArea");
 
-		LibraryArea.getChildren().addAll(libraryTitle, framesLibrary, libraryMenu, addImageButton);
+		LibraryArea.getChildren().addAll(libraryTitle, framesLibrary, sp, addImageButton);
 		LibraryArea.setId("libraryArea");
 		helpArea.getChildren().addAll(helpTitle,helpCommands);
 		
@@ -148,15 +153,16 @@ public class GameGui extends Group{
 
 
 	private void setupLibrary() {
-		addImageButton.setPrefSize(180, 30);
+		addImageButton.setPrefSize(LIBRARY_WIDTH, 30);
 		libraryTitle.setText("Library");
-		libraryTitle.setPrefSize(180, 50);
-		libraryMenu.setPrefSize(180, 375);
-		libraryMenu.setMinWidth(180);
-		libraryMenu.setMaxWidth(180);
-		libraryMenu.setMaxHeight(375);
-		libraryMenu.setMinHeight(375);
-		libraryMenu.getMenus().add(imageLibrary);
+		libraryTitle.setPrefSize(LIBRARY_WIDTH, 50);
+		sp.setPrefSize(LIBRARY_WIDTH, 375);
+		sp.setMinWidth(LIBRARY_WIDTH);
+		sp.setMaxWidth(LIBRARY_WIDTH);
+		sp.setMaxHeight(375);
+		sp.setMinHeight(375);
+		
+		//libraryMenu.getMenus().add(imageLibrary);
 		
 		
 	}
@@ -227,7 +233,8 @@ public class GameGui extends Group{
 		
 		if(imageSafelyAdded && !buttonExecuteCalled){
 			addNewImageToImageLibrary(canvasImage);
-		}buttonExecuteCalled = false;
+		}
+		buttonExecuteCalled = false;
 		return stage.addImage(canvasImage);
 	}
 
@@ -235,20 +242,38 @@ public class GameGui extends Group{
 		Image image = new Image(new File(canvasImage.getImageFilename()).toURI().toString(), ICON_SIZE, ICON_SIZE, false, false);
 		AddImageButton newImage =  new AddImageButton(canvasImage.getImageFilename());
 		ImageView icon = new ImageView(image);
-		
 		newImage.setGraphic(icon);
-		
-		imageLibrary.getItems().add(new MenuItem("", newImage));
-		icon.fitHeightProperty();
-		icon.fitWidthProperty();
+		newImage.setPrefSize(LIBRARY_WIDTH, ICON_SIZE + 10);
+		newImage.setOnAction(new EventHandler<ActionEvent>(){
+			@Override
+			public void handle(ActionEvent event) {
+				String point = Prompts.promptUserForPoint();
+				GUI.getInstance().buttonExecuteCalled = true;
+				if(point.equalsIgnoreCase("background")){
+					GuiCommands.executeBackgroundImageAdditionCommand(GUI.getInstance(), canvasImage.getImageFilename());
+				}else
+				GuiCommands.executeImageAdditionCommand(GUI.getInstance(), canvasImage.getImageFilename(), point);
+			
+			}
+			
+		});
+		imageLibrary.getChildren().add(newImage);
+		//imageLibrary.getItems().add(new MenuItem("", newImage));
 	}
 	
-	public Menu getImageLibrary(){
+	public VBox getImageLibrary(){
 		return imageLibrary;
 	}
 
-	public boolean addBackgroundToCanvas(CanvasImage canvasImage){
-		return stage.setBackgroundImage(canvasImage);
+	public boolean addBackgroundToCanvas(CanvasImage canvasImage) {
+		boolean imageSafelyAdded = stage.setBackgroundImage(canvasImage);
+
+		if (imageSafelyAdded && !buttonExecuteCalled) {
+			addNewImageToImageLibrary(canvasImage);
+		}
+		buttonExecuteCalled = false;
+
+		return imageSafelyAdded;
 	}
 	
 	public void clearStage() {

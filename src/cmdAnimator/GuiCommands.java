@@ -9,6 +9,9 @@ import cmdAnimator.GameCanvasActions.FrameAnimator;
 import javafx.scene.control.Menu;
 
 public class GuiCommands {
+	
+	public static ArrayList<String> commands =  new ArrayList<String>();
+	public static int currentCommandView = 0;
 
 	public static void executeAddBackgroundCommand(GameGui gui, File file) {
 		gui.getCommandLine().setText("add background \"" + file.getAbsolutePath() + "\"");
@@ -27,15 +30,13 @@ public class GuiCommands {
 		currentCommandView = commands.size();
 	}
 
-	public static void executeBackgroundImageAdditionCommand(GameGui gui, String ImagePath, ArrayList<String> commands,
-			int currentCommandView) {
+	public static void executeBackgroundImageAdditionCommand(GameGui gui, String ImagePath) {
 		gui.getCommandLine().setText("add background \"" + ImagePath + "\"");
 		GuiCommands.addCommandToPreviousCommandsFeed(gui, commands, currentCommandView);
 		CommandParser.parseText("add background \"" + ImagePath + "\"");
 	}
 
-	public static void executeImageAdditionCommand(GameGui gui, String ImagePath, String point,
-			ArrayList<String> commands, int currentCommandView) {
+	public static void executeImageAdditionCommand(GameGui gui, String ImagePath, String point) {
 		gui.getCommandLine().setText("add image \"" + ImagePath + "\" " + point);
 		GuiCommands.addCommandToPreviousCommandsFeed(gui, commands, currentCommandView);
 		CommandParser.parseText("add image \"" + ImagePath + "\" " + point);

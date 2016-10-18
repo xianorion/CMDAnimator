@@ -1,0 +1,4 @@
+---- remove commands ----
+Remove Frame frame# --- Removes the frame frame#
+
+The only remove command is the remove frame commands. To remove a frame, type “Remove frame” along with an integer valued frame number that it greater than 0.

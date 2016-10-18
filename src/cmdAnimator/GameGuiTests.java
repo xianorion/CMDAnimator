@@ -60,7 +60,7 @@ public class GameGuiTests {
 		Point point = new Point(40,45);
 		
 		gui.addImageToCanvas(new CanvasImage(filename, point));
-		assertEquals(filename, ((AddImageButton)(gui.getImageLibrary().getItems().get(0).getGraphic())).getImagePath());
+		assertEquals(filename, ((AddImageButton)(gui.getImageLibrary().getChildren().get(0))).getImagePath());
 	}
 	
 	@Test
@@ -69,7 +69,7 @@ public class GameGuiTests {
 		Point point = new Point(40,45);
 		
 		gui.addImageToCanvas(new CanvasImage(filename, point));
-		assertEquals(0, gui.getImageLibrary().getItems().size());
+		assertEquals(0, gui.getImageLibrary().getChildren().size());
 	}
 	
 	@Test
@@ -80,8 +80,8 @@ public class GameGuiTests {
 		gui.addImageToCanvas(new CanvasImage(filename, point));
 		gui.buttonExecuteCalled = true;
 		gui.addImageToCanvas(new CanvasImage(filename, point));
-		assertEquals(filename, ((AddImageButton)(gui.getImageLibrary().getItems().get(0).getGraphic())).getImagePath());
-		assertEquals(1, gui.getImageLibrary().getItems().size());
+		assertEquals(filename, ((AddImageButton)(gui.getImageLibrary().getChildren().get(0))).getImagePath());
+		assertEquals(1, gui.getImageLibrary().getChildren().size());
 	}
 	
 	@Test
@@ -93,9 +93,9 @@ public class GameGuiTests {
 		
 		gui.addImageToCanvas(new CanvasImage(filename, point));
 		gui.addImageToCanvas(new CanvasImage(filename2, point2));
-		assertEquals(filename, ((AddImageButton)(gui.getImageLibrary().getItems().get(0).getGraphic())).getImagePath());
-		assertEquals(filename2, ((AddImageButton)(gui.getImageLibrary().getItems().get(1).getGraphic())).getImagePath());
-		assertEquals(2, gui.getImageLibrary().getItems().size());
+		assertEquals(filename, ((AddImageButton)(gui.getImageLibrary().getChildren().get(0))).getImagePath());
+		assertEquals(filename2, ((AddImageButton)(gui.getImageLibrary().getChildren().get(1))).getImagePath());
+		assertEquals(2, gui.getImageLibrary().getChildren().size());
 	}
 	
 	@Test
@@ -111,10 +111,16 @@ public class GameGuiTests {
 		gui.addImageToCanvas(new CanvasImage(filename, point));
 		//-------
 		gui.addImageToCanvas(new CanvasImage(filename2, point2));
-		assertEquals(filename, ((AddImageButton)(gui.getImageLibrary().getItems().get(0).getGraphic())).getImagePath());
-		assertEquals(filename2, ((AddImageButton)(gui.getImageLibrary().getItems().get(1).getGraphic())).getImagePath());
-		assertEquals(2, gui.getImageLibrary().getItems().size());
+		assertEquals(filename, ((AddImageButton)(gui.getImageLibrary().getChildren().get(0))).getImagePath());
+		assertEquals(filename2, ((AddImageButton)(gui.getImageLibrary().getChildren().get(1))).getImagePath());
+		assertEquals(2, gui.getImageLibrary().getChildren().size());
 	}
+	
+	@Test
+	public void whenIAddTwoDifferentBackgroundsTheyAreBothContainedInTheLibrary(){
+		
+	}
+	
 	
 	
 	public static class dummyApp extends Application {
