@@ -113,7 +113,7 @@ public class AddCommandExecutor implements ICommandExecutor {
 		int x = 0, y = 0;
 		String[] coordinates = string.split("\\(|\\,|\\)|\\s+");
 
-		if (coordinates.length == 3)
+		if (coordinates.length == 3 && string.contains("(") && string.contains(")"))
 			try {
 				x = Integer.parseInt(coordinates[1]);
 				y = Integer.parseInt(coordinates[2]);

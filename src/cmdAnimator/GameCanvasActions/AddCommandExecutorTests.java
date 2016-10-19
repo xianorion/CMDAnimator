@@ -42,6 +42,22 @@ public class AddCommandExecutorTests {
 	}
 	
 	@Test
+	public void returnNullWithX40andy30WhenStringOfFortyandThirtyAreEnteredInIncorrectFormat() {
+		text = "(40,30";
+		point = ACE.convertStringToPoint(text);
+		
+		assertEquals(null, point);
+	}
+	
+	@Test
+	public void returnNullWithX40andy30WhenStringOfFortyandThirtyAreEnteredInIncorrectRegardingParenthesisFormat() {
+		text = "(40),30";
+		point = ACE.convertStringToPoint(text);
+		
+		assertEquals(null, point);
+	}
+	
+	@Test
 	public void returnNullWhenStringOfFortyAndAHalfandThirtyAreEnteredInCorrectFormat() {
 		text = "(40.5,30)";
 		point = ACE.convertStringToPoint(text);
