@@ -108,7 +108,7 @@ public class AddCommandExecutor implements ICommandExecutor {
 		}
 	}
 
-	protected Point convertStringToPoint(String string) {
+	public static Point convertStringToPoint(String string) {
 		Point point = null;
 		int x = 0, y = 0;
 		String[] coordinates = string.split("\\(|\\,|\\)|\\s+");

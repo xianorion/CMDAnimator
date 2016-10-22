@@ -4,6 +4,7 @@ import java.awt.Point;
 import java.io.File;
 import java.util.ArrayList;
 
+import cmdAnimator.GameCanvasActions.AddCommandExecutor;
 import cmdAnimator.GameCanvasActions.CommandParser;
 import cmdAnimator.GameCanvasActions.FrameAnimator;
 import cmdAnimator.GameCanvasActions.GameAnimator;
@@ -112,13 +113,16 @@ public class Main extends Application {
 				File file = files.showOpenDialog(primaryStage);
 				if (file != null) {
 					String point = Prompts.promptUserForPoint();
-					if (point.equalsIgnoreCase("background")) {
+					if(point == null){
+						gui.appendTextToOutputScreen("Add image request canceled.");
+					}
+					else if (point.equalsIgnoreCase("background")) {
 						GuiCommands.executeBackgroundImageAdditionCommand(gui, file.getAbsolutePath());
 						
-					} else {
+					} else if(AddCommandExecutor.convertStringToPoint(point) != null){
 						GuiCommands.executeImageAdditionCommand(gui, file.getAbsolutePath(), point);
-					}
-
+					}else
+						gui.appendTextToOutputScreen("Invalid Image");
 				}
 			}
 		});

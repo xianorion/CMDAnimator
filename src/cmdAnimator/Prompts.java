@@ -3,7 +3,9 @@ package cmdAnimator;
 import java.awt.Point;
 import java.util.Optional;
 
+import javafx.event.EventHandler;
 import javafx.scene.Group;
+import javafx.scene.control.DialogEvent;
 import javafx.scene.control.TextInputDialog;
 
 public class Prompts extends Group{
@@ -18,11 +20,12 @@ public class Prompts extends Group{
 
 		
 		Optional<String> point = dialog.showAndWait();
+
 		if (point.isPresent()){
 		    return point.get();
 		}
 		
-		return "";
+		return null;
 	}
 
 }
