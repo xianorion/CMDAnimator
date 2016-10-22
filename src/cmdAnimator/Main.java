@@ -68,7 +68,6 @@ public class Main extends Application {
 						if (GuiCommands.currentCommandView < GuiCommands.commands.size() - 1 && GuiCommands.currentCommandView >= 0) {
 							gui.getCommandLine().setText(GuiCommands.commands.get(GuiCommands.currentCommandView + 1));
 							GuiCommands.currentCommandView++;
-							System.out.println("current command view " + GuiCommands.currentCommandView);
 						}else{
 							GuiCommands.currentCommandView = GuiCommands.commands.size();
 							gui.getCommandLine().setText("");
