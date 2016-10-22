@@ -61,17 +61,18 @@ public class Main extends Application {
 						if (GuiCommands.currentCommandView > 0 && GuiCommands.currentCommandView <= GuiCommands.commands.size()) {
 							gui.getCommandLine().setText(GuiCommands.commands.get(GuiCommands.currentCommandView - 1));
 							GuiCommands.currentCommandView--;
+						}else if(GuiCommands.commands.size() > 0 && GuiCommands.currentCommandView == 0){
+							gui.getCommandLine().setText(GuiCommands.commands.get(GuiCommands.currentCommandView));
 						}
 					} else if (event.getCode().equals(KeyCode.DOWN)) {
 						if (GuiCommands.currentCommandView < GuiCommands.commands.size() - 1 && GuiCommands.currentCommandView >= 0) {
 							gui.getCommandLine().setText(GuiCommands.commands.get(GuiCommands.currentCommandView + 1));
 							GuiCommands.currentCommandView++;
 							System.out.println("current command view " + GuiCommands.currentCommandView);
-						}else if(GuiCommands.currentCommandView == 0 && GuiCommands.commands.size()  == 1 ){
-							gui.getCommandLine().setText(GuiCommands.commands.get(GuiCommands.currentCommandView));
-							GuiCommands.currentCommandView++;
-						}else
+						}else{
+							GuiCommands.currentCommandView = GuiCommands.commands.size();
 							gui.getCommandLine().setText("");
+						}
 					}
 
 				}

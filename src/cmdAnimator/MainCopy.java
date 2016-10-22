@@ -17,27 +17,27 @@ public class MainCopy {
 				GuiCommands.currentCommandView = GuiCommands.commands.size();
 				CommandParser.parseText(gui.getCommandLineText());
 			} else if (run.equalsIgnoreCase("right")) {
-				if ((Animation.getNumberOfCurrentFrame() +1) <= Animation.getTotalNumberOfFrames())
+				if (gui.getCommandLineText().equals("") &&(Animation.getNumberOfCurrentFrame() +1) <= Animation.getTotalNumberOfFrames())
 					CommandParser.parseText("goto frame " + (Animation.getNumberOfCurrentFrame() + 1));
 			} else if (run.equalsIgnoreCase("left")) {
-				if ( (Animation.getNumberOfCurrentFrame() - 1) >0)
+				if (gui.getCommandLineText().equals("") && (Animation.getNumberOfCurrentFrame() - 1) >0)
 					CommandParser.parseText("goto frame " + (Animation.getNumberOfCurrentFrame() - 1));
 			} else if (run.equalsIgnoreCase("up")) {
 				if (GuiCommands.currentCommandView > 0 && GuiCommands.currentCommandView <= GuiCommands.commands.size()) {
 					gui.getCommandLine().setText(GuiCommands.commands.get(GuiCommands.currentCommandView - 1));
 					GuiCommands.currentCommandView--;
+				}else if(GuiCommands.commands.size() > 0 && GuiCommands.currentCommandView == 0){
+					gui.getCommandLine().setText(GuiCommands.commands.get(GuiCommands.currentCommandView));
 				}
 			} else if (run.equalsIgnoreCase("down")) {
 				if (GuiCommands.currentCommandView < GuiCommands.commands.size() - 1 && GuiCommands.currentCommandView >= 0) {
 					gui.getCommandLine().setText(GuiCommands.commands.get(GuiCommands.currentCommandView + 1));
 					GuiCommands.currentCommandView++;
 					System.out.println("current command view " + GuiCommands.currentCommandView);
-				}else if(GuiCommands.currentCommandView == 0 && GuiCommands.commands.size()  == 1 ){
-					gui.getCommandLine().setText(GuiCommands.commands.get(GuiCommands.currentCommandView));
-					GuiCommands.currentCommandView++;
-				}else
+				}else{
+					GuiCommands.currentCommandView = GuiCommands.commands.size();
 					gui.getCommandLine().setText("");
-			
+				}
 		}
 	}
 

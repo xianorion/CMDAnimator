@@ -83,6 +83,10 @@ public class FrameAnimator {
 		
 
 	}
+	
+	public void setTotalNumberOfFrames(int newNumber){
+		totalNumberOfFrames = newNumber;
+	}
 
 	public int getNumberOfCurrentFrame() {
 		return currentFrameNumber;
