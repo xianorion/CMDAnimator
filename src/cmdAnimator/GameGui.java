@@ -245,26 +245,27 @@ public class GameGui extends Group{
 		AddImageButton newImage =  new AddImageButton(canvasImage.getImageFilename());
 		if(!isImageAlreadyAddedToImageLibrary(canvasImage.getImageFilename())){
 		ImageView icon = new ImageView(image);
-		newImage.setGraphic(icon);
-		newImage.setPrefSize(LIBRARY_WIDTH, ICON_SIZE + 10);
-		newImage.setOnAction(new EventHandler<ActionEvent>(){
-			@Override
-			public void handle(ActionEvent event) {
-				String point = Prompts.promptUserForPoint();
-				GUI.getInstance().buttonExecuteCalled = true;
-				if(point.equalsIgnoreCase("background")){
-					GuiCommands.executeBackgroundImageAdditionCommand(GUI.getInstance(), canvasImage.getImageFilename());
-				}else
-				GuiCommands.executeImageAdditionCommand(GUI.getInstance(), canvasImage.getImageFilename(), point);
-			
-			}
-			
-		});
-		imageLibrary.getChildren().add(newImage);
+			newImage.setGraphic(icon);
+			newImage.setPrefSize(LIBRARY_WIDTH, ICON_SIZE + 10);
+			newImage.setOnAction(new EventHandler<ActionEvent>() {
+				@Override
+				public void handle(ActionEvent event) {
+					String point = Prompts.promptUserForPoint();
+					GUI.getInstance().buttonExecuteCalled = true;
+					if (point.equalsIgnoreCase("background")) {
+						GuiCommands.executeBackgroundImageAdditionCommand(GUI.getInstance(),
+								canvasImage.getImageFilename());
+					} else
+						GuiCommands.executeImageAdditionCommand(GUI.getInstance(), canvasImage.getImageFilename(),
+								point);
+
+				}
+
+			});
+			imageLibrary.getChildren().add(newImage);
 		}
-		//imageLibrary.getItems().add(new MenuItem("", newImage));
 	}
-	
+
 	private boolean isImageAlreadyAddedToImageLibrary(String image) {
 		int i = 0;
 		while(imageLibrary.getChildren() != null && i<imageLibrary.getChildren().size()){

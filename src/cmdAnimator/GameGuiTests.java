@@ -196,12 +196,29 @@ public class GameGuiTests {
 	}
 	
 	@Test
-	public void whenIAddTeoDifferentOfTheSameBackgroundsOneIsContainedInTheLibrary(){
+	public void whenIAddTwoDifferentOfTheSameBackgroundsOneIsContainedInTheLibrary(){
 		GameGui gui = GUI.getInstance();
 		anime = GameAnimator.getInstance();
-		String filename = "..\\TextBasedGame\\src\\resource\\images\\kirbywalk1.png";
+		gui.getImageLibrary().getChildren().clear();
+
+		String filename = "..\\TextBasedGame\\src\\resource\\images\\kirbywalk6.png";
+		String filename2 = "..\\TextBasedGame\\src\\resource\\images\\kirbywalk6.png";
 		gui.addBackgroundToCanvas(new CanvasImage( filename, new Point(0,0)));
+		gui.addBackgroundToCanvas(new CanvasImage( filename2, new Point(0,0)));
+
+		assertEquals(1, gui.getImageLibrary().getChildren().size());
+		assertEquals(filename, ((AddImageButton)(gui.getImageLibrary().getChildren().get(0))).getImagePath());
+	}
+	
+	@Test
+	public void whenIAddTwoDifferentOfTheSamefileTypesOneIsContainedInTheLibrary(){
+		GameGui gui = GUI.getInstance();
+		anime = GameAnimator.getInstance();
+		gui.getImageLibrary().getChildren().clear();
+
+		String filename = "..\\TextBasedGame\\src\\resource\\images\\kirbywalk7.png";
 		gui.addBackgroundToCanvas(new CanvasImage( filename, new Point(0,0)));
+		gui.addImageToCanvas(new CanvasImage( filename, new Point(0,0)));
 
 		assertEquals(1, gui.getImageLibrary().getChildren().size());
 		assertEquals(filename, ((AddImageButton)(gui.getImageLibrary().getChildren().get(0))).getImagePath());
