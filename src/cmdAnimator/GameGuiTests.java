@@ -223,6 +223,14 @@ public class GameGuiTests {
 		assertEquals(1, gui.getImageLibrary().getChildren().size());
 		assertEquals(filename, ((AddImageButton)(gui.getImageLibrary().getChildren().get(0))).getImagePath());
 	}
+
+	@Test
+	public void stageCanClearIfThereAreNoFramesInAnimation(){
+		anime = GameAnimator.getInstance();
+		anime.getFrames().clear();
+		
+		gui.clearStage();
+	}
 	
 	
 	

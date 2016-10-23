@@ -295,7 +295,8 @@ public class GameGui extends Group{
 	}
 	
 	public void clearStage() {
-		GameAnimator.getInstance().getCurrentFrame().clearCanvas();
+		if(GameAnimator.getInstance().getNumberOfCurrentFrame() > 0)
+			GameAnimator.getInstance().getCurrentFrame().clearCanvas();
 		stage.clearCanvas();
 	}
 
