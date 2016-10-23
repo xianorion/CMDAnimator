@@ -22,6 +22,9 @@ public class MainCopy {
 			} else if (run.equalsIgnoreCase("left")) {
 				if (gui.getCommandLineText().equals("") && (Animation.getNumberOfCurrentFrame() - 1) >0)
 					CommandParser.parseText("goto frame " + (Animation.getNumberOfCurrentFrame() - 1));
+				else if(gui.getCommandLineText().equals("") && (Animation.getNumberOfCurrentFrame() -1) == 0){
+					CommandParser.parseText("goto frame 1");
+				}
 			} else if (run.equalsIgnoreCase("up")) {
 				if (GuiCommands.currentCommandView > 0 && GuiCommands.currentCommandView <= GuiCommands.commands.size()) {
 					gui.getCommandLine().setText(GuiCommands.commands.get(GuiCommands.currentCommandView - 1));

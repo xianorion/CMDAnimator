@@ -223,6 +223,36 @@ public class MainCopyTests {
 		assertEquals("", gui.getCommandLine().getText());
 	}
 	
+	@Test 
+	public void ifOneFrameIsAddedToAnimationUserCanGoLeftOnce(){
+		Point point = new Point(45,45);
+		gui.getScreen().addText(new CanvasText("hello1", point));
+		Animation.addFrameToAnimation();
+		assertEquals(1, Animation.getNumberOfCurrentFrame());
+
+		gui.getCommandLine().setText("");
+		robot.CommandTestKeys("left");
+		assertEquals(gui.getScreen().getTextToWrite().get(point).getTextToAdd(), Animation.getFrameBasedOnFrameNumber(1).getTextToWrite().get(point).getTextToAdd());
+	}
+	
+	@Test
+	public void ifOneFrameIsAddedToAnimationUserCanGoLeftOnceAndNotRight(){
+		Point point = new Point(45,45);
+		gui.getScreen().addText(new CanvasText("hello1", point));
+		Animation.addFrameToAnimation();
+		assertEquals(1, Animation.getNumberOfCurrentFrame());
+
+		gui.getCommandLine().setText("");
+		robot.CommandTestKeys("left");
+		assertEquals(gui.getScreen().getTextToWrite().get(point).getTextToAdd(), Animation.getFrameBasedOnFrameNumber(1).getTextToWrite().get(point).getTextToAdd());
+
+		gui.getCommandLine().setText("");
+		robot.CommandTestKeys("right");
+		assertEquals(gui.getScreen().getTextToWrite().get(point).getTextToAdd(), Animation.getFrameBasedOnFrameNumber(1).getTextToWrite().get(point).getTextToAdd());
+		
+	}
+	
+	
 	public static class dummyApp extends Application {
 	    @Override
 	    public void start(Stage primaryStage) throws Exception {
