@@ -214,6 +214,7 @@ public class GameGuiTests {
 	public void whenIAddTwoDifferentOfTheSamefileTypesOneIsContainedInTheLibrary(){
 		GameGui gui = GUI.getInstance();
 		anime = GameAnimator.getInstance();
+		anime.setCurrentFrameNumber(0);
 		gui.getImageLibrary().getChildren().clear();
 
 		String filename = "..\\TextBasedGame\\src\\resource\\images\\kirbywalk7.png";
@@ -227,9 +228,48 @@ public class GameGuiTests {
 	@Test
 	public void stageCanClearIfThereAreNoFramesInAnimation(){
 		anime = GameAnimator.getInstance();
+		anime.setCurrentFrameNumber(0);
 		anime.getFrames().clear();
 		
 		gui.clearStage();
+	}
+	
+	@Test
+	public void stageCanClearFrameAndGUIisUserIsViewingAFrame() throws InvalidCommandException{
+		anime = GameAnimator.getInstance();
+		anime.setCurrentFrameNumber(0);
+		anime.getFrames().clear();
+		gui = GUI.getInstance();
+		Point point = new Point(45,45);
+		gui.addTextToCanvas(new CanvasText("hello1", point ));
+		assertEquals("hello1", gui.getScreen().getTextToWrite().get(point).getTextToAdd());
+
+		anime.addFrameToAnimation();
+
+		assertEquals("hello1", anime.getFrames().get(0).getTextToWrite().get(point).getTextToAdd());
+
+		
+		anime.moveToFrameNumber(1);
+		gui.clearStage();
+		assertEquals(0, anime.getFrameBasedOnFrameNumber(1).getTextToWrite().size());
+	}
+	
+	@Test
+	public void stageCanOnlyClearGUIisUserIsNotViewingAFrame(){
+		anime = GameAnimator.getInstance();
+		anime.setCurrentFrameNumber(0);
+		anime.getFrames().clear();
+		gui = GUI.getInstance();
+		Point point = new Point(45,45);
+		gui.addTextToCanvas(new CanvasText("hello1", point ));
+		assertEquals("hello1", gui.getScreen().getTextToWrite().get(point).getTextToAdd());
+
+		anime.addFrameToAnimation();
+
+		assertEquals("hello1", anime.getFrames().get(0).getTextToWrite().get(point).getTextToAdd());
+
+		gui.clearStage();
+		assertEquals(1, anime.getFrameBasedOnFrameNumber(1).getTextToWrite().size());
 	}
 	
 	

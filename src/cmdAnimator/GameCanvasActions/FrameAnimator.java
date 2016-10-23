@@ -21,11 +21,16 @@ public class FrameAnimator {
 	private int currentFrameBeingDisplayed;
 	private GameGui gui;
 	private static int currentFrameNumber =0;
+	private boolean isViewingFrame = false;
 
 	public FrameAnimator() {
 		frames = new ArrayList<GameCanvas>();
 		this.fps = DEFAULT_FPS;
 		gui =  GUI.getInstance();
+	}
+	
+	public boolean isViewingFrame(){
+		return isViewingFrame;
 	}
 
 	// add tests for me!!
@@ -60,12 +65,15 @@ public class FrameAnimator {
 		currentFrameNumber++;
 		System.out.println("current frame num "+ currentFrameNumber+" total frame"+ totalNumberOfFrames);
 		updateCurrentFrameLabel(false);
+		isViewingFrame= false;
 	}
 
 	public void moveToFrameNumber(int frameNumber) throws InvalidCommandException {
 		if(frameNumber -  1 < totalNumberOfFrames && frameNumber -1 >= 0 ){
 			currentFrameNumber = frameNumber;
 			gui.setScreen(getFrameBasedOnFrameNumber(frameNumber));
+			isViewingFrame= true;
+
 		}else{
 			throw new InvalidCommandException();
 		}
@@ -130,6 +138,7 @@ public class FrameAnimator {
 	}
 
 	public void moveToClearFrame() {
+		isViewingFrame= false;
 		gui.setScreen(new GameCanvas(null));
 		 updateCurrentFrameLabel(false);
 	}
