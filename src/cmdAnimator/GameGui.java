@@ -252,7 +252,7 @@ public class GameGui extends Group{
 				public void handle(ActionEvent event) {
 					String point = Prompts.promptUserForPoint();
 					GUI.getInstance().buttonExecuteCalled = true;
-					if (point.equalsIgnoreCase("background")) {
+					if (point != null && point.equalsIgnoreCase("background")) {
 						GuiCommands.executeBackgroundImageAdditionCommand(GUI.getInstance(),
 								canvasImage.getImageFilename());
 					} else
