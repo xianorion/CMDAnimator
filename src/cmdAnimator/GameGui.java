@@ -47,6 +47,7 @@ public class GameGui extends Group{
 	private TextArea helpCommands;
 	private final String outputFieldText ="---output---";
 	private Button addImageButton;
+	private Button changeTextStyleButton;
 	public static boolean buttonExecuteCalled = false;
 	private final int ICON_SIZE = 25;
 	private ScrollPane sp;
@@ -64,6 +65,7 @@ public class GameGui extends Group{
 		framesLibrary = new Label("Current Frame: 0");
 		imageLibrary =  new VBox ();
 		addImageButton = new Button("Add image");
+		changeTextStyleButton = new Button("Change Text Style");
 		sp = new ScrollPane();
 		
 		setupIDs();
@@ -86,7 +88,7 @@ public class GameGui extends Group{
 		outputAreas.getChildren().addAll(canvasPane, outputField, userinputArea);
 		outputAreas.setId("outputArea");
 
-		LibraryArea.getChildren().addAll(libraryTitle, framesLibrary, sp, addImageButton);
+		LibraryArea.getChildren().addAll(libraryTitle, framesLibrary, sp, addImageButton, changeTextStyleButton);
 		LibraryArea.setId("libraryArea");
 		helpArea.getChildren().addAll(helpTitle,helpCommands);
 		
@@ -110,6 +112,7 @@ public class GameGui extends Group{
 		helpCommands.setId("helpCommandArea");
 		//helpScroller.setId("helpScoller");
 		addImageButton.setId("imageButton");
+		changeTextStyleButton.setId("textButton");
 		helpCommands.setEditable(false);
 		
 	}
@@ -154,20 +157,33 @@ public class GameGui extends Group{
 
 
 	private void setupLibrary() {
-		addImageButton.setPrefSize(LIBRARY_WIDTH, 30);
+		addImageButton.setPrefSize(LIBRARY_WIDTH, 10);
+		changeTextStyleButton.setPrefSize(LIBRARY_WIDTH, 10);
+		setUpActionForTextStyleButton();
 		libraryTitle.setText("Library");
 		libraryTitle.setPrefSize(LIBRARY_WIDTH, 50);
-		sp.setPrefSize(LIBRARY_WIDTH, 375);
+		sp.setPrefSize(LIBRARY_WIDTH, 358);
 		sp.setMinWidth(LIBRARY_WIDTH);
 		sp.setMaxWidth(LIBRARY_WIDTH);
-		sp.setMaxHeight(375);
-		sp.setMinHeight(375);
+		sp.setMaxHeight(358);
+		sp.setMinHeight(358);
 		
 		//libraryMenu.getMenus().add(imageLibrary);
 		
 		
 	}
 
+
+	private void setUpActionForTextStyleButton() {
+		changeTextStyleButton.setOnAction(new EventHandler(){
+
+			@Override
+			public void handle(Event event) {
+				Prompts.promptUserToChangeTextStyle("color");
+			}
+			
+		});
+	}
 
 	private void setupGUITextFields() {
 		// TODO Auto-generated method stub

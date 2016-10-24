@@ -8,9 +8,12 @@ import java.util.Map.Entry;
 import cmdAnimator.GUI;
 import cmdAnimator.GameCanvasActions.CanvasImage;
 import cmdAnimator.GameCanvasActions.CanvasText;
+import cmdAnimator.GameObjects.UserTextConstants;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
+import javafx.scene.paint.Color;
+import javafx.scene.paint.Paint;
 
 public class GameCanvas extends Canvas {
 	final static int HEIGHT=300;
@@ -46,6 +49,9 @@ public class GameCanvas extends Canvas {
 		if(background != null)
 			g.drawImage(background.getImage().getImage(), 0, 0, WIDTH, HEIGHT);
 		//----------------------------------------------------
+		//set up drawing properties for text
+		g.setFont(UserTextConstants.getInstance().getFont());
+		g.setFill(UserTextConstants.getInstance().getTextColorFill());
 		
 		Iterator<Entry<Point, CanvasText>> it = textToWrite.entrySet().iterator();
 		while (it.hasNext()) {
