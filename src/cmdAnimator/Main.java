@@ -112,6 +112,12 @@ public class Main extends Application {
 
 	private void enableFileChooserListener(Stage primaryStage, GameGui gui) {
 		FileChooser files = new FileChooser();
+		FileChooser files2 = new FileChooser();
+		FileChooser.ExtensionFilter textFilter = new FileChooser.ExtensionFilter("Text Files (*.txt)", "*.txt");
+		FileChooser.ExtensionFilter imageFilter = new FileChooser.ExtensionFilter("Image Files", "*.png", "*.jpg", "*.gif");
+		files.getExtensionFilters().add(imageFilter);
+		files2.getExtensionFilters().add(textFilter);
+
 		gui.getAddImageButton().setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(final ActionEvent e) {
@@ -135,7 +141,7 @@ public class Main extends Application {
 		gui.getRunCommandFileButton().setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(final ActionEvent e) {
-				File file = files.showOpenDialog(primaryStage);
+				File file = files2.showOpenDialog(primaryStage);
 				if (file != null) {
 					try {
 						CommandFileRunner.runBatchFile(file.getAbsolutePath());
