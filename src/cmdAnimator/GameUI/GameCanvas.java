@@ -49,13 +49,14 @@ public class GameCanvas extends Canvas {
 		if(background != null)
 			g.drawImage(background.getImage().getImage(), 0, 0, WIDTH, HEIGHT);
 		//----------------------------------------------------
-		//set up drawing properties for text
-		g.setFont(UserTextConstants.getInstance().getFont());
-		g.setFill(UserTextConstants.getInstance().getTextColorFill());
-		
+
 		Iterator<Entry<Point, CanvasText>> it = textToWrite.entrySet().iterator();
 		while (it.hasNext()) {
 			CanvasText text = it.next().getValue();
+			//set up drawing text properties
+			g.setFont(text.getFont());
+			g.setFill(text.getColor());
+			//add text to screen based on drawing properties
 			g.fillText(text.getTextToAdd(), text.getPointToAddTextTo().x, text.getPointToAddTextTo().y);
 
 		}

@@ -46,7 +46,7 @@ public class UserTextConstants {
 	
 	public void setTextColor(String color){
 		int index =  Arrays.asList(colorNameChoices).indexOf(color);
-		if(index < colors.length)
+		if(index < colors.length && index >= 0)
 			fontColor = colors[index];
 	}
 	
