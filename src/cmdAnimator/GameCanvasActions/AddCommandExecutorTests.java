@@ -73,6 +73,45 @@ public class AddCommandExecutorTests {
 		assertEquals(null, point);
 	}
 	
+	@Test
+	public void userEntersAddImageWithHeightAndWidthIsValid(){
+		String[] textToEnter = {"image","..\\TextBasedGame\\src\\resource\\images\\kirbywalk1.png","(45,45)","50", "150"};
+		try {
+			ACE.execute(textToEnter);
+		} catch (InvalidCommandException e) {
+			fail("unexpected error occurred: "+ e.getMessage());
+		}
+	}
+	@Test (expected = InvalidCommandException.class)
+	public void userEntersAddImageWithHeightDecimalAndWidthIsInvalid() throws InvalidCommandException{
+		String[] textToEnter = {"image","..\\TextBasedGame\\src\\resource\\images\\kirbywalk1.png","(45,45)","50.5", "150"};
+		ACE.execute(textToEnter);
+	}
+	
+	@Test (expected = InvalidCommandException.class)
+	public void userEntersAddImageWithHeightNegativeAndWidthIsInvalid() throws InvalidCommandException{
+		String[] textToEnter = {"image","..\\TextBasedGame\\src\\resource\\images\\kirbywalk1.png","(45,45)","-50", "150"};
+		ACE.execute(textToEnter);
+	}
+	
+	@Test (expected = InvalidCommandException.class)
+	public void userEntersAddImageWithHeightAndWidthNegativeIsInvalid() throws InvalidCommandException{
+		String[] textToEnter = {"image","..\\TextBasedGame\\src\\resource\\images\\kirbywalk1.png","(45,45)","50", "-150"};
+		ACE.execute(textToEnter);
+	}
+	
+	@Test (expected = InvalidCommandException.class)
+	public void userEntersAddImageWithHeightGreaterThanCanvasIsInvalid() throws InvalidCommandException{
+		String[] textToEnter = {"image","..\\TextBasedGame\\src\\resource\\images\\kirbywalk1.png","(45,45)","301", "150"};
+		ACE.execute(textToEnter);
+	}
+	
+	@Test (expected = InvalidCommandException.class)
+	public void userEntersAddImageWithWidthGreaterThanCanvasIsInvalid() throws InvalidCommandException{
+		String[] textToEnter = {"image","..\\TextBasedGame\\src\\resource\\images\\kirbywalk1.png","(45,45)","50", "601"};
+		ACE.execute(textToEnter);
+	}
+	
 	@Test (expected = InvalidCommandException.class)
 	public void shouldThrowExecptionIfTextIsJustEntered() throws InvalidCommandException{
 		String[] textToEnter = {"text"};

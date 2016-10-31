@@ -4,6 +4,7 @@ import java.awt.Point;
 
 import cmdAnimator.GUI;
 import cmdAnimator.GameGui;
+import cmdAnimator.GameUI.GameCanvas;
 
 //text with quotations doesn't work: "hello\"this\" does 
 
@@ -18,7 +19,7 @@ public class AddCommandExecutor implements ICommandExecutor {
 	@Override
 	public void execute(String[] parameters) throws InvalidCommandException {
 		
-		if (parameters.length >= 1 && parameters.length <= 3) {
+		if (parameters.length >= 1 && parameters.length <= 3 || parameters.length == 5) {
 
 			for (int i = 0; i < parameters.length; i++)
 				System.out.println("para " + parameters[i]);
@@ -81,9 +82,9 @@ public class AddCommandExecutor implements ICommandExecutor {
 	}
 
 	private void executeImageAddition(String[] para, boolean isBackgroundImage) throws InvalidCommandException {
-		Point point =  null;
+		Point point = null;
 		boolean isAdded = false;
-		if (para.length == 3 || (para.length == 2 && isBackgroundImage)) {
+		if (para.length == 3 || (para.length == 2 && isBackgroundImage) || para.length == 5) {
 			if (!isBackgroundImage)
 				point = convertStringToPoint(para[2]);
 			else
@@ -94,9 +95,22 @@ public class AddCommandExecutor implements ICommandExecutor {
 						"Point representation is incorrect.\nPoints are in format (X-Coordinate, Y-Coordinate)"
 								+ "\nExample: (4,5)");
 			} else {
-				if (!isBackgroundImage)
+				if (!isBackgroundImage && para.length == 3 )
 					isAdded = guiInUse.addImageToCanvas(new CanvasImage(para[1], point));
-				else
+				else if(!isBackgroundImage && para.length == 5){
+					//check if parameters are int
+					try{
+					int height = Integer.parseInt(para[3]);
+					int width = Integer.parseInt(para[4]);
+					
+					if(height > 0 && height < GameCanvas.HEIGHT && width >0 && width < GameCanvas.WIDTH )
+						isAdded = guiInUse.addImageToCanvas(new CanvasImage(para[1], point, height, width));
+					
+					}catch (NumberFormatException e) {
+						isAdded = false;
+					}
+				}
+				else if(isBackgroundImage)
 					isAdded = guiInUse.addBackgroundToCanvas(new CanvasImage(para[1], point));
 				// System.out.println("image " + para[1] + " is " + isAdded);
 				if (!isAdded) {

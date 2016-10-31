@@ -5,6 +5,7 @@ import java.awt.Point;
 import java.util.Optional;
 
 import cmdAnimator.GameObjects.UserTextConstants;
+import cmdAnimator.GameUI.GameCanvas;
 import javafx.event.EventHandler;
 import javafx.scene.Group;
 import javafx.scene.control.ChoiceDialog;
@@ -59,6 +60,37 @@ public class Prompts extends Group{
 		
 	}
 	
+	public static String imageHeightPrompt() {
+		TextInputDialog dialog = new TextInputDialog("50");
+		dialog.setTitle("Image Height Prompt");
+		dialog.setHeaderText("Input a value to set the height of your image");
+		dialog.setContentText("NOTE: Your height value must be between 0 and "+ GameCanvas.HEIGHT+" :");
+
+		
+		Optional<String> height = dialog.showAndWait();
+
+		if (height.isPresent()){
+		    return height.get();
+		}
+		
+		return "50";
+	}
+	
+	public static String imageWidthPrompt() {
+		TextInputDialog dialog = new TextInputDialog("50");
+		dialog.setTitle("Image Width Prompt");
+		dialog.setHeaderText("Input a value to set the width of your image");
+		dialog.setContentText("NOTE: Your width value must be between 0 and "+ GameCanvas.WIDTH+" :");
+
+		
+		Optional<String> width = dialog.showAndWait();
+
+		if (width.isPresent()){
+		    return width.get();
+		}
+		
+		return "50";
+	}
 	
 
 	private static void textFontPrompt() {

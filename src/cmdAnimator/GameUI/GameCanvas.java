@@ -16,8 +16,8 @@ import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 
 public class GameCanvas extends Canvas {
-	final static int HEIGHT=300;
-	final static int WIDTH=600;
+	public final static int HEIGHT=300;
+	public final static int WIDTH=600;
 	HashMap<Point, CanvasText> textToWrite;
 	HashMap<Point, CanvasImage> imagesToAdd;
 	private CanvasImage background;
@@ -63,8 +63,8 @@ public class GameCanvas extends Canvas {
 		// adding images
 		Iterator<Entry<Point, CanvasImage>> iterator2 = imagesToAdd.entrySet().iterator();
 		while (iterator2.hasNext()) {
-			CanvasImage image = iterator2.next().getValue();
-			g.drawImage(image.getImage().getImage(), image.getPointToAddImage().x, image.getPointToAddImage().y, 50,50);
+			CanvasImage image = iterator2.next().getValue(); 
+			g.drawImage(image.getImage().getImage(), image.getPointToAddImage().x, image.getPointToAddImage().y, image.getWidth(),image.getHeight());
 		}
 		
 	}

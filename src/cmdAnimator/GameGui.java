@@ -273,7 +273,7 @@ public class GameGui extends Group{
 								canvasImage.getImageFilename());
 					} else
 						GuiCommands.executeImageAdditionCommand(GUI.getInstance(), canvasImage.getImageFilename(),
-								point);
+								point, Prompts.imageHeightPrompt(),Prompts.imageWidthPrompt());
 
 				}
 

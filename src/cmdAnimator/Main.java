@@ -123,7 +123,7 @@ public class Main extends Application {
 						GuiCommands.executeBackgroundImageAdditionCommand(gui, file.getAbsolutePath());
 						
 					} else if(AddCommandExecutor.convertStringToPoint(point) != null){
-						GuiCommands.executeImageAdditionCommand(gui, file.getAbsolutePath(), point);
+						GuiCommands.executeImageAdditionCommand(gui, file.getAbsolutePath(), point, Prompts.imageHeightPrompt(), Prompts.imageWidthPrompt());
 					}else
 						gui.appendTextToOutputScreen("Invalid Image");
 				}

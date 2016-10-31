@@ -13,28 +13,10 @@ public class GuiCommands {
 	public static ArrayList<String> commands =  new ArrayList<String>();
 	public static int currentCommandView = 0;
 
-	public static void executeAddBackgroundCommand(GameGui gui, File file) {
-		gui.getCommandLine().setText("add background \"" + file.getAbsolutePath() + "\"");
-		CommandParser.parseText("add background \"" + file.getAbsolutePath() + "\"");
-		gui.getCommandLine().setText("");
-		
-		//update number of commands executed
-		updateCurrentCommandView();
-
-	}
 
 	private static void updateCurrentCommandView() {
 		GuiCommands.currentCommandView = GuiCommands.commands.size();
-	}
-
-	public static void executeAddImageCommand(GameGui gui, File file, String point) {
-		gui.getCommandLine().setText("add image \"" + file.getAbsolutePath() + "\" " + point);
-		CommandParser.parseText("add image \"" + file.getAbsolutePath() + "\" " + point);
-		gui.getCommandLine().setText("");
-		
-		updateCurrentCommandView();
-
-	}
+	}	
 
 	public static void addCommandToPreviousCommandsFeed(GameGui gui, ArrayList<String> commands,
 			int currentCommandView) {
@@ -53,10 +35,10 @@ public class GuiCommands {
 
 	}
 
-	public static void executeImageAdditionCommand(GameGui gui, String ImagePath, String point) {
-		gui.getCommandLine().setText("add image \"" + ImagePath + "\" " + point);
+	public static void executeImageAdditionCommand(GameGui gui, String ImagePath, String point, String height, String width) {
+		gui.getCommandLine().setText("add image \"" + ImagePath + "\" " + point +" "+height+" "+ width);
 		GuiCommands.addCommandToPreviousCommandsFeed(gui, commands, currentCommandView);
-		CommandParser.parseText("add image \"" + ImagePath + "\" " + point);
+		CommandParser.parseText("add image \"" + ImagePath + "\" " + point+" "+height+" "+ width);
 		gui.getCommandLine().setText("");
 		
 		updateCurrentCommandView();
