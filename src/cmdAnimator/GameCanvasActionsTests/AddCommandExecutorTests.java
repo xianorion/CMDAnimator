@@ -1,4 +1,4 @@
-package cmdAnimator.GameCanvasActions;
+package cmdAnimator.GameCanvasActionsTests;
 
 import static org.junit.Assert.*;
 
@@ -11,7 +11,8 @@ import org.junit.Test;
 
 import cmdAnimator.GUI;
 import cmdAnimator.GameGui;
-import cmdAnimator.GameCanvasActions.FrameAnimatorTests.dummyApp;
+import cmdAnimator.GameCanvasActions.AddCommandExecutor;
+import cmdAnimator.GameCanvasActions.InvalidCommandException;
 import javafx.application.Application;
 import javafx.stage.Stage;
 

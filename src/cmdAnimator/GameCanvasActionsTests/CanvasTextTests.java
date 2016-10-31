@@ -1,4 +1,4 @@
-package cmdAnimator.GameCanvasActions;
+package cmdAnimator.GameCanvasActionsTests;
 
 
 import static org.junit.Assert.*;
@@ -8,6 +8,7 @@ import java.awt.Point;
 import org.junit.Before;
 import org.junit.Test;
 
+import cmdAnimator.GameCanvasActions.CanvasText;
 import cmdAnimator.GameObjects.UserTextConstants;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;

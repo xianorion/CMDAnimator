@@ -1,4 +1,4 @@
-package cmdAnimator;
+package cmdAnimator.cmdAnimatorTests;
 
 import static org.junit.Assert.*;
 import java.awt.*;
@@ -7,10 +7,12 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import cmdAnimator.GUI;
+import cmdAnimator.GameGui;
+import cmdAnimator.GuiCommands;
 import cmdAnimator.GameCanvasActions.CanvasText;
 import cmdAnimator.GameCanvasActions.FrameAnimator;
 import cmdAnimator.GameCanvasActions.GameAnimator;
-import cmdAnimator.GameGuiTests.dummyApp;
 import javafx.application.Application;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;

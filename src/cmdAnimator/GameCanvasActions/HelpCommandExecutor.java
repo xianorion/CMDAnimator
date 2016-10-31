@@ -36,7 +36,7 @@ public class HelpCommandExecutor implements ICommandExecutor {
 
 	}
 	
-	String getFileInfoInHelpTextArea(String file) throws InvalidCommandException{	    
+	public String getFileInfoInHelpTextArea(String file) throws InvalidCommandException{	    
 	    BufferedReader reader = null;     
 	    try {
 	       reader = new BufferedReader(new FileReader(file)); 

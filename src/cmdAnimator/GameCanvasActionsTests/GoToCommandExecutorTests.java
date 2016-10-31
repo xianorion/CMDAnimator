@@ -1,4 +1,4 @@
-package cmdAnimator.GameCanvasActions;
+package cmdAnimator.GameCanvasActionsTests;
 
 import static org.junit.Assert.*;
 
@@ -10,7 +10,12 @@ import org.junit.Test;
 
 import cmdAnimator.GUI;
 import cmdAnimator.GameGui;
-import cmdAnimator.GameCanvasActions.RemoveCommandExecutorTests.dummyApp;
+import cmdAnimator.GameCanvasActions.CanvasImage;
+import cmdAnimator.GameCanvasActions.CanvasText;
+import cmdAnimator.GameCanvasActions.FrameAnimator;
+import cmdAnimator.GameCanvasActions.GameAnimator;
+import cmdAnimator.GameCanvasActions.GoToCommandExecutor;
+import cmdAnimator.GameCanvasActions.InvalidCommandException;
 import cmdAnimator.GameUI.GameCanvas;
 import javafx.application.Application;
 import javafx.stage.Stage;

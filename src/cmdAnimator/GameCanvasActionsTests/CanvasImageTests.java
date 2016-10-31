@@ -1,4 +1,4 @@
-package cmdAnimator.GameCanvasActions;
+package cmdAnimator.GameCanvasActionsTests;
 
 import static org.junit.Assert.*;
 
@@ -7,6 +7,8 @@ import java.awt.Point;
 import org.junit.BeforeClass;
 import org.junit.Ignore;
 import org.junit.Test;
+
+import cmdAnimator.GameCanvasActions.CanvasImage;
 import cmdAnimator.GameUI.GameCanvasTests.dummyApp;
 import javafx.application.Application;
 import javafx.stage.Stage;

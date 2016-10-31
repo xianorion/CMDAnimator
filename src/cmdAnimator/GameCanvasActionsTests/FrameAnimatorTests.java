@@ -1,4 +1,4 @@
-package cmdAnimator.GameCanvasActions;
+package cmdAnimator.GameCanvasActionsTests;
 
 import org.junit.*;
 import static org.junit.Assert.*;
@@ -12,6 +12,10 @@ import javax.swing.Timer;
 
 import cmdAnimator.GUI;
 import cmdAnimator.GameGui;
+import cmdAnimator.GameCanvasActions.CanvasImage;
+import cmdAnimator.GameCanvasActions.CanvasText;
+import cmdAnimator.GameCanvasActions.FrameAnimator;
+import cmdAnimator.GameCanvasActions.InvalidCommandException;
 import cmdAnimator.GameUI.GameCanvas;
 import cmdAnimator.GameUI.GameCanvasTests.dummyApp;
 import javafx.application.Application;

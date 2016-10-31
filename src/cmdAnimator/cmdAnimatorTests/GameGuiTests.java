@@ -1,4 +1,4 @@
-package cmdAnimator;
+package cmdAnimator.cmdAnimatorTests;
 
 import static org.junit.Assert.*;
 
@@ -8,6 +8,9 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import cmdAnimator.AddImageButton;
+import cmdAnimator.GUI;
+import cmdAnimator.GameGui;
 import cmdAnimator.GameCanvasActions.CanvasImage;
 import cmdAnimator.GameCanvasActions.CanvasText;
 import cmdAnimator.GameCanvasActions.FrameAnimator;

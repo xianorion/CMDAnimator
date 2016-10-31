@@ -1,5 +1,8 @@
-package cmdAnimator;
+package cmdAnimator.cmdAnimatorTests;
 
+import cmdAnimator.GUI;
+import cmdAnimator.GameGui;
+import cmdAnimator.GuiCommands;
 import cmdAnimator.GameCanvasActions.CommandParser;
 import cmdAnimator.GameCanvasActions.FrameAnimator;
 import cmdAnimator.GameCanvasActions.GameAnimator;
