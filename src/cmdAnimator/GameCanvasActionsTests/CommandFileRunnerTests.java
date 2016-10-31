@@ -28,6 +28,11 @@ public class CommandFileRunnerTests {
 		CommandFileRunner.runBatchFile("..\\TextBasedGame\\src\\resource\\textCommands\\batchfile2.txt");
 	}
 	
+	@Test(expected = InvalidCommandException.class)
+	public void returnExceptionIfImageIsPassed() throws InvalidCommandException{
+		CommandFileRunner.runBatchFile("..\\TextBasedGame\\src\\resource\\images\\kirbywalk1.png");
+	}
+	
 	public static class dummyApp extends Application {
 	    @Override
 	    public void start(Stage primaryStage) throws Exception {

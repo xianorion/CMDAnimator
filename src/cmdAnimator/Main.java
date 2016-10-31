@@ -5,9 +5,11 @@ import java.io.File;
 import java.util.ArrayList;
 
 import cmdAnimator.GameCanvasActions.AddCommandExecutor;
+import cmdAnimator.GameCanvasActions.CommandFileRunner;
 import cmdAnimator.GameCanvasActions.CommandParser;
 import cmdAnimator.GameCanvasActions.FrameAnimator;
 import cmdAnimator.GameCanvasActions.GameAnimator;
+import cmdAnimator.GameCanvasActions.InvalidCommandException;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -126,6 +128,20 @@ public class Main extends Application {
 						GuiCommands.executeImageAdditionCommand(gui, file.getAbsolutePath(), point, Prompts.imageHeightPrompt(), Prompts.imageWidthPrompt());
 					}else
 						gui.appendTextToOutputScreen("Invalid Image");
+				}
+			}
+		});
+		
+		gui.getRunCommandFileButton().setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(final ActionEvent e) {
+				File file = files.showOpenDialog(primaryStage);
+				if (file != null) {
+					try {
+						CommandFileRunner.runBatchFile(file.getAbsolutePath());
+					} catch (InvalidCommandException e1) {
+						gui.appendTextToOutputScreen("File Error: must be a textfile!");
+					}
 				}
 			}
 		});

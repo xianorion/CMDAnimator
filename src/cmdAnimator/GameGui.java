@@ -15,6 +15,7 @@ import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.scene.Group;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonBase;
 import javafx.scene.control.Label;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
@@ -47,6 +48,7 @@ public class GameGui extends Group{
 	private TextArea helpCommands;
 	private final String outputFieldText ="---output---";
 	private Button addImageButton;
+	private Button runCommandFileButton;
 	private Button changeTextStyleButton;
 	public static boolean buttonExecuteCalled = false;
 	private final int ICON_SIZE = 25;
@@ -65,6 +67,7 @@ public class GameGui extends Group{
 		framesLibrary = new Label("Current Frame: 0");
 		imageLibrary =  new VBox ();
 		addImageButton = new Button("Add image");
+		runCommandFileButton =  new Button("Run Command file");
 		changeTextStyleButton = new Button("Change Text Style");
 		sp = new ScrollPane();
 		
@@ -88,7 +91,7 @@ public class GameGui extends Group{
 		outputAreas.getChildren().addAll(canvasPane, outputField, userinputArea);
 		outputAreas.setId("outputArea");
 
-		LibraryArea.getChildren().addAll(libraryTitle, framesLibrary, sp, addImageButton, changeTextStyleButton);
+		LibraryArea.getChildren().addAll(libraryTitle, framesLibrary, sp, addImageButton, changeTextStyleButton,runCommandFileButton);
 		LibraryArea.setId("libraryArea");
 		helpArea.getChildren().addAll(helpTitle,helpCommands);
 		
@@ -112,6 +115,7 @@ public class GameGui extends Group{
 		helpCommands.setId("helpCommandArea");
 		//helpScroller.setId("helpScoller");
 		addImageButton.setId("imageButton");
+		runCommandFileButton.setId("runCommandButton");
 		changeTextStyleButton.setId("textButton");
 		helpCommands.setEditable(false);
 		
@@ -158,15 +162,16 @@ public class GameGui extends Group{
 
 	private void setupLibrary() {
 		addImageButton.setPrefSize(LIBRARY_WIDTH, 10);
+		runCommandFileButton.setPrefSize(LIBRARY_WIDTH, 10);
 		changeTextStyleButton.setPrefSize(LIBRARY_WIDTH, 10);
 		setUpActionForTextStyleButton();
 		libraryTitle.setText("Library");
 		libraryTitle.setPrefSize(LIBRARY_WIDTH, 50);
-		sp.setPrefSize(LIBRARY_WIDTH, 358);
+		sp.setPrefSize(LIBRARY_WIDTH, 333);
 		sp.setMinWidth(LIBRARY_WIDTH);
 		sp.setMaxWidth(LIBRARY_WIDTH);
-		sp.setMaxHeight(358);
-		sp.setMinHeight(358);
+		sp.setMaxHeight(333);
+		sp.setMinHeight(333);
 		
 		//libraryMenu.getMenus().add(imageLibrary);
 		
@@ -326,5 +331,9 @@ public class GameGui extends Group{
 	
 	public Button getAddImageButton(){
 		return addImageButton;
+	}
+
+	public Button getRunCommandFileButton() {
+		return runCommandFileButton;
 	}
 }
