@@ -5,7 +5,8 @@ Add Image “image.gif” (Point.x, Point.y) ---Calls addImage function with paramet
 Add Text “Hello world” (Point.x, Point.y) --- Calls addText function with parameters: “Hello world” and (Point.x, Point.y)
 fps framerate --- Changes the fps in the animation class to frameRate
 Remove Frame frame# --- Removes the frame frame#
-View frame frame# --- Changes the canvas view to view all frame number
+goto frame frame# --- Changes the canvas view to view all frame number
+run "filename" --- reads each line in your file called "filename" and executes each line as its own command 
 Done ---Goes to a clear canvas
 < (key command) --- Moves to previous frame
 > (key command) --- Moves to next frame if no next frame stays on current

@@ -218,6 +218,18 @@ public class CommandParserTests {
 		assertFalse(CommandParser.parseText(text));
 	}
 	
+	@Test 
+	public void ifUserEntersRunFileNameParserIsTrue(){
+		text = "run \"..\\TextBasedGame\\src\\resource\\textCommands\\batchfile.txt\"";		
+		assertTrue(CommandParser.parseText(text));
+	}
+	
+	@Test
+	public void ifUserEntersRunParserIsFalse(){
+		text = "run";		
+		assertFalse(CommandParser.parseText(text));
+	}
+	
 	
 
 	public static class dummyApp extends Application {

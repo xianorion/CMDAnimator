@@ -1,0 +1,32 @@
+add image "C:\Users\Orion\workspace\TextBasedGame\src\resource\images\kirbywalk1.png" (150,220)
+add background "C:\Users\Orion\workspace\TextBasedGame\src\resource\images\kirbyBackground.png"
+add frame
+add image "C:\Users\Orion\workspace\TextBasedGame\src\resource\images\kirbywalk2.png" (160,220)
+add background "C:\Users\Orion\workspace\TextBasedGame\src\resource\images\kirbyBackground.png"
+add frame
+add image "C:\Users\Orion\workspace\TextBasedGame\src\resource\images\kirbywalk3.png" (170,220)
+add background "C:\Users\Orion\workspace\TextBasedGame\src\resource\images\kirbyBackground.png"
+add frame
+add image "C:\Users\Orion\workspace\TextBasedGame\src\resource\images\kirbywalk4.png" (180,220)
+add background "C:\Users\Orion\workspace\TextBasedGame\src\resource\images\kirbyBackground.png"
+add frame
+add image "C:\Users\Orion\workspace\TextBasedGame\src\resource\images\kirbywalk5.png" (190,220)
+add background "C:\Users\Orion\workspace\TextBasedGame\src\resource\images\kirbyBackground.png"
+add frame
+add image "C:\Users\Orion\workspace\TextBasedGame\src\resource\images\kirbywalk6.png" (200,220)
+add background "C:\Users\Orion\workspace\TextBasedGame\src\resource\images\kirbyBackground.png"
+add frame
+add image "C:\Users\Orion\workspace\TextBasedGame\src\resource\images\kirbywalk7.png" (210,220)
+add background "C:\Users\Orion\workspace\TextBasedGame\src\resource\images\kirbyBackground.png"
+add frame
+add image "C:\Users\Orion\workspace\TextBasedGame\src\resource\images\kirbywalk8.png" (220,220)
+add background "C:\Users\Orion\workspace\TextBasedGame\src\resource\images\kirbyBackground.png"
+add frame
+add image "C:\Users\Orion\workspace\TextBasedGame\src\resource\images\kirbywalk9.png" (230,220)
+add background "C:\Users\Orion\workspace\TextBasedGame\src\resource\images\kirbyBackground.png"
+add frame
+add image "C:\Users\Orion\workspace\TextBasedGame\src\resource\images\kirbywalk10.png" (240,220)
+add background "C:\Users\Orion\workspace\TextBasedGame\src\resource\images\kirbyBackground.png"
+add frame
+fps 12
+play

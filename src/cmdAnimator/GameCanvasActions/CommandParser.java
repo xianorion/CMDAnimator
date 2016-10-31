@@ -123,6 +123,9 @@ public class CommandParser {
 			typeOfCommand = new HelpCommandExecutor();
 			typeOfCommand.execute(splittingCmdsParameters);
 			break;
+		case "run":
+			CommandFileRunner.parseRunCommand(splittingCmdsParameters);
+			break;
 		default:
 			guiInUse.addUserInputToOutPutFieldAndClearUserInput();
 			throw new InvalidCommandException();
