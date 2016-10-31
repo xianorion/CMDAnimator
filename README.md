@@ -1,6 +1,6 @@
 # CMDAnimator
-For my project proposal, I would like to create a text command animation program using java
-swing which allows the user to create basic animations. This will allow the user to create small
+For my project proposal, I would like to create a text command animation program using javafx
+which allows the user to create basic animations. This will allow the user to create small
 animated movies using their own image files and text to add to a stage. In order for the user to do
 this, they will have to write commands into the command line given in the GUI and press enter. Upon
 clicking enter, the user’s command, such as adding an image to a particular part of the screen, will be
