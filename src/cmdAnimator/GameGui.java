@@ -305,7 +305,7 @@ public class GameGui extends Group{
 
 	public boolean addBackgroundToCanvas(CanvasImage canvasImage) {
 		boolean imageSafelyAdded = stage.setBackgroundImage(canvasImage);
-		if(GameAnimator.getInstance().getCurrentFrame() != null)
+		if(GameAnimator.getInstance().getCurrentFrame() != null && GameAnimator.getInstance().isViewingFrame())
 			GameAnimator.getInstance().getCurrentFrame().setBackgroundImage(canvasImage);
 		if (imageSafelyAdded && !buttonExecuteCalled) {
 			addNewImageToImageLibrary(canvasImage);

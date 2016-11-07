@@ -115,6 +115,20 @@ public class GameCanvasTests {
 	}
 	
 	@Test
+	public void backgroundImageSetAndNewFrameAddedAnotherbackgroundImageIsSetAndPreviousBackgroundImageIsSame(){
+		anime = GameAnimator.getInstance();
+		GameGui gui= GUI.getInstance();
+		gui.addBackgroundToCanvas(new CanvasImage( "..\\TextBasedGame\\src\\resource\\images\\kirbywalk1.png", new Point(0,0)));
+		anime.addFrameToAnimation();
+		gui.addBackgroundToCanvas(new CanvasImage( "..\\TextBasedGame\\src\\resource\\images\\kirbywalk2.png", new Point(0,0)));
+		anime.addFrameToAnimation();
+		
+		assertEquals(anime.getFrameBasedOnFrameNumber(1).getBackgroundImage().getImageFilename(), "..\\TextBasedGame\\src\\resource\\images\\kirbywalk1.png");
+		assertEquals(anime.getFrameBasedOnFrameNumber(2).getBackgroundImage().getImageFilename(), "..\\TextBasedGame\\src\\resource\\images\\kirbywalk2.png");
+
+	}
+	
+	@Test
 	public void afterClearTheFrameBackgroundShouldBeClear(){
 		canvas.setBackgroundImage(new CanvasImage( "..\\TextBasedGame\\src\\resource\\images\\kirbywalk1.png", new Point(0,0)));
 		canvas.clearCanvas();
