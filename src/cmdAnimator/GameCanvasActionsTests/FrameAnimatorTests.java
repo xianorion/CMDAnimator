@@ -35,6 +35,7 @@ public class FrameAnimatorTests {
 	@Before
 	public void setup(){
 		gui= GUI.getInstance(); 
+		gui.clearStage();
 		Animation = new FrameAnimator();
 	}
 

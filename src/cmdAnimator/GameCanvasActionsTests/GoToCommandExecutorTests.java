@@ -30,7 +30,11 @@ public class GoToCommandExecutorTests {
 	public void setup(){
 		Animation = GameAnimator.getInstance();
 		gui = GUI.getInstance();
+		gui.getCommandLine().setText("");
 		gtce = new GoToCommandExecutor();
+		Animation.getFrames().clear();
+		Animation.setTotalNumberOfFrames(0);
+		
 		
 	}
 
@@ -85,6 +89,7 @@ public class GoToCommandExecutorTests {
 		//after moving to second frame, second frame equal current frame displayed on gui
 		assertEquals(canvas.getImagesToAdd(), gui.getScreen().getImagesToAdd());
 		assertEquals(canvas.getTextToWrite(), gui.getScreen().getTextToWrite());
+		Animation.deleteFrame(1);
 	}
 
 	

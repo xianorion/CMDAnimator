@@ -31,6 +31,8 @@ public class RemoveCommandExecutorTests {
 		rce = new RemoveCommandExecutor();
 		gui= GUI.getInstance(); 
 		Animation = GameAnimator.getInstance();
+		Animation.getFrames().clear();
+		Animation.setTotalNumberOfFrames(0);
 	}
 	
 	@Test(expected = InvalidCommandException.class)

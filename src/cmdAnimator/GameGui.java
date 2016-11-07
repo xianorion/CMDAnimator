@@ -34,11 +34,13 @@ import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
 
 public class GameGui extends Group{
+	private static final int HELP_PANEL_WIDTH = 200;
 	private static final int LIBRARY_WIDTH = 180;
 	private TextArea outputField;
 	private Label libraryTitle;
 	private MenuBar libraryMenu;
 	private Label framesLibrary;
+	private Label currentPointOnCanvas;
 	private VBox imageLibrary;
 	private FlowPane canvasPane;
 	private GameCanvas stage;
@@ -65,6 +67,7 @@ public class GameGui extends Group{
 		canvasPane = new FlowPane();
 		libraryMenu = new MenuBar();
 		framesLibrary = new Label("Current Frame: 0");
+		currentPointOnCanvas =  new Label("Point: "+"(0,0)");
 		imageLibrary =  new VBox ();
 		addImageButton = new Button("Add image");
 		runCommandFileButton =  new Button("Run Command file");
@@ -91,7 +94,7 @@ public class GameGui extends Group{
 		outputAreas.getChildren().addAll(canvasPane, outputField, userinputArea);
 		outputAreas.setId("outputArea");
 
-		LibraryArea.getChildren().addAll(libraryTitle, framesLibrary, sp, addImageButton, changeTextStyleButton,runCommandFileButton);
+		LibraryArea.getChildren().addAll(libraryTitle, framesLibrary,currentPointOnCanvas, sp, addImageButton, changeTextStyleButton,runCommandFileButton);
 		LibraryArea.setId("libraryArea");
 		helpArea.getChildren().addAll(helpTitle,helpCommands);
 		
@@ -107,6 +110,7 @@ public class GameGui extends Group{
 		outputField.setId("outputField");;
 		libraryTitle.setId("libraryTitle");
 		framesLibrary.setId("frameLibrary");
+		currentPointOnCanvas.setId("canvasPointLocationLabel");
 		helpTitle.setId("helpTitle");
 		libraryMenu.setId("libraryMenu");
 		stage.setId("stage");
@@ -147,12 +151,12 @@ public class GameGui extends Group{
 
 	private void setupHelp() {
 		helpTitle.setText("Commands");
-		helpTitle.setPrefSize(200, 50);
+		helpTitle.setPrefSize(HELP_PANEL_WIDTH, 50);
 		helpCommands.setWrapText(true);
 		helpCommands.setMinHeight(425);
 		helpCommands.setMaxHeight(425);
-		helpCommands.setMinWidth(200);
-		helpCommands.setMaxWidth(200);
+		helpCommands.setMinWidth(HELP_PANEL_WIDTH);
+		helpCommands.setMaxWidth(HELP_PANEL_WIDTH);
 		helpCommands.setEditable(false);
 		
 		helpCommands.setText("This is where help file will be placed");
@@ -167,11 +171,11 @@ public class GameGui extends Group{
 		setUpActionForTextStyleButton();
 		libraryTitle.setText("Library");
 		libraryTitle.setPrefSize(LIBRARY_WIDTH, 50);
-		sp.setPrefSize(LIBRARY_WIDTH, 333);
+		sp.setPrefSize(LIBRARY_WIDTH, 315);
 		sp.setMinWidth(LIBRARY_WIDTH);
 		sp.setMaxWidth(LIBRARY_WIDTH);
-		sp.setMaxHeight(333);
-		sp.setMinHeight(333);
+		sp.setMaxHeight(315);
+		sp.setMinHeight(315);
 		
 		//libraryMenu.getMenus().add(imageLibrary);
 		
@@ -202,6 +206,10 @@ public class GameGui extends Group{
 	
 	public void setCurrentFrameLabel(String newLabel){
 		framesLibrary.setText(newLabel);
+	}
+	
+	public void setCurrentPointLabel(String point){
+		currentPointOnCanvas.setText("Point: "+ point);
 	}
 
 	public void setScreen(GameCanvas gameCanvas) {
@@ -335,5 +343,9 @@ public class GameGui extends Group{
 
 	public Button getRunCommandFileButton() {
 		return runCommandFileButton;
+	}
+	
+	public int getHelpPanelWidth(){
+		return HELP_PANEL_WIDTH;
 	}
 }

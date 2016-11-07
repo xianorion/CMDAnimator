@@ -23,6 +23,7 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 
 
@@ -85,6 +86,7 @@ public class Main extends Application {
 
 			Scene scene = new Scene(gui, 1040, 500);
 			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
+			setUpSceneMouseListener(scene);
 			primaryStage.setScene(scene);
 			primaryStage.show();
 			
@@ -94,6 +96,28 @@ public class Main extends Application {
 		
 	
 		
+	}
+
+	private void setUpSceneMouseListener(Scene scene) {
+		GameGui gui =  GUI.getInstance();
+		scene.setOnMouseMoved(new EventHandler<MouseEvent>(){
+
+			@Override
+			public void handle(MouseEvent event) {
+				if(mouseInsideGui(event))
+					gui.setCurrentPointLabel("("+(event.getX()-200)+","+event.getY()+")");
+			}
+
+			private boolean mouseInsideGui(MouseEvent event) {
+				if(event.getX() >=gui.getHelpPanelWidth() && 
+						event.getX() <= (gui.getHelpPanelWidth()+gui.getScreen().getWidth())
+						&& event.getY() >=0 
+						&& event.getY() <= gui.getScreen().getHeight())
+					return true;
+				return false;
+			}
+			
+		});
 	}
 
 	private void setEnterButtonFromGuiAsAListener(Stage primaryStage, GameGui gui, Button enterButton) {
