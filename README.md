@@ -10,4 +10,4 @@ the new frame. When they are done, they can play the animation, and the program 
 frame, one by one, based on the frames per second specified. This gives the illusion of a moving
 object, i.e. animation. 
 
-To run: just compile/run the main.java file
+To run: just compile/run the main.java file in src/ccmdAnimator/main.java
