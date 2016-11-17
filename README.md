@@ -1,4 +1,6 @@
 # CMDAnimator
+![alt tag](https://github.com/xianorion/CMDAnimator/blob/master/Logomakr_7cE1md.png)
+
 For my project proposal, I would like to create a text command animation program using javafx
 which allows the user to create basic animations. This will allow the user to create small
 animated movies using their own image files and text to add to a stage. In order for the user to do
