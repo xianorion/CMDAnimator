@@ -9,3 +9,5 @@ typing in a command, which simply adds a new blank screen. Then the user can add
 the new frame. When they are done, they can play the animation, and the program will play each
 frame, one by one, based on the frames per second specified. This gives the illusion of a moving
 object, i.e. animation. 
+
+To run: just compile/run the main.java file
