@@ -2,6 +2,7 @@ package cmdAnimator.GameCanvasActions;
 
 import java.awt.Point;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -41,9 +42,10 @@ public class CommandParser {
 	//return true if parse worked, else false
 	public static boolean parseText(String text) {
 		typeOfCommand = defaultTypeOfCommand;
-		splittingCmds = splitTextBasedOnDelimiters(text);
-				//text.split("\\s+");
 
+		splittingCmds = splitTextBasedOnDelimiters(text);
+		//grab the aliases and convert them into real text
+		splittingCmds = Aliases.convertCommandWithAliasesIntoNormalCommand(splittingCmds);
 		if (stringArrayIsNotEmpty(splittingCmds)) {
 			try {
 				executeCommandBasedOnType();
@@ -60,7 +62,7 @@ public class CommandParser {
 		return true;
 	}
 
-	private static String[] splitTextBasedOnDelimiters(String text) {
+	protected static String[] splitTextBasedOnDelimiters(String text) {
 		List<String> matchList = new ArrayList<String>();
 		Pattern regex = Pattern.compile("[^\\s\"']+|\"([^\"]*)\"");
 		Matcher regexMatcher = regex.matcher(text);
@@ -125,6 +127,10 @@ public class CommandParser {
 			break;
 		case "run":
 			CommandFileRunner.parseRunCommand(splittingCmdsParameters);
+			break;
+		case "alias":
+			typeOfCommand = new AliasCommandExecutor();
+			typeOfCommand.execute(splittingCmdsParameters);
 			break;
 		default:
 			guiInUse.addUserInputToOutPutFieldAndClearUserInput();

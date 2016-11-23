@@ -12,4 +12,6 @@ Done ---Goes to a clear canvas
 > (key command) --- Moves to next frame if no next frame stays on current
 Up and down arrow keys (key command) --- Traverse throw previously executed statements
 Clear --- Clears what is on the frame
-
+alias display --- displays all of your aliases.
+alias "your alias" "what you are replacing" -- eg 'alias at "add text"' would now imply that when you say: at "hello" (1,1), you will add "hello" to the screen at point (1,1)
+you could also say 'alias "at" "add text"' and it would also work.

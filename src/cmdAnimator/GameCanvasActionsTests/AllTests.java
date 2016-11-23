@@ -7,7 +7,7 @@ import org.junit.runners.Suite.SuiteClasses;
 @RunWith(Suite.class)
 @SuiteClasses({ AddCommandExecutorTests.class, CanvasImageTests.class, CanvasTextTests.class,
 		CommandFileRunnerTests.class, CommandParserTests.class, FpsCommandExecutorTests.class, FrameAnimatorTests.class,
-		GoToCommandExecutorTests.class, HelpCommandExecutorTests.class, RemoveCommandExecutorTests.class })
+		GoToCommandExecutorTests.class, HelpCommandExecutorTests.class, RemoveCommandExecutorTests.class, AliasesTests.class, AliasCommandExecutorTests.class })
 public class AllTests {
 
 }
