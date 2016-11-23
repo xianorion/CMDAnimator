@@ -16,6 +16,7 @@ import cmdAnimator.GameCanvasActions.FrameAnimator;
 import cmdAnimator.GameCanvasActions.GameAnimator;
 import cmdAnimator.GameCanvasActions.InvalidCommandException;
 import javafx.application.Application;
+import javafx.scene.canvas.GraphicsContext;
 import javafx.stage.Stage;
 
 public class GameCanvasTests {
@@ -136,6 +137,30 @@ public class GameCanvasTests {
 		assertNull(canvas.getBackgroundImage());
 	}
 	
+	@Test
+	public void ifTextTooLongTextWrappingIsImplemented(){
+		String text = "abcdefghijklmnopqrstuvwxyz }:?></.,;[]=-";
+		point =  new Point(580,10);
+		int wrappedLength = canvas.paintTextToScreenBasedOnTextWrappingProperties(canvas.getGraphicsContext2D(), new CanvasText(text, point));
+		assertTrue(wrappedLength > 0);
+	
+	}
+	
+	@Test
+	public void ifTextNotTooLongTextWrappingIsNotImplemented(){
+		String text = "abcde#$%^&*()~_+{}:?></.,;[]=-";
+		point =  new Point(10,10);
+		int wrappedLength = canvas.paintTextToScreenBasedOnTextWrappingProperties(canvas.getGraphicsContext2D(), new CanvasText(text, point));
+		assertEquals(0,wrappedLength);
+	}
+	
+	@Test 
+	public void ifTextIsFourLinesLongTextWrappingIsImplementedThreeTimes(){
+		String text = "abcdefghijklmnopqrstuvwxyz extratextToMakeThisLine Longer ABCDEFGHIJKLMNOPQRSTUVWXYZ 12345678910 !@#$%^&*()~_+{}:?></.,;[]=-";
+		point =  new Point(580,10);
+		int wrappedLength = canvas.paintTextToScreenBasedOnTextWrappingProperties(canvas.getGraphicsContext2D(), new CanvasText(text, point));
+		assertEquals(3 , wrappedLength);
+	}
 
 		
 	@Test

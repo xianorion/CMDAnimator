@@ -70,12 +70,13 @@ public class GameCanvas extends Canvas {
 		
 	}
 	
-	private void paintTextToScreenBasedOnTextWrappingProperties(GraphicsContext g, CanvasText text) {
+	protected int paintTextToScreenBasedOnTextWrappingProperties(GraphicsContext g, CanvasText text) {
 		//calculate the length of letter and set up variables
 		char[] textArray = text.getTextToAdd().toCharArray();
 		double lengthOfLetter = g.getFont().getSize();
 		double x = text.getPointToAddTextTo().x;
 		double y = text.getPointToAddTextTo().y;
+		int timesWrapped = 0;
 				
 		//calculate the length size of the text
 		double sizeOfText = lengthOfLetter*text.getTextToAdd().length();
@@ -86,6 +87,7 @@ public class GameCanvas extends Canvas {
 				if(x +lengthOfLetter > WIDTH){
 					x = 1;
 					y = y + lengthOfLetter;
+					timesWrapped++;
 				}
 				g.fillText(String.valueOf(textArray[i]), x,y);
 				x=x+lengthOfLetter;
@@ -93,6 +95,7 @@ public class GameCanvas extends Canvas {
 			}
 		}else
 			g.fillText(text.getTextToAdd(), text.getPointToAddTextTo().x, text.getPointToAddTextTo().y);
+	return timesWrapped;
 	}
 
 
