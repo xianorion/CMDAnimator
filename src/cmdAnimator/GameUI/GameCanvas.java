@@ -57,8 +57,7 @@ public class GameCanvas extends Canvas {
 			g.setFont(text.getFont());
 			g.setFill(text.getColor());
 			//add text to screen based on drawing properties
-			paintTextToScreenBasedOnTextWrappingProperties(g, text);
-			//g.fillText(text.getTextToAdd(), text.getPointToAddTextTo().x, text.getPointToAddTextTo().y);
+			g.fillText(text.getTextToAdd(), text.getPointToAddTextTo().x, text.getPointToAddTextTo().y, WIDTH- text.getPointToAddTextTo().x);
 
 		}
 		// adding images
@@ -68,34 +67,6 @@ public class GameCanvas extends Canvas {
 			g.drawImage(image.getImage().getImage(), image.getPointToAddImage().x, image.getPointToAddImage().y, image.getWidth(),image.getHeight());
 		}
 		
-	}
-	
-	protected int paintTextToScreenBasedOnTextWrappingProperties(GraphicsContext g, CanvasText text) {
-		//calculate the length of letter and set up variables
-		char[] textArray = text.getTextToAdd().toCharArray();
-		double lengthOfLetter = g.getFont().getSize();
-		double x = text.getPointToAddTextTo().x;
-		double y = text.getPointToAddTextTo().y;
-		int timesWrapped = 0;
-				
-		//calculate the length size of the text
-		double sizeOfText = lengthOfLetter*text.getTextToAdd().length();
-		//if length + x point on screen is > length of screen, cut text based on avalible length
-		if(sizeOfText+ text.getPointToAddTextTo().getX() > WIDTH){
-			for(int i =0; i < textArray.length; i++){
-				//paint each letter of the string and wrap when necessary
-				if(x +lengthOfLetter > WIDTH){
-					x = 1;
-					y = y + lengthOfLetter;
-					timesWrapped++;
-				}
-				g.fillText(String.valueOf(textArray[i]), x,y);
-				x=x+lengthOfLetter;
-				
-			}
-		}else
-			g.fillText(text.getTextToAdd(), text.getPointToAddTextTo().x, text.getPointToAddTextTo().y);
-	return timesWrapped;
 	}
 
 

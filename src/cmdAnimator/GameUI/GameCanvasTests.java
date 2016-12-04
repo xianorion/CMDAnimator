@@ -137,37 +137,6 @@ public class GameCanvasTests {
 		assertNull(canvas.getBackgroundImage());
 	}
 	
-	@Test
-	public void ifTextTooLongTextWrappingIsImplemented(){
-		String text = "abcdefghijklmnopqrstuvwxyz }:?></.,;[]=-";
-		point =  new Point(580,10);
-		int wrappedLength = canvas.paintTextToScreenBasedOnTextWrappingProperties(canvas.getGraphicsContext2D(), new CanvasText(text, point));
-		assertTrue(wrappedLength > 0);
-	
-	}
-	
-	@Test
-	public void ifTextNotTooLongTextWrappingIsNotImplemented(){
-		String text = "abcde#$%^&*()~_+{}:?></.,;[]=-";
-		point =  new Point(10,10);
-		int wrappedLength = canvas.paintTextToScreenBasedOnTextWrappingProperties(canvas.getGraphicsContext2D(), new CanvasText(text, point));
-		assertEquals(0,wrappedLength);
-	}
-	
-	@Test 
-	public void ifTextIsFourLinesLongTextWrappingIsImplementedThreeTimes(){
-		String text = "abcdefghijklmnopqrstuvwxyz extratextToMakeThisLine Longer ABCDEFGHIJKLMNOPQRSTUVWXYZ 12345678910 !@#$%^&*()~_+{}:?></.,;[]=-";
-		point =  new Point(580,10);
-		int wrappedLength = canvas.paintTextToScreenBasedOnTextWrappingProperties(canvas.getGraphicsContext2D(), new CanvasText(text, point));
-		assertEquals(3 , wrappedLength);
-	}
-
-		
-	@Test
-	public void copyCopiesDataIntoAnotherCanvasCorrectly(){
-		
-	}
-	
 	public static class dummyApp extends Application {
 	    @Override
 	    public void start(Stage primaryStage) throws Exception {
