@@ -10,15 +10,15 @@ import cmdAnimator.GameUI.GameCanvas;
 
 public class AddCommandExecutor implements ICommandExecutor {
 
-	private final String DEFAULT_ADD_ERROR = "Not a command\nType 'help add' and refer to "+
-			"the help sidebar for more information";
+	private final String DEFAULT_ADD_ERROR = "Not a command\nType 'help add' and refer to "
+			+ "the help sidebar for more information";
 	private String error = "Error using add command.";
 	private GameGui guiInUse = GUI.getInstance();
 	private FrameAnimator animation = GameAnimator.getInstance();
-	
+
 	@Override
 	public void execute(String[] parameters) throws InvalidCommandException {
-		
+
 		if (parameters.length >= 1 && parameters.length <= 3 || parameters.length == 5) {
 
 			for (int i = 0; i < parameters.length; i++)
@@ -49,35 +49,33 @@ public class AddCommandExecutor implements ICommandExecutor {
 		executeImageAddition(parameters, true);
 	}
 
-	protected void executeFrameAddition(String[] parameters) throws InvalidCommandException{
-		if(parameters.length ==1){
-		animation.addFrameToAnimation();
-		}else{
+	protected void executeFrameAddition(String[] parameters) throws InvalidCommandException {
+		if (parameters.length == 1) {
+			animation.addFrameToAnimation();
+		} else {
 			throwErrorWithOutputMessage("Invalid Command.\nTo add a new Frame use command: \"Add Frame\"");
 		}
 	}
-
-
 
 	@Override
 	public String getErrorType() {
 		return error;
 	}
 
-	private void executeTextAddition(String[] para) throws InvalidCommandException{
-		if(para.length == 3){
-		Point point = convertStringToPoint(para[2]);
-		if(point == null){
-			throwErrorWithOutputMessage("Point representation is incorrect.\nPoints are in format (X-Coordinate, Y-Coordinate)"
-					+ "\nExample: (4,5)");
-		}else{
-			guiInUse.addTextToCanvas(new CanvasText(para[1], point));
-		}
-		}else{
+	private void executeTextAddition(String[] para) throws InvalidCommandException {
+		if (para.length == 3) {
+			Point point = convertStringToPoint(para[2]);
+			if (point == null) {
+				throwErrorWithOutputMessage(
+						"Point representation is incorrect.\nPoints are in format (X-Coordinate, Y-Coordinate)"
+								+ "\nExample: (4,5)");
+			} else {
+				guiInUse.addTextToCanvas(new CanvasText(para[1], point));
+			}
+		} else {
 			error = "Not enough parameters to add text";
 			throw new InvalidCommandException();
 		}
-		
 
 	}
 
@@ -95,30 +93,34 @@ public class AddCommandExecutor implements ICommandExecutor {
 						"Point representation is incorrect.\nPoints are in format (X-Coordinate, Y-Coordinate)"
 								+ "\nExample: (4,5)");
 			} else {
-				if (!isBackgroundImage && para.length == 3 )
-					isAdded = guiInUse.addImageToCanvas(new CanvasImage(para[1], point));
-				else if(!isBackgroundImage && para.length == 5){
-					//check if parameters are int
-					try{
-					int height = Integer.parseInt(para[3]);
-					int width = Integer.parseInt(para[4]);
-					
-					if(height > 0 && height < GameCanvas.HEIGHT && width >0 && width < GameCanvas.WIDTH )
-						isAdded = guiInUse.addImageToCanvas(new CanvasImage(para[1], point, height, width));
-					
-					}catch (NumberFormatException e) {
-						isAdded = false;
-					}
-				}
-				else if(isBackgroundImage)
-					isAdded = guiInUse.addBackgroundToCanvas(new CanvasImage(para[1], point));
-				// System.out.println("image " + para[1] + " is " + isAdded);
-				if (!isAdded) {
-					throwErrorWithOutputMessage("Invalid Image");
-				}
+				executeBackgroundImageAddition(para, isBackgroundImage, point, isAdded);
 			}
 		} else {
 			throwErrorWithOutputMessage("not enough parameters to add an image");
+		}
+	}
+
+	private void executeBackgroundImageAddition(String[] para, boolean isBackgroundImage, Point point, boolean isAdded)
+			throws InvalidCommandException {
+		if (!isBackgroundImage && para.length == 3)
+			isAdded = guiInUse.addImageToCanvas(new CanvasImage(para[1], point));
+		else if (!isBackgroundImage && para.length == 5) {
+			// check if parameters are int
+			try {
+				int height = Integer.parseInt(para[3]);
+				int width = Integer.parseInt(para[4]);
+
+				if (height > 0 && height < GameCanvas.HEIGHT && width > 0 && width < GameCanvas.WIDTH)
+					isAdded = guiInUse.addImageToCanvas(new CanvasImage(para[1], point, height, width));
+
+			} catch (NumberFormatException e) {
+				isAdded = false;
+			}
+		} else if (isBackgroundImage)
+			isAdded = guiInUse.addBackgroundToCanvas(new CanvasImage(para[1], point));
+		// System.out.println("image " + para[1] + " is " + isAdded);
+		if (!isAdded) {
+			throwErrorWithOutputMessage("Invalid Image");
 		}
 	}
 
@@ -140,9 +142,9 @@ public class AddCommandExecutor implements ICommandExecutor {
 		return point;
 	}
 
-	public void throwErrorWithOutputMessage(String errorMsg) throws InvalidCommandException{
+	public void throwErrorWithOutputMessage(String errorMsg) throws InvalidCommandException {
 		error = errorMsg;
 		throw new InvalidCommandException(error);
 	}
-	
+
 }
