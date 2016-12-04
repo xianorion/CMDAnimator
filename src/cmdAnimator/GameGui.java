@@ -323,6 +323,10 @@ public class GameGui extends Group {
 	public String getCommandLineText() {
 		return userInputField.getText();
 	}
+	
+	public void setCommandLineText(String string){
+		userInputField.setText(string);
+	}
 
 	public TextArea getHelpCommands() {
 		return helpCommands;

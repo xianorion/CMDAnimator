@@ -19,16 +19,24 @@ public class GuiCommands {
 		GuiCommands.currentCommandView = GuiCommands.commands.size();
 	}	
 
-	public static void addCommandToPreviousCommandsFeed(GameGui gui, ArrayList<String> commands,
-			int currentCommandView) {
+	public static void addCommandToPreviousCommandsFeed(GameGui gui) {
+		System.out.println("-----adding to feed------");
 		if (!commands.contains(gui.getCommandLineText()))
 			commands.add(gui.getCommandLineText());
+		else
+			makeCommandMostRecentlyAddedToQueue(gui.getCommandLineText());
 		currentCommandView = commands.size();
+	}
+
+	private static void makeCommandMostRecentlyAddedToQueue(String commandLineText) {
+		System.out.println("-----command has been executed before------");
+		commands.remove(commandLineText);
+		commands.add(commandLineText);
 	}
 
 	public static void executeBackgroundImageAdditionCommand(GameGui gui, String ImagePath) {
 		gui.getCommandLine().setText("add background \"" + ImagePath + "\"");
-		GuiCommands.addCommandToPreviousCommandsFeed(gui, commands, currentCommandView);
+		GuiCommands.addCommandToPreviousCommandsFeed(gui);
 		CommandParser.parseText("add background \"" + ImagePath + "\"");
 		gui.getCommandLine().setText("");
 		
@@ -38,7 +46,7 @@ public class GuiCommands {
 
 	public static void executeImageAdditionCommand(GameGui gui, String ImagePath, String point, String height, String width) {
 		gui.getCommandLine().setText("add image \"" + ImagePath + "\" " + point +" "+height+" "+ width);
-		GuiCommands.addCommandToPreviousCommandsFeed(gui, commands, currentCommandView);
+		GuiCommands.addCommandToPreviousCommandsFeed(gui);
 		CommandParser.parseText("add image \"" + ImagePath + "\" " + point+" "+height+" "+ width);
 		gui.getCommandLine().setText("");
 		

@@ -24,9 +24,7 @@ public class KeyAndButtonActionListenerSetUp {
 			@Override
 			public void handle(KeyEvent event) {
 				if (event.getCode().equals(KeyCode.ENTER)) {
-					if (!GuiCommands.commands.contains(gui.getCommandLineText()))
-						GuiCommands.commands.add(gui.getCommandLineText());
-					GuiCommands.currentCommandView = GuiCommands.commands.size();
+					GuiCommands.addCommandToPreviousCommandsFeed(gui);
 					CommandParser.parseText(gui.getCommandLineText());
 				} else if (event.getCode().equals(KeyCode.RIGHT)) {
 					if (gui.getCommandLineText().equals("")
@@ -91,9 +89,7 @@ public class KeyAndButtonActionListenerSetUp {
 		enterButton.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent event) {
-				if (!GuiCommands.commands.contains(gui.getCommandLineText()))
-					GuiCommands.commands.add(gui.getCommandLineText());
-				GuiCommands.currentCommandView = GuiCommands.commands.size();
+				GuiCommands.addCommandToPreviousCommandsFeed(gui);
 				CommandParser.parseText(gui.getCommandLineText());
 
 				primaryStage.requestFocus();
