@@ -12,7 +12,7 @@ public class AddCommandExecutor implements ICommandExecutor {
 
 	private final String DEFAULT_ADD_ERROR = "Not a command\nType 'help add' and refer to "+
 			"the help sidebar for more information";
-	private String error = "";
+	private String error = "Error using add command.";
 	private GameGui guiInUse = GUI.getInstance();
 	private FrameAnimator animation = GameAnimator.getInstance();
 	

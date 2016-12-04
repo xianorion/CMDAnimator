@@ -8,6 +8,7 @@ import cmdAnimator.GameCanvasActions.CommandParser;
 import cmdAnimator.GameCanvasActions.FrameAnimator;
 import javafx.scene.control.Menu;
 
+//class that saves previously exeucted commands and executes some commands that were called by the gui
 public class GuiCommands {
 	
 	public static ArrayList<String> commands =  new ArrayList<String>();

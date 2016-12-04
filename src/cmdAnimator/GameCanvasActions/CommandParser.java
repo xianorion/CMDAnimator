@@ -62,6 +62,7 @@ public class CommandParser {
 		return true;
 	}
 
+	//splits commandline user input basted on the pattern regex
 	protected static String[] splitTextBasedOnDelimiters(String text) {
 		List<String> matchList = new ArrayList<String>();
 		Pattern regex = Pattern.compile("[^\\s\"']+|\"([^\"]*)\"");
@@ -86,6 +87,7 @@ public class CommandParser {
 		return true;
 	}
 
+	//executes the user command based on its function, add remove goto, etc
 	private static void executeCommandBasedOnType() throws InvalidCommandException {
 		String[] splittingCmdsParameters = new String[splittingCmds.length - 1];
 
@@ -142,20 +144,6 @@ public class CommandParser {
 		}
 		printOutputCommand = true;
 		typeOfCommand = defaultTypeOfCommand;
-	}
-
-	private void updateGUIAfterCommandEntered() {
-		// call the gui to do this updating of output
-		guiInUse.addUserInputToOutPutFieldAndClearUserInput();
-	}
-	
-	private void invalidCommandPrinter(){
-		
-	}
-	
-	
-	private void execute(){
-
 	}
 
 }

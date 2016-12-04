@@ -7,7 +7,7 @@ public class RemoveCommandExecutor implements ICommandExecutor {
 
 	private final String DEFAULT_ADD_ERROR = "Not a command\nType 'help remove' and refer to "+
 			"the help sidebar for more information";
-	private String error = "";
+	private String error = "Error using remove command.";
 	private GameGui guiInUse = GUI.getInstance();
 	private FrameAnimator animation = GameAnimator.getInstance();
 	

@@ -13,3 +13,4 @@ frame, one by one, based on the frames per second specified. This gives the illu
 object, i.e. animation. 
 
 To run: just compile/run the main.java file in src/ccmdAnimator/main.java
+You may need to install junit4 and javafx pakages to run 

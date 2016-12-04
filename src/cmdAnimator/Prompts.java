@@ -112,7 +112,7 @@ public class Prompts extends Group{
 		dialog.setHeaderText("Choose a size from the dropdown menu. \n(Note: will change every text size in your animation)");
 		dialog.setContentText("Choose your Size:");
 
-		// set the new color for text
+		// set the new font size for text
 		Optional<String> result = dialog.showAndWait();
 		if (result.isPresent()){
 			utc.setFontSize(result.get());

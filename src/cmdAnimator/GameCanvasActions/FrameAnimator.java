@@ -91,7 +91,7 @@ public class FrameAnimator {
 		
 
 	}
-	
+	//used for testing purposes
 	public void setTotalNumberOfFrames(int newNumber){
 		totalNumberOfFrames = newNumber;
 	}

@@ -74,8 +74,18 @@
 
 .text-field{
 	-fx-text-fill:rgb(0,64,0);
+	-fx-text-fill: #000000;
+    -fx-background-color: #DDD3DD;
+    -fx-border-radius: 1;
+    -fx-background-radius: 5;
+    -fx-padding: 10;
 }
 
 #outputArea{
 		-fx-background-color: black;
+}
+
+.button{
+    -fx-font: bold 9.5pt "Arial";
+    -fx-effect: dropshadow( one-pass-box , black , 2 , 0.1 , 0.1 , 0 );
 }

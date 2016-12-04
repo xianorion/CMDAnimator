@@ -7,7 +7,7 @@ public class GoToCommandExecutor implements ICommandExecutor {
 	
 	private final String DEFAULT_ADD_ERROR = "Not a command\nType 'help goto' and refer to "+
 			"the help sidebar for more information";
-	private String error = "";
+	private String error = "Error using goto command.";
 	private GameGui guiInUse = GUI.getInstance();
 	private FrameAnimator animation = GameAnimator.getInstance();
 
@@ -46,8 +46,7 @@ public class GoToCommandExecutor implements ICommandExecutor {
 
 	@Override
 	public String getErrorType() {
-		// TODO Auto-generated method stub
-		return null;
+		return error;
 	}
 	
 	public void throwErrorWithOutputMessage(String errorMsg) throws InvalidCommandException{

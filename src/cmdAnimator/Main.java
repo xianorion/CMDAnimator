@@ -30,8 +30,6 @@ import javafx.scene.layout.VBox;
 
 public class Main extends Application {
 	
-	protected String RobotTester = null;
-	
 	@Override
 	public void start(Stage primaryStage) {
 		try {
@@ -40,13 +38,12 @@ public class Main extends Application {
 			GameGui gui = GUI.getInstance();						
 			Button enterButton =gui.getEnterButton();
 			VBox libraryMenu = gui.getImageLibrary();
-		    //setListenerForImageLibraryInGui(gui, libraryMenu);
 			setEnterButtonFromGuiAsAListener(primaryStage, gui, enterButton);
 			//listener for file choosing 
 			enableFileChooserListener(primaryStage, gui);
 
 			TextField cmdLine = gui.getCommandLine();
-
+			//sets up left, right, up, and down key press actions for the user keyboard clicks
 			cmdLine.setOnKeyPressed(new EventHandler<KeyEvent>() {
 				@Override
 				public void handle(KeyEvent event) {
@@ -97,7 +94,8 @@ public class Main extends Application {
 	
 		
 	}
-
+	//uses the mouse position to get the position of the mouse on the canvas and displays it on
+	//the gui's right side.
 	private void setUpSceneMouseListener(Scene scene) {
 		GameGui gui =  GUI.getInstance();
 		scene.setOnMouseMoved(new EventHandler<MouseEvent>(){
@@ -119,7 +117,7 @@ public class Main extends Application {
 			
 		});
 	}
-
+//sets up a listener for when the user clicks the enter key, the command in the commandline should be executed
 	private void setEnterButtonFromGuiAsAListener(Stage primaryStage, GameGui gui, Button enterButton) {
 		enterButton.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
@@ -134,6 +132,7 @@ public class Main extends Application {
 		});
 	}
 
+	//enables a file chooser for the add image button on the gui and the run command file of the gui
 	private void enableFileChooserListener(Stage primaryStage, GameGui gui) {
 		FileChooser files = new FileChooser();
 		FileChooser files2 = new FileChooser();

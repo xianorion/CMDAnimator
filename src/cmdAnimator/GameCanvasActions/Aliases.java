@@ -10,6 +10,7 @@ public class Aliases {
 	private static ArrayList<String> restrictedAliases = new ArrayList<String>(Arrays.asList("help", "frame","add","image","text", "fps", "remove"
 			,"goto", "run", "done", "clear", "alias"));
 
+	//adds alias to the alias list if not apart of the restricted alias list
 	public static boolean AddNewAlias(String alias, String replacedText) {
 		if (!restrictedAliases.contains(alias.toLowerCase())) {
 			aliasList.put(alias, replacedText);
@@ -25,7 +26,11 @@ public class Aliases {
 	public static HashMap<String, String> getAliasList() {
 		return aliasList;
 	}
-
+	/*
+	 * input: command
+	 * output: command with with out aliases
+	 * Function: converts a command with aliases to a clear understandable text command w/o aliases
+	 */
 	public static String[] convertCommandWithAliasesIntoNormalCommand(String[] cmds) {
 		ArrayList<String> command = new ArrayList<String>();
 		String[] temp;

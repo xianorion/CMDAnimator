@@ -15,7 +15,11 @@ import cmdAnimator.GuiCommands;
 public class CommandFileRunner {
 	
 	
-	
+	/*
+	 * function: reads every line in a batchfile and executes each line in said file
+	 * input: name of batchfile of type string
+	 * output: void, but batch gets executed.
+	 */
 	public static void runBatchFile(String file) throws InvalidCommandException{
 		GameGui gui = GUI.getInstance();	
 		BufferedReader reader = null;     

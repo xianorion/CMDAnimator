@@ -5,7 +5,7 @@ import cmdAnimator.GameGui;
 
 public class FpsCommandExecutor implements ICommandExecutor {
 	
-	private String error = "";
+	private String error = "Error manipulating fps";
 	private FrameAnimator animation = GameAnimator.getInstance();
 
 	@Override
@@ -23,7 +23,7 @@ public class FpsCommandExecutor implements ICommandExecutor {
 	
 	@Override
 	public String getErrorType() {
-		return null;
+		return error;
 	}
 
 	@Override

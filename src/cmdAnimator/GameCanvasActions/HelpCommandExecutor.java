@@ -11,7 +11,7 @@ public class HelpCommandExecutor implements ICommandExecutor {
 
 	private final String DEFAULT_HELP_ERROR = "Not a command\nType 'help' and refer to "+
 			"the help sidebar for more information";
-	private String error = "";
+	private String error = "Error using help command";
 	private GameGui guiInUse = GUI.getInstance();
 	
 	@Override

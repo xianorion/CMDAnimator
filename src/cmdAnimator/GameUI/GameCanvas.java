@@ -159,6 +159,7 @@ public class GameCanvas extends Canvas {
 		return false;	
 	}
 
+	//returns a copy of the canvas, mainly used for frame animator to keep animated frames
 	public static GameCanvas copy(GameCanvas screen) {
 		GameCanvas newCanvas;
 		if(screen.background != null){
